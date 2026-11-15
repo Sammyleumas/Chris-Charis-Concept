@@ -1,0 +1,351 @@
+import { linkRegister, site } from "@/config/site";
+import { images } from "./images";
+import type {
+  FeaturedInitiative,
+  Film,
+  ImpactStat,
+  Organisation,
+  Partner,
+  PathwayStage,
+  ProjectFamily,
+  TimelineEntry,
+} from "./types";
+
+/*
+ * Local content layer: verified content from the CTO build brief (Oct 2026)
+ * and the Founder's master specification. Nothing here is invented: where
+ * the brief has no value, the field is null or the list is empty.
+ */
+
+export const projectFamilies: ProjectFamily[] = [
+  {
+    slug: "film-for-social-change",
+    name: "Film for Social Change",
+    shortName: "Film for Social Change",
+    year: 2020,
+    line: "Film and storytelling that educate, raise awareness and advocate for change.",
+    intro:
+      "Film for Social Change uses filmmaking and storytelling to promote education, public awareness, advocacy and social change. It is where the Chris Charis Concept story began in August 2020.",
+    accent: null,
+    image: images.ffsc,
+    items: [
+      { name: "Shun Electoral Violence" },
+      { name: "D’impact Campaign" },
+      { name: "Hope Alive" },
+      { name: "Blur" },
+      { name: "Treepz Stage Drama" },
+      { name: "FreeDumb" },
+      { name: "Stop Human Trafficking" },
+    ],
+    externalLinks: [{ label: "Watch on YouTube", url: linkRegister.youtubeChannel }],
+    related: ["healthy-heart", "fusion"],
+  },
+  {
+    slug: "healthy-heart",
+    name: "Healthy Heart Community Project",
+    shortName: "Healthy Heart",
+    year: 2021,
+    line: "Our flagship community development programme for health and well-being.",
+    intro:
+      "The Healthy Heart Community Project (HHCP) is Chris Charis Concept’s flagship community development programme. Its editions, the Mental Health Awareness Campaign and Well-being Socials take health and well-being conversations into communities.",
+    accent: null,
+    image: images.hhcp,
+    items: [
+      { name: "HHCP 1.0" },
+      { name: "HHCP 2.0" },
+      { name: "HHCP 3.0" },
+      { name: "HHCP 4.0" },
+      { name: "MHAC 1.0", summary: "Mental Health Awareness Campaign" },
+      { name: "MHAC 2.0", summary: "Mental Health Awareness Campaign" },
+      {
+        name: "NAHCON 2021",
+        date: "May 2021",
+        summary:
+          "Took part in the inaugural National Arts in Health Conference, later running a Young Leaders in Arts and Health activation in Benin.",
+      },
+      { name: "Well-being Socials", date: "2025" },
+    ],
+    externalLinks: [{ label: "HHCP website", url: linkRegister.hhcpWebsite }],
+    related: ["film-for-social-change", "learn-to-lead"],
+  },
+  {
+    slug: "learn-to-lead",
+    name: "Learn To Lead → SOUL",
+    shortName: "Learn To Lead",
+    year: 2021,
+    line: "Leadership development for young people, growing into the School of Ultimate Leadership.",
+    intro:
+      "Learn To Lead builds leadership and personal development in young people. Two editions laid the foundation for SOUL, the School of Ultimate Leadership, and its seven faculties.",
+    accent: null,
+    image: images.learnToLead,
+    items: [
+      { name: "Learn To Lead 1.0" },
+      { name: "Learn To Lead 2.0" },
+      { name: "SOUL", summary: "School of Ultimate Leadership, with seven faculties" },
+    ],
+    externalLinks: [{ label: "SOUL website", url: linkRegister.soulWebsite }],
+    related: ["healthy-heart", "fusion"],
+  },
+  {
+    slug: "fusion",
+    name: "Fusion Creative Project",
+    shortName: "Fusion",
+    year: 2024,
+    line: "Where art meets technology: bootcamps, training, enterprise and awards for young creatives.",
+    intro:
+      "The Fusion Creative Project brings young creatives and technologists together. It spans the Fusion: Art Meets Tech bootcamp, Fusion Connect Academy, Fusion Solutions Hub, school and Africa tours, and the Fusion Art and Tech Awards.",
+    accent: null,
+    image: images.fusion,
+    items: [
+      { name: "Fusion: Art Meets Tech", date: "26–28 Nov 2026" },
+      { name: "FUSION 1.0" },
+      { name: "FUSION 2.0" },
+      { name: "FUSION 3.0" },
+      { name: "School Tour" },
+      { name: "Africa Tour" },
+      { name: "Fusion Art and Tech Awards" },
+      { name: "Fusion Connect Academy" },
+      { name: "Fusion Solutions Hub" },
+    ],
+    externalLinks: [
+      { label: "Bootcamp website", url: linkRegister.fusionBootcamp },
+      { label: "Fusion Connect Academy", url: linkRegister.fusionConnectAcademy },
+    ],
+    related: ["learn-to-lead", "chris-charis-brand"],
+  },
+  {
+    slug: "chris-charis-brand",
+    name: "The Chris Charis Brand",
+    shortName: "Chris Charis Brand",
+    year: 2025,
+    line: "Founder-led content and community: the MayBe Challenge, the Community and the Book Project.",
+    intro:
+      "The Chris Charis Brand carries the founder’s voice into content and community, through the MayBe Challenge, the Chris Charis Community and the Book Project.",
+    accent: null,
+    image: images.brand,
+    items: [{ name: "MayBe Challenge" }, { name: "Chris Charis Community" }, { name: "Book Project" }],
+    externalLinks: [{ label: "MayBe Challenge on TikTok", url: linkRegister.maybeChallengeTiktok }],
+    related: ["fusion", "film-for-social-change"],
+  },
+];
+
+export const impactStats: ImpactStat[] = [
+  {
+    id: "projects",
+    value: 26,
+    display: "26",
+    label: "Projects since 2020",
+    detail: "Across five project families",
+    href: "/our-work",
+  },
+  {
+    id: "films",
+    value: 6,
+    display: "6",
+    label: "Films",
+    detail: "Film for Social Change",
+    href: "/our-work/film-for-social-change",
+  },
+  {
+    id: "hhcp",
+    value: 4,
+    display: "4",
+    label: "HHCP editions",
+    detail: "Healthy Heart Community Project",
+    href: "/our-work/healthy-heart",
+  },
+  {
+    id: "young-people",
+    value: 1200,
+    display: "1,200+",
+    label: "Young people reached",
+    detail: "Across our programmes",
+    href: "/impact",
+  },
+  {
+    id: "dakar",
+    value: null,
+    display: "Dakar",
+    label: "2025 delegation",
+    detail: "Delegation to Dakar, 2025",
+    href: "/impact#dakar-2025",
+  },
+];
+
+export const pathway: PathwayStage[] = [
+  {
+    key: "tell",
+    title: "Tell",
+    text: "Film and storytelling start conversations, educate and raise awareness.",
+    href: "/our-work/film-for-social-change",
+    linkLabel: "Film for Social Change",
+  },
+  {
+    key: "reach",
+    title: "Reach",
+    text: "Community outreach and social impact programmes connect with people where they are.",
+    href: "/our-work/healthy-heart",
+    linkLabel: "Healthy Heart Community Project",
+  },
+  {
+    key: "build",
+    title: "Build",
+    text: "Education, training, mentorship and skills development build lasting capacity.",
+    href: "/our-work/learn-to-lead",
+    linkLabel: "Learn To Lead → SOUL",
+  },
+  {
+    key: "earn",
+    title: "Earn & Lead",
+    text: "Fusion Connect Academy and Fusion Solutions Hub turn skills into income and opportunity.",
+    href: "/our-work/fusion",
+    linkLabel: "Fusion Creative Project",
+  },
+];
+
+export const timeline: TimelineEntry[] = [
+  {
+    date: "August 2020",
+    year: 2020,
+    title: "Chris Charis Concept begins with Film for Social Change",
+    text: "Advocacy films become the first tool for starting conversations in our communities.",
+    href: "/our-work/film-for-social-change",
+  },
+  {
+    date: "2021",
+    year: 2021,
+    title: "Healthy Heart Community Project launches",
+    text: "The flagship community development programme takes health and well-being into communities.",
+    href: "/our-work/healthy-heart",
+  },
+  {
+    date: "May 2021",
+    year: 2021,
+    title: "NAHCON 2021",
+    text: "Chris Charis Concept takes part in the inaugural National Arts in Health Conference.",
+    href: "/our-work/healthy-heart",
+  },
+  {
+    date: "2021",
+    year: 2021,
+    title: "Learn To Lead",
+    text: "Leadership development for young people begins, later growing into SOUL.",
+    href: "/our-work/learn-to-lead",
+  },
+  {
+    date: "2024",
+    year: 2024,
+    title: "Fusion Creative Project",
+    text: "Art meets technology: bootcamps, training and enterprise for young creatives.",
+    href: "/our-work/fusion",
+  },
+  {
+    date: "2025",
+    year: 2025,
+    title: "The Chris Charis Brand, Well-being Socials and Dakar",
+    text: "The brand launches its community projects, and a delegation travels to Dakar.",
+    href: "/our-work/chris-charis-brand",
+  },
+  {
+    date: "26–28 November 2026",
+    year: 2026,
+    title: "Fusion: Art Meets Tech",
+    text: "Three days bringing young creatives and technologists together.",
+    href: "/our-work/fusion",
+  },
+];
+
+export const organisations: Organisation[] = [
+  {
+    slug: "social-enterprise",
+    name: "The Social Enterprise",
+    registeredName: site.legalName,
+    registrationNumber: site.registrationNumber,
+    line: "The registered not-for-profit at the centre of everything we do.",
+    description: null,
+    image: images.orgSocialEnterprise,
+    website: null,
+  },
+  {
+    slug: "fusion-connect-academy",
+    name: "Fusion Connect Academy",
+    registeredName: null,
+    registrationNumber: null,
+    line: "Creative and technology education that turns talent into skill.",
+    description: null,
+    image: images.orgFca,
+    website: linkRegister.fusionConnectAcademy,
+  },
+  {
+    slug: "fusion-solutions-hub",
+    name: "Fusion Solutions Hub",
+    registeredName: null,
+    registrationNumber: null,
+    line: "Innovative, sustainable solutions for individuals and businesses.",
+    description:
+      "At FUSION Solution Hub, we empower individuals and businesses to thrive in an ever-evolving world by providing innovative, sustainable solutions to complex problems. Our multifaceted enterprise brings together experts from diverse fields to deliver exceptional services that drive growth, efficiency, and success.",
+    image: images.orgFsh,
+    website: null,
+  },
+  {
+    slug: "chris-charis-brand",
+    name: "The Chris Charis Brand",
+    registeredName: null,
+    registrationNumber: null,
+    line: "Founder-led media and community, creating content with purpose.",
+    description: null,
+    image: images.brand,
+    website: null,
+  },
+  {
+    slug: "soul",
+    name: "SOUL",
+    registeredName: null,
+    registrationNumber: null,
+    line: "The School of Ultimate Leadership and its seven faculties.",
+    description: null,
+    image: images.orgSoul,
+    website: linkRegister.soulWebsite,
+  },
+];
+
+/** Homepage feature slot (brief §5.1). CMS-editable in Phase 11. */
+export const featuredInitiative: FeaturedInitiative = {
+  eyebrow: "Featured now",
+  title: "Fusion: Art Meets Tech",
+  dateLabel: "26–28 November 2026",
+  startDate: "2026-11-26",
+  endDate: "2026-11-28",
+  description:
+    "Three days where young creatives and technologists learn, build and showcase together. Apply to take part, vote for your favourites, or sponsor the next generation of talent.",
+  image: images.fusionFeature,
+  actions: [
+    { label: "Apply", url: linkRegister.fusionBootcamp, external: true },
+    { label: "Vote", url: linkRegister.fusionVote, external: true },
+    { label: "Sponsor", url: "/get-involved/partner?interest=fusion" },
+  ],
+};
+
+/** Approved partners only. Empty until logos and permissions are supplied. */
+export const partners: Partner[] = [];
+
+export const films: Film[] = [
+  {
+    title: "Latest from Film for Social Change",
+    family: "film-for-social-change",
+    description:
+      "Our films start conversations about the issues that shape communities, from electoral violence to human trafficking.",
+    youtubeUrl: null,
+    poster: images.latestFilm,
+  },
+];
+
+/**
+ * Homepage hero (brief §5.1: 20-second muted loop from a project).
+ * `videoSrc` must be an approved, externally hosted, optimised MP4/WebM
+ * (e.g. a Cloudinary delivery URL). Until supplied, the poster is shown.
+ */
+export const heroMedia = {
+  videoSrc: (process.env.NEXT_PUBLIC_HERO_VIDEO_URL ?? null) as string | null,
+  poster: images.heroPoster,
+};
