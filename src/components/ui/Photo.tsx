@@ -13,7 +13,7 @@ type Props = {
   /** Darker placeholder for use on dark sections and heroes. */
   tone?: "light" | "dark";
   /** Where the "photo to be supplied" label sits on the placeholder. */
-  notePosition?: "bottom-left" | "bottom-right" | "top-right";
+  notePosition?: "bottom-left" | "bottom-right" | "top-right" | "top-left";
 };
 
 /**
@@ -56,6 +56,7 @@ export function Photo({ image, fill = true, sizes = "100vw", priority, className
         "flex items-end overflow-hidden",
         notePosition === "bottom-right" && "justify-end",
         notePosition === "top-right" && "items-start! justify-end pt-20 lg:pt-24",
+        notePosition === "top-left" && "items-start!",
         dark
           ? "bg-[radial-gradient(120%_90%_at_70%_20%,#2c4a63_0%,#1d2b38_45%,#17181c_100%)]"
           : "bg-[linear-gradient(135deg,#dbe7f1_0%,#eef3f7_55%,#e3e8ec_100%)]",

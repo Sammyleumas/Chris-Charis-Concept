@@ -1,5 +1,5 @@
 import { linkRegister, site } from "@/config/site";
-import { images } from "./images";
+import { galleryFor, images } from "./images";
 import type {
   FeaturedInitiative,
   Film,
@@ -42,6 +42,17 @@ export const projectFamilies: ProjectFamily[] = [
     ],
     externalLinks: [{ label: "Watch on YouTube", url: linkRegister.youtubeChannel }],
     related: ["healthy-heart", "fusion"],
+    results: [{ value: "6", label: "Films produced", source: "Chris Charis Concept, CTO build brief (Oct 2026)" }],
+    gallery: galleryFor("Film for Social Change", ["on set", "behind the camera", "screening audience", "cast and crew"]),
+    cta: {
+      title: "Tell a story with us.",
+      text: "Partner on our next film, or help the films we have made reach more people.",
+      actions: [
+        { label: "Watch on YouTube", url: linkRegister.youtubeChannel, external: true },
+        { label: "Partner on a film", url: "/get-involved/partner" },
+        { label: "Volunteer on set", url: "/get-involved/volunteer" },
+      ],
+    },
   },
   {
     slug: "healthy-heart",
@@ -70,6 +81,17 @@ export const projectFamilies: ProjectFamily[] = [
     ],
     externalLinks: [{ label: "HHCP website", url: linkRegister.hhcpWebsite }],
     related: ["film-for-social-change", "learn-to-lead"],
+    results: [{ value: "4", label: "HHCP editions completed", source: "Chris Charis Concept, CTO build brief (Oct 2026)" }],
+    gallery: galleryFor("Healthy Heart", ["HHCP outreach", "MHAC session", "NAHCON 2021", "Well-being Socials 2025"]),
+    cta: {
+      title: "Bring Healthy Heart to your community.",
+      text: "Volunteer at an outreach or sponsor the next edition.",
+      actions: [
+        { label: "Sponsor an edition", url: "/get-involved/partner" },
+        { label: "Volunteer", url: "/get-involved/volunteer" },
+        { label: "HHCP website", url: linkRegister.hhcpWebsite, external: true },
+      ],
+    },
   },
   {
     slug: "learn-to-lead",
@@ -84,10 +106,21 @@ export const projectFamilies: ProjectFamily[] = [
     items: [
       { name: "Learn To Lead 1.0" },
       { name: "Learn To Lead 2.0" },
-      { name: "SOUL", summary: "School of Ultimate Leadership, with seven faculties" },
+      { name: "SOUL", summary: "School of Ultimate Leadership, with seven faculties", href: "/organisations/soul" },
     ],
     externalLinks: [{ label: "SOUL website", url: linkRegister.soulWebsite }],
     related: ["healthy-heart", "fusion"],
+    results: [],
+    gallery: galleryFor("Learn To Lead and SOUL", ["Learn To Lead 1.0", "Learn To Lead 2.0", "SOUL session", "graduates"]),
+    cta: {
+      title: "Grow the next generation of leaders.",
+      text: "Facilitate a SOUL faculty or partner on a leadership programme.",
+      actions: [
+        { label: "Become a facilitator", url: "/get-involved/careers" },
+        { label: "Partner with us", url: "/get-involved/partner" },
+        { label: "SOUL website", url: linkRegister.soulWebsite, external: true },
+      ],
+    },
   },
   {
     slug: "fusion",
@@ -100,21 +133,32 @@ export const projectFamilies: ProjectFamily[] = [
     accent: null,
     image: images.fusion,
     items: [
-      { name: "Fusion: Art Meets Tech", date: "26–28 Nov 2026" },
-      { name: "FUSION 1.0" },
-      { name: "FUSION 2.0" },
-      { name: "FUSION 3.0" },
-      { name: "School Tour" },
-      { name: "Africa Tour" },
-      { name: "Fusion Art and Tech Awards" },
-      { name: "Fusion Connect Academy" },
-      { name: "Fusion Solutions Hub" },
+      { name: "Fusion: Art Meets Tech", date: "26–28 Nov 2026", group: "Programmes", summary: "The bootcamp bringing creatives and technologists together.", href: linkRegister.fusionBootcamp ?? undefined },
+      { name: "FUSION 1.0", group: "Editions" },
+      { name: "FUSION 2.0", group: "Editions" },
+      { name: "FUSION 3.0", group: "Editions" },
+      { name: "School Tour", group: "Programmes" },
+      { name: "Africa Tour", group: "Programmes" },
+      { name: "Fusion Art and Tech Awards", group: "Programmes" },
+      { name: "Fusion Connect Academy", group: "Enterprises", summary: "Creative and technology education.", href: "/organisations/fusion-connect-academy" },
+      { name: "Fusion Solutions Hub", group: "Enterprises", summary: "Innovative, sustainable solutions for individuals and businesses.", href: "/organisations/fusion-solutions-hub" },
     ],
     externalLinks: [
       { label: "Bootcamp website", url: linkRegister.fusionBootcamp },
       { label: "Fusion Connect Academy", url: linkRegister.fusionConnectAcademy },
     ],
     related: ["learn-to-lead", "chris-charis-brand"],
+    results: [],
+    gallery: galleryFor("Fusion", ["bootcamp workshop", "FUSION showcase", "School Tour", "Africa Tour"]),
+    cta: {
+      title: "Be part of Fusion 2026.",
+      text: "Fusion: Art Meets Tech runs 26–28 November 2026. Apply to take part or sponsor young talent.",
+      actions: [
+        { label: "Apply", url: linkRegister.fusionBootcamp, external: true },
+        { label: "Sponsor Fusion", url: "/get-involved/partner?interest=fusion" },
+        { label: "About Fusion Solutions Hub", url: "/organisations/fusion-solutions-hub" },
+      ],
+    },
   },
   {
     slug: "chris-charis-brand",
@@ -129,6 +173,16 @@ export const projectFamilies: ProjectFamily[] = [
     items: [{ name: "MayBe Challenge" }, { name: "Chris Charis Community" }, { name: "Book Project" }],
     externalLinks: [{ label: "MayBe Challenge on TikTok", url: linkRegister.maybeChallengeTiktok }],
     related: ["fusion", "film-for-social-change"],
+    results: [],
+    gallery: galleryFor("Chris Charis Brand", ["MayBe Challenge", "community meet-up", "Book Project", "content shoot"]),
+    cta: {
+      title: "Join the conversation.",
+      text: "Take part in the MayBe Challenge or join the Chris Charis Community.",
+      actions: [
+        { label: "MayBe Challenge on TikTok", url: linkRegister.maybeChallengeTiktok, external: true },
+        { label: "Get in touch", url: "/contact" },
+      ],
+    },
   },
 ];
 

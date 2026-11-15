@@ -1,22 +1,19 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/PageHero";
-import { PlannedSection } from "@/components/ui/PlannedSection";
+import { notFound } from "next/navigation";
+import { ProjectPage } from "@/components/projects/ProjectPage";
+import { HeartEditions } from "@/components/projects/Editions";
+import { getProjectFamily } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Healthy Heart Community Project",
-  description: "Our flagship community development programme.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const family = await getProjectFamily("healthy-heart");
+  return {
+    title: family?.name,
+    description: "The Healthy Heart Community Project: Chris Charis Concept's flagship community health and well-being programme.",
+  };
+}
 
-export default function Page() {
-  return (
-    <>
-      <PageHero
-        eyebrow="Our Work \u00b7 2021"
-        title="Healthy Heart Community Project"
-        subtitle="Our flagship community development programme."
-        crumbs={[{"label": "Our Work", "href": "/our-work"}, {"label": "Healthy Heart Community Project"}]}
-      />
-      <PlannedSection phase="Phase 6 (Our Work)" />
-    </>
-  );
+export default async function Page() {
+  const family = await getProjectFamily("healthy-heart");
+  if (!family) notFound();
+  return <ProjectPage family={family} editions={<HeartEditions family={family} />} />;
 }

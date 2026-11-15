@@ -1,22 +1,19 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/PageHero";
-import { PlannedSection } from "@/components/ui/PlannedSection";
+import { notFound } from "next/navigation";
+import { ProjectPage } from "@/components/projects/ProjectPage";
+import { FilmEditions } from "@/components/projects/Editions";
+import { getProjectFamily } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Film for Social Change",
-  description: "Film and storytelling that start conversations.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const family = await getProjectFamily("film-for-social-change");
+  return {
+    title: family?.name,
+    description: "Film for Social Change: advocacy films by Chris Charis Concept on electoral violence, human trafficking and more.",
+  };
+}
 
-export default function Page() {
-  return (
-    <>
-      <PageHero
-        eyebrow="Our Work \u00b7 2020"
-        title="Film for Social Change"
-        subtitle="Film and storytelling that start conversations."
-        crumbs={[{"label": "Our Work", "href": "/our-work"}, {"label": "Film for Social Change"}]}
-      />
-      <PlannedSection phase="Phase 6 (Our Work)" />
-    </>
-  );
+export default async function Page() {
+  const family = await getProjectFamily("film-for-social-change");
+  if (!family) notFound();
+  return <ProjectPage family={family} editions={<FilmEditions family={family} />} />;
 }

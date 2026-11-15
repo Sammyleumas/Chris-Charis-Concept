@@ -1,22 +1,19 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/PageHero";
-import { PlannedSection } from "@/components/ui/PlannedSection";
+import { notFound } from "next/navigation";
+import { ProjectPage } from "@/components/projects/ProjectPage";
+import { FusionEditions } from "@/components/projects/Editions";
+import { getProjectFamily } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Fusion Creative Project",
-  description: "Where art meets technology.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const family = await getProjectFamily("fusion");
+  return {
+    title: family?.name,
+    description: "The Fusion Creative Project: Fusion: Art Meets Tech, Fusion Connect Academy, Fusion Solutions Hub and more.",
+  };
+}
 
-export default function Page() {
-  return (
-    <>
-      <PageHero
-        eyebrow="Our Work \u00b7 2024"
-        title="Fusion Creative Project"
-        subtitle="Where art meets technology."
-        crumbs={[{"label": "Our Work", "href": "/our-work"}, {"label": "Fusion Creative Project"}]}
-      />
-      <PlannedSection phase="Phase 6 (Our Work)" />
-    </>
-  );
+export default async function Page() {
+  const family = await getProjectFamily("fusion");
+  if (!family) notFound();
+  return <ProjectPage family={family} editions={<FusionEditions family={family} />} />;
 }

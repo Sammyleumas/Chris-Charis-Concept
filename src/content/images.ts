@@ -89,3 +89,10 @@ export const images = {
     "Governance hero: team or board meeting",
   ),
 } satisfies Record<string, ImageAsset>;
+
+/** Pending photo slots for a project gallery, one per subject. */
+export function galleryFor(project: string, subjects: string[]): ImageAsset[] {
+  return subjects.map((subject) =>
+    pending(`${project}: ${subject}`, `${project} gallery: ${subject}`),
+  );
+}

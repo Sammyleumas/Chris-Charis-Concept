@@ -32,6 +32,10 @@ export type ProjectFamilySlug =
 
 export type ProjectItem = {
   name: string;
+  /** Internal or external page for this item, when one exists. */
+  href?: string;
+  /** Groups items on pages that need it (e.g. Fusion programmes vs enterprises). */
+  group?: string;
   /** Year or date label, only when verified. */
   date?: string;
   summary?: string;
@@ -53,6 +57,14 @@ export type ProjectFamily = {
   items: ProjectItem[];
   externalLinks: ExternalLink[];
   related: ProjectFamilySlug[];
+  /** Verified key numbers only, each with its source. */
+  results: { value: string; label: string; source: string }[];
+  gallery: ImageAsset[];
+  cta: {
+    title: string;
+    text: string;
+    actions: { label: string; url: string | null; external?: boolean }[];
+  };
 };
 
 export type ImpactStat = {

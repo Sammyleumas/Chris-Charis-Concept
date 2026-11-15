@@ -1,22 +1,19 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/PageHero";
-import { PlannedSection } from "@/components/ui/PlannedSection";
+import { notFound } from "next/navigation";
+import { ProjectPage } from "@/components/projects/ProjectPage";
+import { BrandEditions } from "@/components/projects/Editions";
+import { getProjectFamily } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "The Chris Charis Brand",
-  description: "Content and community with purpose.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const family = await getProjectFamily("chris-charis-brand");
+  return {
+    title: family?.name,
+    description: "The Chris Charis Brand: the MayBe Challenge, the Chris Charis Community and the Book Project.",
+  };
+}
 
-export default function Page() {
-  return (
-    <>
-      <PageHero
-        eyebrow="Our Work \u00b7 2025"
-        title="The Chris Charis Brand"
-        subtitle="Content and community with purpose."
-        crumbs={[{"label": "Our Work", "href": "/our-work"}, {"label": "The Chris Charis Brand"}]}
-      />
-      <PlannedSection phase="Phase 6 (Our Work)" />
-    </>
-  );
+export default async function Page() {
+  const family = await getProjectFamily("chris-charis-brand");
+  if (!family) notFound();
+  return <ProjectPage family={family} editions={<BrandEditions family={family} />} />;
 }
