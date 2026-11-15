@@ -121,3 +121,29 @@ export type Film = {
   youtubeUrl: string | null;
   poster: ImageAsset;
 };
+
+export type TeamMember = {
+  name: string;
+  role: string;
+  group: "leadership" | "department";
+  department?: string;
+  bio?: string;
+  photo: ImageAsset;
+  links?: { label: string; url: string }[];
+};
+
+export type Statements = {
+  /** Approved wording only. `null` = awaiting the Founder. */
+  vision: string | null;
+  mission: string | null;
+  tagline: string | null;
+  motto: string | null;
+  values: { name: string; text?: string }[];
+};
+
+export type LegalEntity = {
+  name: string;
+  registeredName: string | null;
+  registrationNumber: string | null;
+  role: string;
+};

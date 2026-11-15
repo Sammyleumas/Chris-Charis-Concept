@@ -11,10 +11,13 @@ import {
   films,
   heroMedia,
   impactStats,
+  legalEntities,
   organisations,
   partners,
   pathway,
   projectFamilies,
+  statements,
+  team,
   timeline,
 } from "@/content/data";
 import type { ProjectFamilySlug } from "@/content/types";
@@ -61,4 +64,16 @@ export async function getLatestFilm() {
 
 export async function getHeroMedia() {
   return heroMedia;
+}
+
+export async function getStatements() {
+  return statements;
+}
+
+export async function getTeam() {
+  return team;
+}
+
+export async function getLegalEntities() {
+  return legalEntities;
 }

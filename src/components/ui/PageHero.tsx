@@ -26,7 +26,7 @@ export function PageHero({
     <section className="edge-slant relative isolate overflow-hidden bg-ink [--slant:3.5vw]">
       {image && (
         <div className="absolute inset-y-0 right-0 -z-10 w-full md:w-[62%]">
-          <Photo image={image} tone="dark" priority sizes="(min-width: 768px) 62vw, 100vw" />
+          <Photo image={image} tone="dark" priority notePosition="top-right" sizes="(min-width: 768px) 62vw, 100vw" />
           <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-ink/10" />
         </div>
       )}

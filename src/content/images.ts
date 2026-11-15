@@ -72,4 +72,20 @@ export const images = {
     "School of Ultimate Leadership session",
     "SOUL: leadership session",
   ),
+  aboutHero: pending(
+    "Filmmaker operating a camera on a Chris Charis Concept set",
+    "About hero: documentary shot of the team at work (filmmaking)",
+  ),
+  aboutWho: pending(
+    "Chris Charis Concept team members together",
+    "Who We Are: team group photo, relaxed and authentic",
+  ),
+  storyHero: pending(
+    "Archive moment from an early Chris Charis Concept project",
+    "Our Story hero: an early project photo (2020–2021)",
+  ),
+  governanceHero: pending(
+    "Chris Charis Concept team meeting",
+    "Governance hero: team or board meeting",
+  ),
 } satisfies Record<string, ImageAsset>;

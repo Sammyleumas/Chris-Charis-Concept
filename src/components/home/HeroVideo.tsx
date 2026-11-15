@@ -43,7 +43,7 @@ export function HeroVideo({ videoSrc, poster }: { videoSrc: string | null; poste
       className="edge-slant relative isolate flex min-h-[92svh] items-end overflow-hidden bg-night [--slant:5vw] lg:min-h-[100svh]"
     >
       <div className="absolute inset-0 -z-10">
-        <Photo image={poster} tone="dark" priority notePosition="bottom-right" />
+        <Photo image={poster} tone="dark" priority notePosition="top-right" />
         {showVideo && (
           <video
             ref={videoRef}

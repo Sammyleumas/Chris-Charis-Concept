@@ -3,6 +3,9 @@ import { images } from "./images";
 import type {
   FeaturedInitiative,
   Film,
+  LegalEntity,
+  Statements,
+  TeamMember,
   ImpactStat,
   Organisation,
   Partner,
@@ -349,3 +352,34 @@ export const heroMedia = {
   videoSrc: (process.env.NEXT_PUBLIC_HERO_VIDEO_URL ?? null) as string | null,
   poster: images.heroPoster,
 };
+
+/**
+ * Vision, mission, tagline, motto and values (brief §5.2). The brief marks
+ * these "Ready" but the wording is not in the document. Do not write them.
+ */
+export const statements: Statements = {
+  vision: null,
+  mission: null,
+  tagline: null,
+  motto: null,
+  values: [],
+};
+
+/** Team: published only with photos, bios and consent (COO to collect). */
+export const team: TeamMember[] = [];
+
+/** Legal & Governance (brief §5.2). Numbers must match CAC records exactly. */
+export const legalEntities: LegalEntity[] = [
+  {
+    name: "Chris Charis Concept",
+    registeredName: site.legalName,
+    registrationNumber: site.registrationNumber,
+    role: "Parent not-for-profit social enterprise (company limited by guarantee). “Chris Charis Concept” is its trading name.",
+  },
+  {
+    name: "Fusion Connect Academy",
+    registeredName: null,
+    registrationNumber: null,
+    role: "Creative and technology education arm.",
+  },
+];
