@@ -1,22 +1,9 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/PageHero";
-import { PlannedSection } from "@/components/ui/PlannedSection";
+import { LegalPage } from "@/components/legal/LegalPage";
+import { privacyPolicy as doc } from "@/content/legal/documents";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description: "How we collect, use and protect your information.",
-};
+export const metadata: Metadata = { title: doc.title, description: doc.summary };
 
 export default function Page() {
-  return (
-    <>
-      <PageHero
-        eyebrow="Legal"
-        title="Privacy Policy"
-        subtitle="How we collect, use and protect your information."
-        crumbs={[{"label": "Privacy Policy"}]}
-      />
-      <PlannedSection phase="Phase 10, as a draft for legal review" />
-    </>
-  );
+  return <LegalPage doc={doc} />;
 }

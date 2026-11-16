@@ -6,6 +6,7 @@ import { site } from "@/config/site";
 import { getOrganisations, getProjectFamilies } from "@/lib/content";
 import { Logo } from "@/components/ui/Logo";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
+import { CookieSettingsButton } from "@/components/legal/CookieConsent";
 
 const quickLinks = [
   { label: "About Us", href: "/about" },
@@ -112,6 +113,9 @@ export async function SiteFooter() {
                 <Link href={l.href} className="hover:text-white">{l.label}</Link>
               </li>
             ))}
+            <li>
+              <CookieSettingsButton className="hover:text-white" />
+            </li>
           </ul>
         </div>
       </div>

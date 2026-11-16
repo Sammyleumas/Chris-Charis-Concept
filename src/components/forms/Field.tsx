@@ -74,6 +74,31 @@ export function TextArea({ rows = 5, ...props }: Base & { rows?: number }) {
   );
 }
 
+export function SelectField({
+  options,
+  ...props
+}: Base & { options: readonly string[] }) {
+  const { name, error, hint, required, defaultValue } = props;
+  return (
+    <Wrapper {...props}>
+      <select
+        id={`f-${name}`}
+        name={name}
+        required={required}
+        defaultValue={defaultValue ?? ""}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={describedBy(name, error, hint)}
+        className={cn(control, "appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%235e6b6b%22 stroke-width=%222%22><path d=%22m6 9 6 6 6-6%22/></svg>')] bg-[length:1.1rem] bg-[position:right_1rem_center] bg-no-repeat pr-10", error ? "border-[#b42318]" : "border-line")}
+      >
+        <option value="">Choose…</option>
+        {options.map((o) => (
+          <option key={o} value={o}>{o}</option>
+        ))}
+      </select>
+    </Wrapper>
+  );
+}
+
 export function Consent({ name = "consent", error, children }: { name?: string; error?: string; children: ReactNode }) {
   return (
     <div>
