@@ -28,6 +28,11 @@ Run on 16 November 2026 against a production build (`next build` + `next start`)
 
 Real photographs and the hero video will add weight. Images go through `next/image` (AVIF/WebP, responsive sizes, lazy loading) and the hero video loads only after the page is interactive, never on data-saver connections or for reduced-motion users. Re-run Lighthouse after content is loaded.
 
+## Hero slideshow and page transitions
+- Slideshow autoplays every 6.5 s with a 1.4 s crossfade and slow zoom; holds while hovered or focused and when the tab is hidden; pause button, previous/next, and per-slide progress buttons work; wraps from 6 to 1; no autoplay for reduced-motion users.
+- Page navigations start a browser view transition (content fades out and up-in; header stays still); disabled for reduced motion; browsers without support switch instantly.
+- Homepage after the change: Lighthouse mobile Performance 98, Accessibility/Best practices/SEO 100, LCP 0.9 s, CLS 0.
+
 ## Integrations verified here
 - **Postgres:** migration applied to a local Postgres 16; contact and quote submissions stored with all fields, consent and honeypot fields excluded, IP stored only as a hash; duplicate newsletter sign-ups stored once (case-insensitive).
 - **Sanity:** Studio builds; `sanity schema validate` reports 0 errors and 0 warnings; every website GROQ query executed with `groq-js` against the seed data returns the expected shapes, and the stories query returns only consent-granted stories.

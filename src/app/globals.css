@@ -99,6 +99,43 @@
   }
 }
 
+/* Hero slideshow progress bar */
+@keyframes hero-progress {
+  from { width: 0; }
+  to { width: 100%; }
+}
+.hero-progress {
+  animation: hero-progress linear forwards;
+}
+
+/*
+ * Page transitions (React <ViewTransition> + the browser View Transitions
+ * API). Page content fades out quickly and the new page fades up gently;
+ * the header stays put. Browsers without support switch pages instantly.
+ */
+::view-transition-old(.page) {
+  animation: 160ms cubic-bezier(0.4, 0, 1, 1) both page-out;
+}
+::view-transition-new(.page) {
+  animation: 380ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both page-in;
+}
+::view-transition-group(site-header) {
+  animation: none;
+}
+@keyframes page-out {
+  to { opacity: 0; transform: translateY(-6px); }
+}
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(14px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 /* Returning visitors: the inline head script marks consent before paint. */
 [data-consent] [data-cookie-banner] {
   display: none;

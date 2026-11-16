@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { pageMeta } from "@/lib/seo/meta";
 import { site } from "@/config/site";
-import { HeroVideo } from "@/components/home/HeroVideo";
+import { HeroSlideshow } from "@/components/home/HeroSlideshow";
 import { ImpactStrip } from "@/components/home/ImpactStrip";
 import { WhoWeAre } from "@/components/home/WhoWeAre";
 import { ImpactPathway } from "@/components/home/ImpactPathway";
@@ -15,6 +15,7 @@ import { OrganizationJsonLd } from "@/components/seo/OrganizationJsonLd";
 import {
   getFeaturedInitiative,
   getHeroMedia,
+  getHeroSlides,
   getImpactStats,
   getLatestFilm,
   getPartners,
@@ -29,8 +30,9 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const [hero, stats, stages, families, featured, film, partners, settings] = await Promise.all([
+  const [hero, slides, stats, stages, families, featured, film, partners, settings] = await Promise.all([
     getHeroMedia(),
+    getHeroSlides(),
     getImpactStats(),
     getPathway(),
     getProjectFamilies(),
@@ -43,7 +45,7 @@ export default async function HomePage() {
   return (
     <>
       <OrganizationJsonLd />
-      <HeroVideo videoSrc={hero.videoSrc} poster={hero.poster} />
+      <HeroSlideshow slides={slides} videoSrc={hero.videoSrc} />
       <ImpactStrip stats={stats} />
       <WhoWeAre />
       <ImpactPathway stages={stages} />

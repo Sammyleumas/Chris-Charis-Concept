@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { ViewTransition } from "react";
 import { Inter, Sora } from "next/font/google";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -48,7 +49,10 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-dvh flex-col">
         <SiteHeader families={families} />
         <main id="main" className="flex-1">
-          {children}
+          {/* Crossfades page content on every navigation (see globals.css). */}
+          <ViewTransition update="page" enter="page" exit="page" default="none">
+            <div>{children}</div>
+          </ViewTransition>
         </main>
         <SiteFooter />
         <CookieConsent />

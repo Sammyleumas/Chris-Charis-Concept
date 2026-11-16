@@ -16,14 +16,25 @@ type Props = {
   notePosition?: "bottom-left" | "bottom-right" | "top-right" | "top-left";
   /** "contain" shows the whole photo (lightbox); default crops to fill. */
   fit?: "cover" | "contain";
+  /** Varies the dark placeholder's light so neighbouring slides differ. */
+  variant?: number;
 };
+
+const darkGradients = [
+  "radial-gradient(120% 90% at 70% 20%,#2c4a63 0%,#1d2b38 45%,#17181c 100%)",
+  "radial-gradient(110% 90% at 25% 30%,#33465a 0%,#1f2a35 45%,#17181c 100%)",
+  "radial-gradient(120% 100% at 85% 75%,#2a5373 0%,#1c2a36 50%,#17181c 100%)",
+  "radial-gradient(100% 80% at 50% 10%,#3a4250 0%,#22262e 50%,#17181c 100%)",
+  "radial-gradient(130% 90% at 15% 80%,#264a66 0%,#1b2833 50%,#17181c 100%)",
+  "radial-gradient(110% 100% at 60% 55%,#2f3f52 0%,#1e2630 50%,#17181c 100%)",
+];
 
 /**
  * Renders a registered photograph. When the organisation has not yet
  * supplied it (`src: null`), shows a labelled frame describing the photo
  * needed, so missing assets are visible during review, never faked.
  */
-export function Photo({ image, fill = true, sizes = "100vw", priority, className, tone = "light", notePosition = "bottom-left", fit = "cover" }: Props) {
+export function Photo({ image, fill = true, sizes = "100vw", priority, className, tone = "light", notePosition = "bottom-left", fit = "cover", variant = 0 }: Props) {
   if (image.src) {
     return fill ? (
       <Image
@@ -60,10 +71,11 @@ export function Photo({ image, fill = true, sizes = "100vw", priority, className
         notePosition === "top-right" && "items-start! justify-end pt-20 lg:pt-24",
         notePosition === "top-left" && "items-start!",
         dark
-          ? "bg-[radial-gradient(120%_90%_at_70%_20%,#2c4a63_0%,#1d2b38_45%,#17181c_100%)]"
+          ? ""
           : "bg-[linear-gradient(135deg,#dbe7f1_0%,#eef3f7_55%,#e3e8ec_100%)]",
         className,
       )}
+      style={dark ? { backgroundImage: darkGradients[variant % darkGradients.length] } : undefined}
     >
       <div
         aria-hidden="true"

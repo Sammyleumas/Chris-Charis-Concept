@@ -2,6 +2,7 @@ import { aboutShort as aboutShortText, linkRegister, site } from "@/config/site"
 import { galleryFor, images } from "./images";
 import type {
   FeaturedInitiative,
+  HeroSlide,
   Post,
   PressAsset,
   Film,
@@ -544,4 +545,14 @@ export const pressAssets: PressAsset[] = [
   { label: "Founder biography", description: "Approved biography and portrait of the founder.", fileUrl: null, format: "PDF" },
   { label: "Approved photographs", description: "High-resolution project photos cleared for press use, with credits.", fileUrl: null, format: "ZIP" },
   { label: "Organisation fact sheet", description: "One-page summary of who we are, our projects and our impact.", fileUrl: null, format: "PDF" },
+];
+
+/**
+ * Hero slideshow (approved mock-up: six slides). Default: the hero photo
+ * plus one image per project family. Replaced by Site settings → Hero
+ * slides in the CMS when set.
+ */
+export const heroSlides: HeroSlide[] = [
+  { image: images.heroPoster, label: "Chris Charis Concept", href: "/about" },
+  ...projectFamilies.map((f) => ({ image: f.image, label: `${f.name} · ${f.year}`, href: `/our-work/${f.slug}` })),
 ];

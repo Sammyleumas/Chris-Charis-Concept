@@ -67,6 +67,13 @@ export type ProjectFamily = {
   };
 };
 
+/** One hero slideshow slide; `href` links the caption to its page. */
+export type HeroSlide = {
+  image: ImageAsset;
+  label: string;
+  href?: string;
+};
+
 export type ImpactStat = {
   id: string;
   value: number | null;

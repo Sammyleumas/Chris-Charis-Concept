@@ -20,7 +20,8 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
   email, phone, streetAddress, socials[]{ platform, url },
   youtubeChannel, hhcpWebsite, soulWebsite, fusionBootcamp, fusionVote, fusionConnectAcademy, maybeChallengeTiktok,
   vision, mission, tagline, motto, values[]{ name, text },
-  heroVideoUrl, "heroPoster": heroPoster${img}
+  heroVideoUrl, "heroPoster": heroPoster${img},
+  "heroSlides": heroSlides[]{ "image": image${img}, label, href }
 }`;
 
 export const homepageQuery = `*[_type == "homepage"][0]{

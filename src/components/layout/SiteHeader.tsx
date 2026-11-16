@@ -69,6 +69,7 @@ export function SiteHeader({ families }: { families: MenuFamily[] }) {
 
   return (
     <header
+      style={{ viewTransitionName: "site-header" }}
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,color] duration-300",
         solid ? "bg-ink/95 shadow-[0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-md" : "bg-transparent",

@@ -14,7 +14,7 @@ A guide for the communications team and project leads. You do not need to touch 
 
 | In the Studio | Changes on the website |
 | --- | --- |
-| **Site settings** | Email, phone, address, social links, project website links, vision/mission/values, hero video and poster |
+| **Site settings** | Email, phone, address, social links, project website links, vision/mission/values, homepage hero slides, hero video |
 | **Homepage** | The *Featured now* event (title, dates, buttons) and the *Latest film* |
 | **Project families** | The five project pages: intro, editions and films, results, photo gallery, buttons. Gallery photos also appear in Media → Gallery |
 | **Organisations** | The five organisation pages |
@@ -30,6 +30,8 @@ A guide for the communications team and project leads. You do not need to touch 
 Anything you leave empty keeps the text the website already shows, so you can fill things in gradually.
 
 ## Common tasks
+
+**Change the homepage slideshow.** Site settings → *Hero* → *Hero slides* → add four to six landscape photos (at least 2400 px wide), each with a short caption such as “Fusion: Art Meets Tech · 2025” and, optionally, a link like `/our-work/fusion` → Publish. Drag slides to reorder. Until slides are added, the homepage uses one photo per project. Choose photos with space on the left: the headline sits there.
 
 **Add photos to a project.** Project families → choose the project → *Gallery* → add images → write alt text and caption → tick consent → Publish. Use photos at least 2000 px wide; the website resizes them.
 

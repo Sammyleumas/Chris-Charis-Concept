@@ -11,6 +11,7 @@ import {
   featuredInitiative,
   films,
   heroMedia,
+  heroSlides,
   impactStats,
   impactStories,
   legalEntities,
@@ -29,6 +30,7 @@ import type {
   FeaturedInitiative,
   Film,
   GalleryItem,
+  HeroSlide,
   ImageAsset,
   ImpactStat,
   ImpactStory,
@@ -64,6 +66,7 @@ type CmsSettings = {
   values?: Statements["values"];
   heroVideoUrl?: string;
   heroPoster?: ImageAsset;
+  heroSlides?: HeroSlide[];
 } & Partial<Record<keyof typeof linkRegister, string>>;
 
 const getCmsSettings = () => cmsFetch<CmsSettings>(q.siteSettingsQuery);
@@ -82,6 +85,12 @@ export async function getSiteSettings() {
 export async function getStatements(): Promise<Statements> {
   const s = await getCmsSettings();
   return overlay(statements, s ? { vision: s.vision, mission: s.mission, tagline: s.tagline, motto: s.motto, values: s.values } : null);
+}
+
+/** Hero slides from the CMS (only slides with an uploaded image), else the defaults. */
+export async function getHeroSlides(): Promise<HeroSlide[]> {
+  const s = await getCmsSettings();
+  return listOr(s?.heroSlides?.filter((x) => x.image?.src), heroSlides);
 }
 
 export async function getHeroMedia() {

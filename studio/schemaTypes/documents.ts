@@ -43,6 +43,25 @@ export const siteSettings = defineType({
     }),
     defineField({ name: "heroVideoUrl", title: "Hero video URL", type: "url", group: "hero", description: "Optimised MP4/WebM on an approved video host (e.g. Cloudinary). About 20 seconds, no sound needed." }),
     defineField({ name: "heroPoster", title: "Hero poster image", type: "photo", group: "hero" }),
+    defineField({
+      name: "heroSlides",
+      title: "Hero slides",
+      type: "array",
+      group: "hero",
+      description: "Homepage slideshow, in order. Four to six strong landscape photos work best.",
+      validation: (r) => r.max(8),
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({ name: "image", type: "photo", validation: (r) => r.required() }),
+            defineField({ name: "label", title: "Caption", type: "string", description: "e.g. Fusion: Art Meets Tech · 2025", validation: (r) => r.required() }),
+            defineField({ name: "href", title: "Caption link", type: "string", description: "A page on this site, e.g. /our-work/fusion" }),
+          ],
+          preview: { select: { title: "label", media: "image" } },
+        }),
+      ],
+    }),
   ],
   preview: { prepare: () => ({ title: "Site settings" }) },
 });
