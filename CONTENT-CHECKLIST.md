@@ -1,6 +1,6 @@
 # Content checklist
 
-What the website still needs from Chris Charis Concept. Owners follow the CTO brief §10.
+What the website still needs from Chris Charis Concept. Owners follow the CTO brief §10. Once the CMS is live, most items are entered directly in the Studio (see EDITING-GUIDE.md).
 
 ## Brand
 - [ ] Logo SVG + PNG, light and dark versions (Founder/CTO) — interim mark in use
@@ -8,7 +8,7 @@ What the website still needs from Chris Charis Concept. Owners follow the CTO br
 
 ## Text
 - [ ] **Vision, mission, values, tagline and motto** — brief marks these "Ready" but the wording is not in the document
-- [ ] Project descriptions and edition details from the concept notes (project leads)
+- [ ] Project descriptions and edition details from the concept notes (project leads): HHCP edition dates/venues/outcomes and whether HHCP 5.0 took place; Learn To Lead editions; FUSION 1.0–3.0, School Tour, Africa Tour and Awards details
 - [ ] Descriptions, programmes and registration details for Fusion Connect Academy Ltd, SOUL and the Chris Charis Brand
 - [ ] Fusion Solutions Hub vision, mission and services list
 - [ ] SOUL's seven faculties
@@ -36,7 +36,19 @@ What the website still needs from Chris Charis Concept. Owners follow the CTO br
 - [ ] Beneficiary stories with consent
 - [ ] Annual report PDF (after FY2026/27)
 
+## Accounts and services (CTO)
+- [ ] Vercel project and domain (see DEPLOYMENT.md)
+- [ ] Sanity project; Studio deployed; staff invited with roles
+- [ ] Neon database; migration run
+- [ ] Resend with a verified sending domain; inbox for submissions
+- [ ] Brevo list
+- [ ] GA4 property
+- [ ] Hero video hosting (e.g. Cloudinary)
+
 ## Get involved
 - [ ] Sponsorship tier PDF
-- [ ] Paystack account (business verification) for donations
-- [ ] Approved privacy policy, terms, safeguarding statement, cookie notice (legal review)
+- [ ] Paystack account (business verification) for donations, deferred by decision
+- [ ] Confirm donation preset amounts (₦5,000 / ₦10,000 / ₦25,000 / ₦50,000) and the ₦1,000 minimum
+- [ ] Confirm volunteer areas, partnership types and careers role options in the forms
+- [ ] Open roles or facilitator calls for the Careers page
+- [ ] Legal review of the four draft legal pages, resolving each "To confirm" box: data protection contact, retention periods, refund policy, safeguarding lead, consent rules for under-18s
