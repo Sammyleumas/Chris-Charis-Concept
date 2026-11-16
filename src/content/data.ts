@@ -2,7 +2,6 @@ import { aboutShort as aboutShortText, linkRegister, site } from "@/config/site"
 import { galleryFor, images } from "./images";
 import type {
   FeaturedInitiative,
-  GalleryItem,
   Post,
   PressAsset,
   Film,
@@ -535,33 +534,6 @@ export const impactStories: ImpactStory[] = [];
 
 /** Annual reports. The FY2026/27 report is added once published. */
 export const reports: Report[] = [];
-
-/** Film library, one entry per Film for Social Change output (brief §5.4). */
-export const filmLibrary: Film[] =
-  projectFamilies
-    .find((f) => f.slug === "film-for-social-change")!
-    .items.map((item) => ({
-      title: item.name,
-      family: "film-for-social-change" as const,
-      description: item.summary,
-      youtubeUrl: item.youtubeUrl ?? null,
-      poster: {
-        src: null,
-        alt: `Poster for ${item.name}`,
-        brief: `${item.name}: poster or YouTube thumbnail`,
-      },
-    }));
-
-/** Gallery: every project's photo slots, tagged by project. */
-export const galleryItems: GalleryItem[] = projectFamilies.flatMap((f) =>
-  f.gallery.map((image, i) => ({
-    id: `${f.slug}-${i}`,
-    family: f.slug,
-    image,
-    // Alt text reads "Project: subject"; the project is shown separately.
-    caption: image.alt.split(": ").slice(1).join(": ") || image.alt,
-  })),
-);
 
 /** News and blog posts. CMS-managed from Phase 11. */
 export const posts: Post[] = [];

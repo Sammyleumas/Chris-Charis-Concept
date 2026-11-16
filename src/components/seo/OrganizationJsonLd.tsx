@@ -1,6 +1,8 @@
 import { site } from "@/config/site";
+import { getSiteSettings } from "@/lib/content";
 
-export function OrganizationJsonLd() {
+export async function OrganizationJsonLd() {
+  const { contact, socials, location } = await getSiteSettings();
   const data = {
     "@context": "https://schema.org",
     "@type": "NGO",
@@ -10,11 +12,13 @@ export function OrganizationJsonLd() {
     description: site.shortDescription,
     foundingDate: "2020-08",
     ...(site.url && { url: site.url }),
-    ...(site.contact.email && { email: site.contact.email }),
-    ...(site.socials.length && { sameAs: site.socials.map((s) => s.url) }),
+    ...(contact.email && { email: contact.email }),
+    ...(contact.phone && { telephone: contact.phone }),
+    ...(socials.length && { sameAs: socials.map((s) => s.url) }),
     address: {
       "@type": "PostalAddress",
-      addressLocality: site.location.city,
+      ...(location.streetAddress && { streetAddress: location.streetAddress }),
+      addressLocality: location.city,
       addressRegion: site.location.state,
       addressCountry: "NG",
     },

@@ -1,12 +1,11 @@
 import type { Film } from "@/content/types";
-import { linkRegister } from "@/config/site";
 import { ButtonLink } from "@/components/ui/Button";
 import { ContentNote } from "@/components/ui/ContentNote";
 import { Photo } from "@/components/ui/Photo";
 import { YouTubeFacade } from "@/components/media/YouTubeFacade";
 
-export function LatestFilm({ film }: { film: Film }) {
-  const watchUrl = film.youtubeUrl ?? linkRegister.youtubeChannel;
+export function LatestFilm({ film, channelUrl }: { film: Film; channelUrl?: string | null }) {
+  const watchUrl = film.youtubeUrl ?? channelUrl ?? null;
   return (
     <section aria-labelledby="film-title" className="border-t border-line py-24 lg:py-32">
       <div className="container-site grid items-center gap-12 lg:grid-cols-12">

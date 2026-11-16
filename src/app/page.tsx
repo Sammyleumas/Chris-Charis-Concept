@@ -17,10 +17,11 @@ import {
   getPartners,
   getPathway,
   getProjectFamilies,
+  getSiteSettings,
 } from "@/lib/content";
 
 export default async function HomePage() {
-  const [hero, stats, stages, families, featured, film, partners] = await Promise.all([
+  const [hero, stats, stages, families, featured, film, partners, settings] = await Promise.all([
     getHeroMedia(),
     getImpactStats(),
     getPathway(),
@@ -28,6 +29,7 @@ export default async function HomePage() {
     getFeaturedInitiative(),
     getLatestFilm(),
     getPartners(),
+    getSiteSettings(),
   ]);
 
   return (
@@ -39,7 +41,7 @@ export default async function HomePage() {
       <ImpactPathway stages={stages} />
       <ProjectShowcase families={families} />
       <FeaturedInitiative item={featured} />
-      {film && <LatestFilm film={film} />}
+      {film && <LatestFilm film={film} channelUrl={settings.links.youtubeChannel} />}
       <PartnerWall partners={partners} />
       <GetInvolvedSection />
       <NewsletterBand />

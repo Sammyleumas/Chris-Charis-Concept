@@ -1,0 +1,10 @@
+import { defineCliConfig } from "sanity/cli";
+
+export default defineCliConfig({
+  api: {
+    projectId: process.env.SANITY_STUDIO_PROJECT_ID ?? "replace-with-project-id",
+    dataset: process.env.SANITY_STUDIO_DATASET ?? "production",
+  },
+  // Deployed to https://<studioHost>.sanity.studio
+  studioHost: process.env.SANITY_STUDIO_HOST ?? "chris-charis-concept",
+});

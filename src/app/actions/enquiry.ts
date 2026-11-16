@@ -2,9 +2,9 @@
 
 import { headers } from "next/headers";
 import { forms, schemaFor, type FieldDef, type FormKind } from "@/lib/forms/definitions";
+import { deliverSubmission } from "@/lib/forms/deliver";
 import { formValues, rateLimited, validate } from "@/lib/forms/server";
 import type { FormState } from "@/lib/forms/types";
-import { isEmailConfigured, sendSubmissionEmail } from "@/lib/integrations/email";
 
 /** Shared handler for the contact, volunteer, partner and careers forms. */
 export async function submitEnquiry(kind: FormKind, _prev: FormState, formData: FormData): Promise<FormState> {
@@ -23,17 +23,12 @@ export async function submitEnquiry(kind: FormKind, _prev: FormState, formData: 
     return { status: "error", message: "Too many submissions. Please try again in a few minutes.", values };
   }
 
-  if (!isEmailConfigured()) {
+  const labels = Object.fromEntries((def.fields as readonly FieldDef[]).map((f) => [f.name, f.label]));
+  const outcome = await deliverSubmission({ kind, data, labels, subject: def.subject(data), ip });
+
+  if (outcome === "delivered") return { status: "success", message: def.success };
+  if (outcome === "not-configured") {
     return { status: "error", message: "Online forms are not connected yet. Please try again soon.", values };
   }
-
-  try {
-    const fields: Record<string, string | undefined> = {};
-    for (const f of def.fields as readonly FieldDef[]) fields[f.label] = data[f.name];
-    await sendSubmissionEmail({ subject: def.subject(data), fields, replyTo: data.email });
-    return { status: "success", message: def.success };
-  } catch (err) {
-    console.error(`[${kind}]`, err);
-    return { status: "error", message: "We couldn’t send this just now. Please try again.", values };
-  }
+  return { status: "error", message: "We couldn’t send this just now. Please try again.", values };
 }

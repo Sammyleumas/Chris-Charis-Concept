@@ -3,7 +3,8 @@ import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContentNote } from "@/components/ui/ContentNote";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
-import { site } from "@/config/site";
+import { getSiteSettings } from "@/lib/content";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 import { images } from "@/content/images";
 
 export const metadata: Metadata = {
@@ -11,8 +12,8 @@ export const metadata: Metadata = {
   description: "Contact Chris Charis Concept in Benin City, Edo State, Nigeria.",
 };
 
-export default function ContactPage() {
-  const { location, contact } = site;
+export default async function ContactPage() {
+  const { location, contact, socials } = await getSiteSettings();
   const place = [location.streetAddress, location.city, location.state, location.country].filter(Boolean).join(", ");
   const mapUrl = `https://www.openstreetmap.org/search?query=${encodeURIComponent(place)}`;
 
@@ -59,7 +60,13 @@ export default function ContactPage() {
                 </li>
               )}
             </ul>
-            {(!contact.email || !contact.phone || !location.streetAddress) && (
+            {socials.length > 0 && (
+              <div className="mt-8">
+                <p className="font-semibold text-ink">Follow us</p>
+                <SocialLinks links={socials} className="mt-2 text-sm font-medium text-brand-ink" />
+              </div>
+            )}
+            {(!contact.email || !contact.phone || !location.streetAddress || socials.length === 0) && (
               <ContentNote className="mt-8">Official email, phone number, street address and social media handles.</ContentNote>
             )}
           </div>

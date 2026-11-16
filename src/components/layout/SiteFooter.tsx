@@ -3,7 +3,8 @@ import { cacheLife } from "next/cache";
 import { MapPin, Mail, Phone } from "lucide-react";
 import { legalNav } from "@/config/navigation";
 import { site } from "@/config/site";
-import { getOrganisations, getProjectFamilies } from "@/lib/content";
+import { getOrganisations, getProjectFamilies, getSiteSettings } from "@/lib/content";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 import { Logo } from "@/components/ui/Logo";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
 import { CookieSettingsButton } from "@/components/legal/CookieConsent";
@@ -48,8 +49,8 @@ async function CopyrightYear() {
 }
 
 export async function SiteFooter() {
-  const [families, orgs] = await Promise.all([getProjectFamilies(), getOrganisations()]);
-  const { location, contact } = site;
+  const [families, orgs, settings] = await Promise.all([getProjectFamilies(), getOrganisations(), getSiteSettings()]);
+  const { location, contact, socials } = settings;
 
   return (
     <footer className="bg-night text-white">
@@ -57,6 +58,7 @@ export async function SiteFooter() {
         <div>
           <Logo tone="light" />
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/70">{site.shortDescription}</p>
+          <SocialLinks links={socials} className="mt-6 text-sm font-semibold text-white/85" />
           <div className="mt-8 max-w-sm">
             <h2 className="font-display text-base font-semibold text-white">Stay in the story</h2>
             <p className="mt-1 mb-4 text-sm text-white/65">Project news, films and opportunities, a few times a year.</p>

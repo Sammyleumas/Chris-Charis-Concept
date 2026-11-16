@@ -5,8 +5,7 @@ import { ContentNote } from "@/components/ui/ContentNote";
 import { MediaNav } from "@/components/media/MediaNav";
 import { FilmCard } from "@/components/media/FilmCard";
 import { LatestFilm } from "@/components/home/LatestFilm";
-import { linkRegister } from "@/config/site";
-import { getFilmLibrary, getLatestFilm } from "@/lib/content";
+import { getFilmLibrary, getLatestFilm, getSiteSettings } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Films",
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function FilmsPage() {
-  const [films, featured] = await Promise.all([getFilmLibrary(), getLatestFilm()]);
+  const [films, featured, { links }] = await Promise.all([getFilmLibrary(), getLatestFilm(), getSiteSettings()]);
   const playable = films.filter((f) => f.youtubeUrl).length;
   return (
     <>
@@ -24,12 +23,12 @@ export default async function FilmsPage() {
         subtitle="Stories that start conversations about the issues shaping our communities."
         crumbs={[{ label: "Media", href: "/media" }, { label: "Films" }]}
       >
-        {linkRegister.youtubeChannel && (
-          <ButtonLink href={linkRegister.youtubeChannel} external size="lg">Our YouTube channel</ButtonLink>
+        {links.youtubeChannel && (
+          <ButtonLink href={links.youtubeChannel} external size="lg">Our YouTube channel</ButtonLink>
         )}
       </PageHero>
       <MediaNav current="/media/films" />
-      {featured && <LatestFilm film={featured} />}
+      {featured && <LatestFilm film={featured} channelUrl={links.youtubeChannel} />}
       <section aria-labelledby="library-title" className="bg-paper py-20 lg:py-28">
         <div className="container-site">
           <div className="flex flex-wrap items-end justify-between gap-6">
