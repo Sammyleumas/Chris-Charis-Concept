@@ -1,8 +1,8 @@
 "use client";
 
+import { ButtonEyes } from "@/components/ui/ButtonEyes";
 import Link from "next/link";
 import { startTransition, useActionState, useEffect, useRef } from "react";
-import { LoaderCircle } from "lucide-react";
 import { FormAlert, FormSuccess, useLiveErrors } from "./FormFeedback";
 import { requestQuote } from "@/app/actions/quote";
 import { initialFormState, type FormState } from "@/lib/forms/types";
@@ -61,10 +61,11 @@ export function QuoteRequestForm() {
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex h-12 items-center gap-2 rounded-full bg-brand-ink px-7 font-semibold text-white tap hover:bg-brand-deep disabled:opacity-70"
+          aria-busy={pending}
+          className="btn-primary inline-flex h-12 items-center gap-3 rounded-full bg-brand-ink pr-2.5 pl-7 font-semibold text-white tap hover:bg-brand-deep disabled:opacity-80"
         >
-          {pending && <LoaderCircle aria-hidden="true" className="h-4 w-4 animate-spin" />}
           {pending ? "Sending…" : "Request a quote"}
+          <ButtonEyes busy={pending} />
         </button>
       </div>
     </form>

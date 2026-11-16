@@ -444,3 +444,66 @@ html:not([data-preloaded]) .hero-copy:first-child:not(.is-active) > :first-child
 @keyframes hero-line-in {
   from { transform: translateY(105%); }
 }
+
+/* ------------------------------------------------------------------ */
+/* Button eyes: pupils follow the pointer (ButtonEyes.tsx).            */
+/* ------------------------------------------------------------------ */
+.btn-eyes {
+  --eye: 1.375rem;
+  --sclera: #fff;
+  --pupil: var(--color-ink);
+  display: inline-flex;
+  gap: 0.1875rem;
+  flex: none;
+}
+.btn-eyes-lg { --eye: 1.75rem; }
+.btn-eye {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--eye);
+  height: var(--eye);
+  border-radius: 999px;
+  background: var(--sclera);
+  box-shadow: inset 0 0 0 1px var(--eye-ring, transparent);
+  animation: eye-blink 6s var(--ease-in-out-soft) infinite;
+}
+.btn-pupil {
+  width: 46%;
+  height: 46%;
+  border-radius: 999px;
+  background: var(--pupil);
+  transition: transform 120ms var(--ease-out-soft);
+  will-change: transform;
+}
+/* Loading: the eyes roll round while a form sends. */
+.btn-eyes.is-busy .btn-pupil {
+  transition: none;
+  animation: eye-roll 900ms linear infinite;
+}
+.btn-eyes.is-busy .btn-eye { animation: none; }
+@keyframes eye-roll {
+  from { transform: rotate(0deg) translateX(calc(var(--eye) * 0.24)) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(calc(var(--eye) * 0.24)) rotate(-360deg); }
+}
+@keyframes eye-blink {
+  0%, 94%, 100% { transform: scaleY(1); }
+  97% { transform: scaleY(0.1); }
+}
+/* Colours per button style. */
+.btn-outline .btn-eyes { --eye-ring: color-mix(in oklab, var(--color-ink) 35%, transparent); }
+.btn-light .btn-eyes,
+.btn-ghost .btn-eyes { --sclera: var(--color-ink); --pupil: #fff; }
+.btn-ghost .btn-eyes { --sclera: var(--color-brand-ink); }
+@media (prefers-reduced-motion: reduce) {
+  .btn-eye,
+  .btn-eyes.is-busy .btn-pupil { animation: none !important; }
+}
+/* Buttons that turn white on hover swap to dark eyes so they stay visible. */
+.btn-outline-light:hover .btn-eyes,
+.btn-outline-light:focus-visible .btn-eyes {
+  --sclera: var(--color-ink);
+  --pupil: #fff;
+}
+.btn-eye { transition: background-color 200ms; }
+.btn-pupil { transition: transform 120ms var(--ease-out-soft), background-color 200ms; }

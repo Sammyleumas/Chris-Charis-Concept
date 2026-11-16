@@ -1,9 +1,10 @@
 "use client";
 
+import { ButtonEyes } from "@/components/ui/ButtonEyes";
 import Link from "next/link";
 import { useActionState, useEffect, useId } from "react";
 import { events, track } from "@/lib/analytics";
-import { ArrowRight, Check, LoaderCircle } from "lucide-react";
+import { Check } from "lucide-react";
 import { subscribe, type FormState } from "@/app/actions/newsletter";
 import { cn } from "@/lib/cn";
 
@@ -44,11 +45,11 @@ export function NewsletterForm({ tone = "dark" }: { tone?: "dark" | "light" }) {
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-full bg-brand-ink px-4 text-sm font-semibold text-white tap hover:bg-brand-deep disabled:opacity-70"
+          aria-busy={pending}
+          className="btn-primary inline-flex h-11 shrink-0 items-center gap-2.5 rounded-full bg-brand-ink pr-2.5 pl-4 text-sm font-semibold text-white tap hover:bg-brand-deep disabled:opacity-80"
         >
-          {pending ? <LoaderCircle aria-hidden="true" className="h-4 w-4 animate-spin" /> : null}
           Subscribe
-          {!pending && <ArrowRight aria-hidden="true" className="h-4 w-4" />}
+          <ButtonEyes busy={pending} />
         </button>
       </div>
       {/* Honeypot for bots: hidden from people and assistive tech */}

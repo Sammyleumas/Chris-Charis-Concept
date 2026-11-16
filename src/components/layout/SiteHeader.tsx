@@ -160,7 +160,7 @@ export function SiteHeader({ families }: { families: MenuFamily[] }) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ButtonLink href="/donate" size="md" arrow={false} className="hidden h-10 px-5 sm:inline-flex">
+          <ButtonLink href="/donate" size="md" className="hidden h-10 pr-2 pl-5 sm:inline-flex">
             Donate
           </ButtonLink>
           <button

@@ -1,8 +1,9 @@
 "use client";
 
+import { ButtonEyes } from "@/components/ui/ButtonEyes";
 import Link from "next/link";
 import { startTransition, useActionState, useEffect, useRef, useState } from "react";
-import { Lock, LoaderCircle } from "lucide-react";
+import { Lock } from "lucide-react";
 import { startDonation } from "@/app/actions/donate";
 import { donationProjects, minimumAmount, presetAmounts } from "@/lib/forms/donation-options";
 import { initialFormState, type FormState } from "@/lib/forms/types";
@@ -116,10 +117,12 @@ export function DonateForm() {
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-brand-ink px-8 text-base font-semibold text-white tap hover:bg-brand-deep disabled:opacity-70"
+        aria-busy={pending}
+        className="btn-primary relative inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-brand-ink px-16 text-base font-semibold text-white tap hover:bg-brand-deep disabled:opacity-80"
       >
-        {pending ? <LoaderCircle aria-hidden="true" className="h-5 w-5 animate-spin" /> : <Lock aria-hidden="true" className="h-4 w-4" />}
+        <Lock aria-hidden="true" className="h-4 w-4" />
         {numeric >= minimumAmount ? `Give ${naira(numeric)}${frequency === "monthly" ? " monthly" : ""}` : "Continue"}
+        <ButtonEyes size="lg" busy={pending} className="absolute right-3" />
       </button>
       <p className="text-center text-xs text-slate-ink">
         Payments are processed securely by Paystack. We never see or store your card details.
