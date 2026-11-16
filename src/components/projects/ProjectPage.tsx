@@ -8,6 +8,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { ContentNote } from "@/components/ui/ContentNote";
 import { Photo } from "@/components/ui/Photo";
 import { Reveal } from "@/components/ui/Reveal";
+import { MaybeCount } from "@/components/home/CountUp";
 
 /**
  * Shared template for every project family page (brief §5.3):
@@ -87,7 +88,7 @@ export async function ProjectPage({ family, editions }: { family: ProjectFamily;
                 {family.results.map((r) => (
                   <div key={r.label} className="border-t border-white/20 pt-5">
                     <dt className="sr-only">{r.label}</dt>
-                    <dd className="font-display text-6xl leading-none font-bold">{r.value}</dd>
+                    <dd className="font-display text-6xl leading-none font-bold"><MaybeCount display={r.value} /></dd>
                     <dd className="mt-3 font-semibold">{r.label}</dd>
                     <dd className="mt-1 text-xs text-white/55">Source: {r.source}</dd>
                   </div>
