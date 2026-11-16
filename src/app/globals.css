@@ -663,3 +663,71 @@ html:not([data-preloaded]) .hero-copy:first-child:not(.is-active) > :first-child
 }
 :root[data-theme="dark"] .text-\[\#b42318\] { color: #ff9b8f; }
 :root[data-theme="dark"] .bg-\[\#fef3f2\] { background: #2c1a19; color: #ffc9c2; border-color: rgb(255 155 143 / 0.35); }
+
+/* ------------------------------------------------------------------ */
+/* Cursor follower (CursorFollower.tsx)                                */
+/* ------------------------------------------------------------------ */
+.cursor-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 250ms;
+  will-change: transform;
+}
+.cursor-follower[data-visible] { opacity: 1; }
+.cursor-ring,
+.cursor-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  translate: -50% -50%;
+}
+.cursor-ring {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  border: 1.5px solid #fff;
+  mix-blend-mode: difference;
+  transition:
+    scale 350ms var(--ease-out-soft),
+    background-color 250ms,
+    border-color 250ms,
+    opacity 200ms;
+}
+.cursor-follower[data-state="hover"] .cursor-ring {
+  scale: 1.6;
+  background-color: rgb(255 255 255 / 0.12);
+}
+.cursor-follower[data-state="text"] .cursor-ring {
+  scale: 0.4;
+  opacity: 0;
+}
+.cursor-follower[data-pressed] .cursor-ring { scale: 0.8; }
+.cursor-follower[data-state="hover"][data-pressed] .cursor-ring { scale: 1.3; }
+/* Labelled bubble over photos and carousel cards. */
+.cursor-follower[data-state="label"] .cursor-ring {
+  scale: 2.2;
+  border-color: transparent;
+  background-color: var(--color-brand-ink);
+  mix-blend-mode: normal;
+}
+.cursor-label {
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  opacity: 0;
+  scale: 0.6;
+  transition: opacity 200ms, scale 300ms var(--ease-out-soft);
+}
+.cursor-follower[data-state="label"] .cursor-label {
+  opacity: 1;
+  scale: 1;
+}
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .cursor-follower { display: none; }
+}

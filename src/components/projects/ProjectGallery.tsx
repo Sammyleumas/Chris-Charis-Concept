@@ -123,7 +123,7 @@ export function ProjectGallery({ images, familyName }: { images: ImageAsset[]; f
 
 function Card({ img, label, onOpen, tabbable = true }: { img: ImageAsset; label: string; onOpen: () => void; tabbable?: boolean }) {
   return (
-    <button type="button" onClick={onOpen} tabIndex={tabbable ? undefined : -1} className="group tap-soft absolute inset-0 block overflow-hidden text-left">
+    <button type="button" onClick={onOpen} tabIndex={tabbable ? undefined : -1} data-cursor="View" className="group tap-soft absolute inset-0 block overflow-hidden text-left">
       <span className="absolute inset-0 transition-transform duration-700 ease-out-soft group-hover:scale-[1.05]">
         <Photo image={img} sizes="(min-width: 1024px) 340px, (min-width: 640px) 290px, 230px" />
       </span>

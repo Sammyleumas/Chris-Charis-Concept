@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CookieConsent } from "@/components/legal/CookieConsent";
 import { Preloader } from "@/components/layout/Preloader";
+import { CursorFollower } from "@/components/ui/CursorFollower";
 import { Analytics } from "@/components/analytics/Analytics";
 import { MotionProvider } from "@/components/analytics/MotionProvider";
 import { getProjectFamilies } from "@/lib/content";
@@ -72,6 +73,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <SiteFooter />
         <CookieConsent />
+        <CursorFollower />
         <Analytics />
         </MotionProvider>
       </body>

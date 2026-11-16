@@ -224,6 +224,7 @@ export function Coverflow({
                 {...a11y}
                 draggable={false}
                 onClick={(e) => moved.current && e.preventDefault()}
+                data-cursor="Open"
                 className={shared}
                 style={style}
               >
@@ -241,6 +242,7 @@ export function Coverflow({
                 if (centred) onOpen?.(i);
                 else go(i);
               }}
+              data-cursor={centred ? (onOpen ? "View" : undefined) : "Drag"}
               className={cn(shared, "cursor-pointer")}
               style={style}
             >

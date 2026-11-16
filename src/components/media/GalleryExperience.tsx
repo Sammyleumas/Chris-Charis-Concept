@@ -122,6 +122,7 @@ export function GalleryExperience({
               <button
                 type="button"
                 onClick={() => setOpen(i)}
+                data-cursor="View"
                 className="group relative block aspect-square w-full overflow-hidden rounded-sm bg-mist"
               >
                 <span className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
