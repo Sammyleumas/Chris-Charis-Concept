@@ -1,19 +1,22 @@
 /**
  * Brand assets. Colours live as CSS tokens in src/app/globals.css.
  *
- * LOGO: the official crown-and-C SVG/PNG files have not been supplied yet.
- * `logo.light` / `logo.dark` are null, so <Logo /> renders an interim
- * vector mark. Drop the supplied files into /public/brand/ and set the
- * paths below; every header, footer and metadata image picks them up.
+ * Logo files in /public/brand are generated from the organisation's
+ * supplied master (crown-and-C symbol with the "Chris Charis." wordmark).
+ * "-light" versions show the charcoal lettering in white for dark
+ * backgrounds; blue, grey and the crown are unchanged. A rebrand replaces
+ * these files and dimensions only.
  */
 export const brand = {
   logo: {
-    /** Logo for light backgrounds, e.g. "/brand/logo-on-light.svg" */
-    light: null as string | null,
-    /** Logo for dark backgrounds, e.g. "/brand/logo-on-dark.svg" */
-    dark: null as string | null,
-    width: 168,
-    height: 40,
+    /** Symbol beside the wordmark: header, mobile menu. */
+    horizontal: { dark: "/brand/logo-horizontal.webp", light: "/brand/logo-horizontal-light.webp", width: 374, height: 176 },
+    /** Symbol above the wordmark: footer, press, social. */
+    full: { dark: "/brand/logo-full.webp", light: "/brand/logo-full-light.webp", width: 698, height: 1021 },
+    /** Symbol only: icons. */
+    mark: { src: "/brand/logo-mark.png", width: 316, height: 512 },
+    /** Full-colour PNG used where WebP is not accepted (structured data). */
+    fullPng: "/brand/logo-full.png",
   },
   /** Mirror of the CSS tokens for places CSS cannot reach (OG images, theme-color). */
   colors: {

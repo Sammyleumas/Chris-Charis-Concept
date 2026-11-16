@@ -83,7 +83,7 @@ export function SiteHeader({ families }: { families: MenuFamily[] }) {
       </a>
       <div className="container-site flex h-[4.5rem] items-center justify-between gap-6 lg:h-20">
         <Link href="/" className="shrink-0 rounded-sm" aria-label="Chris Charis Concept, home">
-          <Logo tone="light" />
+          <Logo tone="light" priority />
         </Link>
 
         <nav ref={navRef} aria-label="Main" className="hidden xl:block">

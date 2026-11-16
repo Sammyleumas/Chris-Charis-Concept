@@ -1,53 +1,33 @@
 import Image from "next/image";
 import { brand } from "@/config/brand";
-import { site } from "@/config/site";
 import { cn } from "@/lib/cn";
 
-type Props = { tone?: "light" | "dark"; className?: string };
+type Props = {
+  /** "light" = for dark backgrounds (white lettering). */
+  tone?: "light" | "dark";
+  /** "horizontal" for the header; "full" (stacked) for the footer. */
+  layout?: "horizontal" | "full";
+  className?: string;
+  priority?: boolean;
+};
 
 /**
- * Uses the supplied logo file when set in config/brand.ts. Until then it
- * renders an interim vector crown-and-C mark with the wordmark.
- * `tone="light"` = logo for dark backgrounds.
+ * The Chris Charis Concept logo. Decorative inside a link that is already
+ * labelled (e.g. "Chris Charis Concept, home"); pass `alt` via the parent.
  */
-export function Logo({ tone = "dark", className }: Props) {
-  const file = tone === "light" ? brand.logo.dark : brand.logo.light;
-  if (file) {
-    return (
-      <Image
-        src={file}
-        alt={site.name}
-        width={brand.logo.width}
-        height={brand.logo.height}
-        priority
-        className={className}
-      />
-    );
-  }
-
-  const text = tone === "light" ? "text-white" : "text-ink";
+export function Logo({ tone = "dark", layout = "horizontal", className, priority }: Props) {
+  const l = brand.logo[layout];
   return (
-    <span className={cn("inline-flex items-center gap-2.5", text, className)}>
-      <svg viewBox="0 0 40 40" aria-hidden="true" className="h-9 w-9 shrink-0" fill="none">
-        <path
-          d="M5 9.5 11.5 18 20 6.5 28.5 18 35 9.5"
-          stroke="currentColor"
-          strokeWidth="3.2"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-        />
-        <path
-          d="M28.6 26.2a10 10 0 1 1 0-4.4"
-          stroke="var(--color-brand)"
-          strokeWidth="3.4"
-          strokeLinecap="round"
-          transform="translate(0 4)"
-        />
-      </svg>
-      <span className="flex flex-col font-display leading-none">
-        <span className="text-[0.8rem] font-bold tracking-[0.06em] uppercase">Chris Charis</span>{" "}
-        <span className="mt-1 text-[0.62rem] font-medium tracking-[0.32em] uppercase opacity-80">Concept</span>
-      </span>
-    </span>
+    <Image
+      src={tone === "light" ? l.light : l.dark}
+      alt=""
+      width={l.width}
+      height={l.height}
+      priority={priority}
+      // Pre-optimised WebP at 2–4× size; served as-is.
+      unoptimized
+      className={cn("block w-auto select-none", layout === "horizontal" ? "h-12 lg:h-[3.75rem]" : "h-32", className)}
+      draggable={false}
+    />
   );
 }

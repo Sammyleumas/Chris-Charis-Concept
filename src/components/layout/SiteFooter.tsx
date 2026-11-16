@@ -56,7 +56,9 @@ export async function SiteFooter() {
     <footer className="bg-night text-white">
       <div className="container-site grid grid-cols-1 gap-12 py-16 lg:grid-cols-[1.25fr_2fr] lg:gap-20 lg:py-24">
         <div>
-          <Logo tone="light" />
+          <Link href="/" aria-label="Chris Charis Concept, home" className="inline-block rounded-sm">
+            <Logo tone="light" layout="full" className="h-28 lg:h-36" />
+          </Link>
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/70">{site.shortDescription}</p>
           <SocialLinks links={socials} className="mt-6 text-sm font-semibold text-white/85" />
           <div className="mt-8 max-w-sm">

@@ -1,5 +1,7 @@
 import { site } from "@/config/site";
 import { getSiteSettings } from "@/lib/content";
+import { brand } from "@/config/brand";
+import { siteUrl } from "@/lib/seo/meta";
 
 export async function OrganizationJsonLd() {
   const { contact, socials, location } = await getSiteSettings();
@@ -10,6 +12,7 @@ export async function OrganizationJsonLd() {
     legalName: site.legalName,
     identifier: site.registrationNumber,
     description: site.shortDescription,
+    logo: `${siteUrl()}${brand.logo.fullPng}`,
     foundingDate: "2020-08",
     ...(site.url && { url: site.url }),
     ...(contact.email && { email: contact.email }),

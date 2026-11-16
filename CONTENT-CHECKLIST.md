@@ -3,7 +3,8 @@
 What the website still needs from Chris Charis Concept. Owners follow the CTO brief §10. Once the CMS is live, most items are entered directly in the Studio (see EDITING-GUIDE.md).
 
 ## Brand
-- [ ] Logo SVG + PNG, light and dark versions (Founder/CTO) — interim mark in use
+- [x] Logo (full-colour PNG) received and in use across the site; light, horizontal and icon versions generated from it
+- [ ] Vector (SVG) master of the logo, for crisp print and large-format use
 - [ ] Project logos and accent colours, where projects have them
 
 ## Text

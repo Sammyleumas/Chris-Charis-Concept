@@ -541,7 +541,7 @@ export const posts: Post[] = [];
 
 /** Press kit downloads (brief §5.6). Files are added as they are approved. */
 export const pressAssets: PressAsset[] = [
-  { label: "Logo pack", description: "Crown-and-C logo for light and dark backgrounds, SVG and PNG.", fileUrl: null, format: "ZIP" },
+  { label: "Logo pack", description: "Full-colour logo, versions for dark backgrounds, horizontal lockup and symbol (PNG). Vector files on request.", fileUrl: "/brand/chris-charis-logo-pack.zip", format: "ZIP" },
   { label: "Founder biography", description: "Approved biography and portrait of the founder.", fileUrl: null, format: "PDF" },
   { label: "Approved photographs", description: "High-resolution project photos cleared for press use, with credits.", fileUrl: null, format: "ZIP" },
   { label: "Organisation fact sheet", description: "One-page summary of who we are, our projects and our impact.", fileUrl: null, format: "PDF" },
