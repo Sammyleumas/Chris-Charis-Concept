@@ -7,6 +7,8 @@ import type {
   Statements,
   TeamMember,
   ImpactStat,
+  ImpactStory,
+  Report,
   Organisation,
   Partner,
   PathwayStage,
@@ -42,7 +44,7 @@ export const projectFamilies: ProjectFamily[] = [
     ],
     externalLinks: [{ label: "Watch on YouTube", url: linkRegister.youtubeChannel }],
     related: ["healthy-heart", "fusion"],
-    results: [{ value: "6", label: "Films produced", source: "Chris Charis Concept, CTO build brief (Oct 2026)" }],
+    results: [{ value: "6", label: "Films produced", source: "Chris Charis Concept M&E records, October 2026" }],
     gallery: galleryFor("Film for Social Change", ["on set", "behind the camera", "screening audience", "cast and crew"]),
     cta: {
       title: "Tell a story with us.",
@@ -81,7 +83,7 @@ export const projectFamilies: ProjectFamily[] = [
     ],
     externalLinks: [{ label: "HHCP website", url: linkRegister.hhcpWebsite }],
     related: ["film-for-social-change", "learn-to-lead"],
-    results: [{ value: "4", label: "HHCP editions completed", source: "Chris Charis Concept, CTO build brief (Oct 2026)" }],
+    results: [{ value: "4", label: "HHCP editions completed", source: "Chris Charis Concept M&E records, October 2026" }],
     gallery: galleryFor("Healthy Heart", ["HHCP outreach", "MHAC session", "NAHCON 2021", "Well-being Socials 2025"]),
     cta: {
       title: "Bring Healthy Heart to your community.",
@@ -194,6 +196,8 @@ export const impactStats: ImpactStat[] = [
     label: "Projects since 2020",
     detail: "Across five project families",
     href: "/our-work",
+    source: "Chris Charis Concept M&E records",
+    asOf: "October 2026",
   },
   {
     id: "films",
@@ -202,6 +206,8 @@ export const impactStats: ImpactStat[] = [
     label: "Films",
     detail: "Film for Social Change",
     href: "/our-work/film-for-social-change",
+    source: "Chris Charis Concept M&E records",
+    asOf: "October 2026",
   },
   {
     id: "hhcp",
@@ -210,6 +216,8 @@ export const impactStats: ImpactStat[] = [
     label: "HHCP editions",
     detail: "Healthy Heart Community Project",
     href: "/our-work/healthy-heart",
+    source: "Chris Charis Concept M&E records",
+    asOf: "October 2026",
   },
   {
     id: "young-people",
@@ -218,6 +226,8 @@ export const impactStats: ImpactStat[] = [
     label: "Young people reached",
     detail: "Across our programmes",
     href: "/impact",
+    source: "Chris Charis Concept M&E records",
+    asOf: "October 2026",
   },
   {
     id: "dakar",
@@ -226,6 +236,8 @@ export const impactStats: ImpactStat[] = [
     label: "2025 delegation",
     detail: "Delegation to Dakar, 2025",
     href: "/impact#dakar-2025",
+    source: "Chris Charis Concept M&E records",
+    asOf: "October 2026",
   },
 ];
 
@@ -514,3 +526,9 @@ export const legalEntities: LegalEntity[] = [
     role: "Creative and technology education arm.",
   },
 ];
+
+/** Beneficiary stories. Only `consent: "granted"` entries are published. */
+export const impactStories: ImpactStory[] = [];
+
+/** Annual reports. The FY2026/27 report is added once published. */
+export const reports: Report[] = [];

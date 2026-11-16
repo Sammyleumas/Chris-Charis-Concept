@@ -11,6 +11,8 @@ import {
   films,
   heroMedia,
   impactStats,
+  impactStories,
+  reports,
   legalEntities,
   organisations,
   partners,
@@ -76,4 +78,15 @@ export async function getTeam() {
 
 export async function getLegalEntities() {
   return legalEntities;
+}
+
+/** Published stories only: consent must be recorded as granted. */
+export async function getImpactStories() {
+  return impactStories
+    .filter((s) => s.consent === "granted")
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
+
+export async function getReports() {
+  return [...reports].sort((a, b) => b.publishedOn.localeCompare(a.publishedOn));
 }

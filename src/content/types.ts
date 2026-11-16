@@ -75,6 +75,9 @@ export type ImpactStat = {
   label: string;
   detail: string;
   href: string;
+  /** Where the figure comes from, shown beside it. */
+  source: string;
+  asOf: string;
 };
 
 export type PathwayStage = {
@@ -164,4 +167,33 @@ export type LegalEntity = {
   registeredName: string | null;
   registrationNumber: string | null;
   role: string;
+};
+
+export type ImpactStory = {
+  slug: string;
+  title: string;
+  summary: string;
+  family: ProjectFamilySlug;
+  /** ISO date */
+  date: string;
+  photo: ImageAsset;
+  /** A verified outcome, stated plainly. */
+  outcome: string;
+  /**
+   * Consent for publishing the person's story and image (NDPA 2023).
+   * Only "granted" stories are ever shown.
+   */
+  consent: "granted" | "pending" | "declined";
+};
+
+export type Report = {
+  title: string;
+  /** e.g. "FY2026/27" */
+  period: string;
+  description: string;
+  /** PDF path or CMS file URL. */
+  fileUrl: string;
+  /** ISO date */
+  publishedOn: string;
+  fileSizeLabel?: string;
 };
