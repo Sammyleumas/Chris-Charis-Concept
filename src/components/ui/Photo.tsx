@@ -18,6 +18,8 @@ type Props = {
   fit?: "cover" | "contain";
   /** Varies the dark placeholder's light so neighbouring slides differ. */
   variant?: number;
+  /** "icon" shows only a small camera mark on the placeholder (for dense layouts). */
+  note?: "full" | "icon";
 };
 
 const darkGradients = [
@@ -34,7 +36,7 @@ const darkGradients = [
  * supplied it (`src: null`), shows a labelled frame describing the photo
  * needed, so missing assets are visible during review, never faked.
  */
-export function Photo({ image, fill = true, sizes = "100vw", priority, className, tone = "light", notePosition = "bottom-left", fit = "cover", variant = 0 }: Props) {
+export function Photo({ image, fill = true, sizes = "100vw", priority, className, tone = "light", notePosition = "bottom-left", fit = "cover", variant = 0, note = "full" }: Props) {
   if (image.src) {
     return fill ? (
       <Image
@@ -93,7 +95,7 @@ export function Photo({ image, fill = true, sizes = "100vw", priority, className
         )}
       >
         <Camera className="mt-px h-3.5 w-3.5 shrink-0" />
-        <span>Photo to be supplied: {image.brief}</span>
+        {note === "full" && <span>Photo to be supplied: {image.brief}</span>}
       </p>
     </div>
   );

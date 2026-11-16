@@ -1,9 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useId, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type PointerEvent,
+  type ReactNode,
+} from "react";
 import { useReducedMotion } from "motion/react";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Expand, Shrink } from "lucide-react";
 import type { ImageAsset } from "@/content/types";
 import { Photo } from "@/components/ui/Photo";
 import { cn } from "@/lib/cn";
@@ -18,39 +27,73 @@ export type CoverflowItem = {
   href?: string;
 };
 
+/*
+ * Geometry (classic cover flow, per the approved reference):
+ * the centre card faces forward; side cards turn ~62° and stack closely,
+ * so many are visible at once. Positions are continuous in `offset`, so
+ * dragging moves every card smoothly along the same path.
+ */
+const ROTATE = 62; // degrees for side cards
+const FIRST_GAP = 0.66; // × card width: distance from centre to first side card
+const STACK_GAP = 0.2; // × card width: spacing between stacked side cards
+const DEPTH = 0.55; // × card width: how far side cards sit back
+const MAX_VISIBLE = 7; // cards rendered each side
+
+function place(offset: number, reduce: boolean | null) {
+  const a = Math.abs(offset);
+  const s = Math.sign(offset);
+  const near = Math.min(a, 1);
+  const x = a <= 1 ? offset * FIRST_GAP : s * (FIRST_GAP + (a - 1) * STACK_GAP);
+  const rot = -s * near * ROTATE;
+  const z = -near * DEPTH;
+  const scale = 1 - near * 0.06;
+  return {
+    transform: `translate(-50%, -50%) translateX(calc(var(--cf-card) * ${x.toFixed(4)})) translateZ(calc(var(--cf-card) * ${z.toFixed(4)})) rotateY(${rot.toFixed(2)}deg) scale(${scale.toFixed(4)})`,
+    zIndex: 200 - Math.round(a * 10),
+    opacity: a > MAX_VISIBLE ? 0 : 1 - Math.max(0, a - (MAX_VISIBLE - 1.5)) * 0.6,
+    filter: a > 0.5 && !reduce ? `brightness(${(1 - Math.min(a, 3) * 0.12).toFixed(2)})` : undefined,
+  };
+}
+
 /**
- * Cinematic 3D coverflow (CSS transforms, no 3D library). The centre item is
- * dominant; neighbours sit back with perspective. Navigate with the arrow
- * buttons, arrow keys, mouse drag, touch swipe, or by clicking a side item.
- * `onOpen` lets a parent open a lightbox for the centred item instead of a link.
+ * Cinematic 3D cover flow with mirror reflections on a dark stage.
+ * Navigate with arrows, dots, arrow keys, drag or swipe, or click a side
+ * card. The centred card opens its link, or `onOpen` (e.g. a lightbox).
  */
 export function Coverflow({
   items,
   label,
   onOpen,
   initial = 0,
+  toolbar,
+  allowFullscreen = false,
 }: {
   items: CoverflowItem[];
   label: string;
   onOpen?: (index: number) => void;
   initial?: number;
+  /** Rendered at the top of the stage, e.g. category tabs. */
+  toolbar?: ReactNode;
+  allowFullscreen?: boolean;
 }) {
-  const [active, setActive] = useState(initial);
+  const [active, setActive] = useState(Math.min(initial, Math.max(0, items.length - 1)));
   const [drag, setDrag] = useState(0);
+  const [cardPx, setCardPx] = useState(240);
+  const [isFull, setIsFull] = useState(false);
   const start = useRef<number | null>(null);
   const moved = useRef(false);
+  const stageRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const id = useId();
   const count = items.length;
 
-  const go = useCallback(
-    (to: number) => setActive(Math.max(0, Math.min(count - 1, to))),
-    [count],
-  );
+  const go = useCallback((to: number) => setActive(Math.max(0, Math.min(count - 1, to))), [count]);
 
-  // Card spacing lives in CSS (--cf-spread) so the first paint is already
-  // in place; drag maths reads the rendered card width instead.
-  const [spreadPx, setSpreadPx] = useState(300);
+  useEffect(() => {
+    const onFs = () => setIsFull(document.fullscreenElement === stageRef.current);
+    document.addEventListener("fullscreenchange", onFs);
+    return () => document.removeEventListener("fullscreenchange", onFs);
+  }, []);
 
   const onKey = (e: KeyboardEvent) => {
     if (e.key === "ArrowLeft") { e.preventDefault(); go(active - 1); }
@@ -61,7 +104,7 @@ export function Coverflow({
 
   const onDown = (e: PointerEvent) => {
     const card = (e.currentTarget as HTMLElement).querySelector<HTMLElement>("[aria-roledescription=slide]");
-    setSpreadPx((card?.offsetWidth ?? 375) * 0.8);
+    setCardPx(card?.offsetWidth ?? 240);
     start.current = e.clientX;
     moved.current = false;
   };
@@ -69,27 +112,59 @@ export function Coverflow({
     if (start.current === null) return;
     let dx = e.clientX - start.current;
     if (Math.abs(dx) > 6) moved.current = true;
-    // Rubber-band resistance past the first or last card.
-    if ((active === 0 && dx > 0) || (active === count - 1 && dx < 0)) dx *= 0.3;
+    if ((active === 0 && dx > 0) || (active === count - 1 && dx < 0)) dx *= 0.3; // rubber band
     setDrag(dx);
   };
   const onUp = () => {
     if (start.current === null) return;
-    const steps = Math.round(-drag / (spreadPx * 0.6));
+    // One card per ~third of a card width dragged, so a swipe crosses several stacked cards.
+    const steps = Math.round(-drag / (cardPx * 0.34));
     if (steps !== 0) go(active + steps);
     start.current = null;
     setDrag(0);
   };
 
-  const pad = (n: number) => String(n).padStart(2, "0");
+  const toggleFullscreen = () => {
+    const el = stageRef.current;
+    if (!el) return;
+    if (document.fullscreenElement) void document.exitFullscreen();
+    else void el.requestFullscreen?.();
+  };
+
+  const current = items[active];
+  const dragOffset = drag / (cardPx * 0.34);
 
   return (
     <div
+      ref={stageRef}
       role="region"
       aria-roledescription="carousel"
       aria-label={label}
-      className="relative select-none"
+      className={cn(
+        "relative isolate flex flex-col overflow-hidden bg-[#141518] text-white select-none",
+        isFull ? "h-full justify-center" : "rounded-2xl",
+      )}
     >
+      {/* Soft stage light so the centre reads first (staging) */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_55%_at_50%_42%,rgba(255,255,255,0.07),transparent_70%)]" />
+
+      {!toolbar && !allowFullscreen && <div aria-hidden="true" className="h-8 sm:h-10" />}
+      {(toolbar || allowFullscreen) && (
+        <div className="relative flex min-h-14 items-center justify-center px-14 pt-4">
+          {toolbar}
+          {allowFullscreen && (
+            <button
+              type="button"
+              onClick={toggleFullscreen}
+              className="tap absolute top-3 right-3 grid h-10 w-10 place-items-center rounded-full text-white/60 hover:bg-white/10 hover:text-white"
+            >
+              {isFull ? <Shrink aria-hidden="true" className="h-4 w-4" /> : <Expand aria-hidden="true" className="h-4 w-4" />}
+              <span className="sr-only">{isFull ? "Exit full screen" : "View full screen"}</span>
+            </button>
+          )}
+        </div>
+      )}
+
       <div
         tabIndex={0}
         onKeyDown={onKey}
@@ -99,62 +174,47 @@ export function Coverflow({
         onPointerCancel={onUp}
         onPointerLeave={onUp}
         aria-describedby={`${id}-help`}
-        className="relative mx-auto h-[23rem] touch-pan-y [--cf-spread:52vw] [perspective:1600px] sm:h-[26rem] sm:[--cf-spread:230px] lg:h-[30rem] lg:[--cf-spread:300px]"
+        className={cn(
+          "relative mx-auto w-full touch-pan-y outline-offset-[-4px] [perspective:1100px] [perspective-origin:50%_45%]",
+          isFull
+            ? "h-[70vh] [--cf-card:clamp(180px,24vw,340px)]"
+            : "h-[19rem] [--cf-card:clamp(132px,36vw,170px)] sm:h-[22rem] sm:[--cf-card:200px] lg:h-[25rem] lg:[--cf-card:230px]",
+        )}
       >
         <p id={`${id}-help`} className="sr-only">Use the left and right arrow keys to move between items.</p>
         {items.map((item, i) => {
-          const offset = i - active + drag / spreadPx;
+          const offset = i - active + dragOffset;
           const abs = Math.abs(offset);
-          const hidden = abs > 2.6;
           const centred = i === active;
           const style = {
-            transform: `translate(-50%, -50%) translateX(calc(var(--cf-spread) * ${offset})) translateZ(${-abs * 160}px) rotateY(${reduce ? 0 : Math.max(-1, Math.min(1, -offset)) * 38}deg) scale(${1 - Math.min(abs, 2) * 0.07})`,
-            zIndex: 100 - Math.round(abs * 10),
-            opacity: hidden ? 0 : 1 - Math.max(0, abs - 1.6) * 0.8,
-            // Depth-consistent shadow: nearer cards cast larger, darker shadows.
-            boxShadow: `0 ${Math.max(10, 40 - abs * 12)}px ${Math.max(30, 80 - abs * 20)}px -30px rgba(0,0,0,${Math.max(0.2, 0.55 - abs * 0.15).toFixed(2)})`,
-            // Slow in & out with a small overshoot so cards settle rather than stop dead.
-            transition: drag || reduce
-              ? "none"
-              : "transform 520ms cubic-bezier(.25,1.12,.4,1), opacity 300ms var(--ease-out-soft), box-shadow 520ms var(--ease-out-soft)",
+            ...place(offset, reduce),
+            // Far cards stay in the page (hidden) so movement never reveals gaps.
+            visibility: abs > MAX_VISIBLE + 1 ? ("hidden" as const) : undefined,
+            transition:
+              drag || reduce
+                ? "none"
+                : "transform 560ms cubic-bezier(.25,1.08,.4,1), opacity 300ms var(--ease-out-soft), filter 400ms var(--ease-out-soft)",
           };
-
-          const card = (
-            <>
-              {/* Anticipation: the centred card dips slightly while pressed, before it opens. */}
-              <div className="absolute inset-0 transition-transform duration-150 ease-out group-active:scale-[0.97]">
-                <Photo image={item.image} tone="dark" notePosition="top-left" sizes="(min-width: 1024px) 480px, 80vw" />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-night/90 via-night/20 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-5 text-left sm:p-7">
-                {item.eyebrow && <p className="text-xs font-semibold text-mist tabular-nums">{item.eyebrow}</p>}
-                <p className="mt-1 font-display text-xl leading-tight font-semibold text-white sm:text-2xl">{item.title}</p>
-                {item.caption && centred && (
-                  <p className="mt-2 line-clamp-2 max-w-sm text-sm text-white/75">{item.caption}</p>
-                )}
-                {centred && (item.href || onOpen) && (
-                  <span aria-hidden="true" className="mt-4 inline-grid h-10 w-10 place-items-center rounded-full border border-white/50 text-white">
-                    <ArrowRight className="h-4 w-4" />
-                  </span>
-                )}
-              </div>
-              {/* Side items dim slightly so the centre reads first */}
-              <div className={cn("absolute inset-0 bg-night transition-opacity duration-500", centred ? "opacity-0" : "opacity-35")} />
-            </>
-          );
-
-          const shared = cn(
-            "group absolute top-1/2 left-1/2 block aspect-[4/5] w-[min(78vw,20rem)] overflow-hidden rounded-xl bg-night [backface-visibility:hidden] sm:w-[22rem] lg:w-[24rem]",
-            hidden && "pointer-events-none",
-          );
 
           const a11y = {
             role: "group" as const,
             "aria-roledescription": "slide",
             "aria-label": `${i + 1} of ${count}: ${item.title}`,
-            "aria-hidden": hidden || undefined,
             tabIndex: centred ? 0 : -1,
+            "data-title": item.title,
+            "data-sub": [item.eyebrow, item.caption].filter(Boolean).join(" · "),
+            "data-href": item.href,
           };
+          const shared = cn(
+            "group absolute top-[46%] left-1/2 block aspect-[3/4] w-[var(--cf-card)] [backface-visibility:hidden]",
+            // Mirror reflection on the floor (Chromium and Safari; others show no reflection).
+            "[-webkit-box-reflect:below_3px_linear-gradient(transparent_62%,rgba(255,255,255,0.22))]",
+          );
+          const face = (
+            <span className="absolute inset-0 block overflow-hidden rounded-[3px] bg-night shadow-[0_24px_40px_-24px_rgba(0,0,0,0.9)] transition-transform duration-150 ease-out group-active:scale-[0.97]">
+              <Photo image={item.image} tone="dark" variant={i} note="icon" notePosition="top-left" sizes="(min-width: 1024px) 240px, 40vw" />
+            </span>
+          );
 
           if (centred && item.href && !onOpen) {
             return (
@@ -167,7 +227,7 @@ export function Coverflow({
                 className={shared}
                 style={style}
               >
-                {card}
+                {face}
               </Link>
             );
           }
@@ -184,35 +244,77 @@ export function Coverflow({
               className={cn(shared, "cursor-pointer")}
               style={style}
             >
-              {card}
+              {face}
             </button>
           );
         })}
       </div>
 
-      <div className="mt-6 flex items-center justify-center gap-4">
-        <button
-          type="button"
-          onClick={() => go(active - 1)}
-          disabled={active === 0}
-          className="grid h-11 w-11 place-items-center rounded-full border border-ink/20 text-ink tap hover:border-ink hover:bg-ink hover:text-white disabled:pointer-events-none disabled:opacity-30"
-        >
-          <ChevronLeft aria-hidden="true" className="h-5 w-5" />
-          <span className="sr-only">Previous</span>
-        </button>
-        <p aria-live="polite" className="min-w-16 text-center text-sm font-semibold text-charcoal tabular-nums">
-          {pad(active + 1)} <span className="text-slate-ink">/ {pad(count)}</span>
-          <span className="sr-only">: {items[active]?.title}</span>
-        </p>
-        <button
-          type="button"
-          onClick={() => go(active + 1)}
-          disabled={active === count - 1}
-          className="grid h-11 w-11 place-items-center rounded-full border border-ink/20 text-ink tap hover:border-ink hover:bg-ink hover:text-white disabled:pointer-events-none disabled:opacity-30"
-        >
-          <ChevronRight aria-hidden="true" className="h-5 w-5" />
-          <span className="sr-only">Next</span>
-        </button>
+      {/* Pagination and caption */}
+      <div className="relative z-10 px-4 pb-6 text-center">
+        <div className="flex items-center justify-center gap-1">
+          <button
+            type="button"
+            onClick={() => go(active - 1)}
+            disabled={active === 0}
+            className="tap grid h-10 w-10 place-items-center rounded-full text-white/70 hover:bg-white/10 hover:text-white disabled:opacity-25"
+          >
+            <ChevronLeft aria-hidden="true" className="h-5 w-5" />
+            <span className="sr-only">Previous</span>
+          </button>
+          {/* Many items on a phone: a counter instead of a second row of dots. */}
+          {count > 9 && (
+            <p className="min-w-16 text-sm font-semibold tabular-nums sm:hidden">
+              {String(active + 1).padStart(2, "0")} <span className="text-white/50">/ {String(count).padStart(2, "0")}</span>
+            </p>
+          )}
+          <ol className={cn("flex max-w-[70vw] flex-wrap items-center justify-center", count > 9 && "max-sm:hidden")} aria-label="Choose an item">
+            {items.map((it, i) => (
+              <li key={it.id}>
+                <button
+                  type="button"
+                  onClick={() => go(i)}
+                  aria-current={i === active ? "true" : undefined}
+                  className="group grid h-6 w-6 place-items-center"
+                >
+                  <span
+                    className={cn(
+                      "block h-1.5 w-1.5 rounded-full transition-[background-color,box-shadow,transform] duration-150",
+                      i === active ? "scale-125 bg-transparent ring-[1.5px] ring-white" : "bg-white/80 group-hover:bg-white",
+                    )}
+                  />
+                  <span className="sr-only">Show {i + 1}: {it.title}</span>
+                </button>
+              </li>
+            ))}
+          </ol>
+          <button
+            type="button"
+            onClick={() => go(active + 1)}
+            disabled={active === count - 1}
+            className="tap grid h-10 w-10 place-items-center rounded-full text-white/70 hover:bg-white/10 hover:text-white disabled:opacity-25"
+          >
+            <ChevronRight aria-hidden="true" className="h-5 w-5" />
+            <span className="sr-only">Next</span>
+          </button>
+        </div>
+
+        <div key={current?.id} className="anim-rise mx-auto mt-2 max-w-xl" aria-live="polite">
+          <p className="text-sm font-semibold text-white">
+            {current?.title}
+            <span className="sr-only"> ({active + 1} of {count})</span>
+          </p>
+          {(current?.eyebrow || current?.caption) && (
+            <p className="mt-1 text-xs text-white/60 italic">
+              {[current.eyebrow, current.caption].filter(Boolean).join(" · ")}
+            </p>
+          )}
+          {current?.href && !onOpen && (
+            <Link href={current.href} className="hit-y group mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-mist hover:text-white">
+              Open project <ArrowRight aria-hidden="true" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );

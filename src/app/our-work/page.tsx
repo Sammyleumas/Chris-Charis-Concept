@@ -32,20 +32,20 @@ export default async function OurWorkPage() {
       />
 
       {/* Coverflow (mock-up: Our Work page) */}
-      <section aria-labelledby="families-title" className="overflow-hidden py-20 lg:py-24">
+      <section aria-labelledby="families-title" className="py-20 lg:py-24">
         <div className="container-site">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="eyebrow text-brand-ink">Our projects</p>
               <h2 id="families-title" className="mt-3 text-h2 font-semibold">Five project families since 2020</h2>
             </div>
-            <p className="max-w-sm text-sm text-slate-ink">Drag, swipe or use the arrows. Select the centre card to open a project.</p>
+            <p className="max-w-sm text-sm text-slate-ink">Drag, swipe or use the arrow keys. Select the centre image to open a project.</p>
           </div>
         </div>
-        <div className="mt-12">
+        <div className="container-site mt-10">
           <Coverflow
             label="Project families"
-            initial={3}
+            initial={2}
             items={families.map((f) => ({
               id: f.slug,
               title: f.name,
