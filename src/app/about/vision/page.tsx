@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { Eye, Target, Sparkles } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContentNote } from "@/components/ui/ContentNote";
 import { AboutNav } from "@/components/about/AboutNav";
 import { getPathway, getStatements } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Vision, Mission & Values",
   description: "The vision, mission and values that guide Chris Charis Concept.",
-};
+  path: "/about/vision",
+});
 
 export default async function VisionPage() {
   const [s, pathway] = await Promise.all([getStatements(), getPathway()]);

@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
+import { site } from "@/config/site";
 import { HeroVideo } from "@/components/home/HeroVideo";
 import { ImpactStrip } from "@/components/home/ImpactStrip";
 import { WhoWeAre } from "@/components/home/WhoWeAre";
@@ -19,6 +22,11 @@ import {
   getProjectFamilies,
   getSiteSettings,
 } from "@/lib/content";
+
+export const metadata: Metadata = {
+  ...pageMeta({ title: `${site.name} | ${site.tagline}`, description: site.shortDescription, path: "/" }),
+  title: { absolute: `${site.name} | ${site.tagline}` },
+};
 
 export default async function HomePage() {
   const [hero, stats, stages, families, featured, film, partners, settings] = await Promise.all([

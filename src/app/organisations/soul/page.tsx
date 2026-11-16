@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { notFound } from "next/navigation";
 import { OrgPage } from "@/components/organisations/OrgPage";
 import { getOrganisation } from "@/lib/content";
 
 export async function generateMetadata(): Promise<Metadata> {
   const org = await getOrganisation("soul");
-  return { title: org?.name, description: "SOUL, the School of Ultimate Leadership: leadership development for young people, grown from Learn To Lead." };
+  return pageMeta({ title: org?.name ?? "", description: "SOUL, the School of Ultimate Leadership: leadership development for young people, grown from Learn To Lead.", path: "/organisations/soul" });
 }
 
 export default async function Page() {

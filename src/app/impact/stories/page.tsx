@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { ShieldCheck } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContentNote } from "@/components/ui/ContentNote";
@@ -7,10 +8,11 @@ import { ImpactNav } from "@/components/impact/ImpactNav";
 import { StoriesBrowser } from "@/components/impact/StoriesBrowser";
 import { getImpactStories, getProjectFamilies } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Impact Stories",
   description: "Stories of change from Chris Charis Concept projects, shared with the consent of the people in them.",
-};
+  path: "/impact/stories",
+});
 
 export default async function StoriesPage() {
   const [stories, families] = await Promise.all([getImpactStories(), getProjectFamilies()]);

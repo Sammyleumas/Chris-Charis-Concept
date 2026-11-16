@@ -49,6 +49,8 @@ export function FeaturedInitiative({ item }: { item: Featured }) {
                   href={a.url!}
                   external={a.external}
                   variant={i === 0 ? "primary" : "outline-light"}
+                  data-track={a.label === "Apply" ? "event_application_click" : undefined}
+                  data-track-label={`${item.title}: ${a.label}`}
                 >
                   {a.label}
                 </ButtonLink>

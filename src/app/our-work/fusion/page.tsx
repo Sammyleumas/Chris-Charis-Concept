@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { notFound } from "next/navigation";
 import { ProjectPage } from "@/components/projects/ProjectPage";
 import { FusionEditions } from "@/components/projects/Editions";
@@ -6,10 +7,7 @@ import { getProjectFamily } from "@/lib/content";
 
 export async function generateMetadata(): Promise<Metadata> {
   const family = await getProjectFamily("fusion");
-  return {
-    title: family?.name,
-    description: "The Fusion Creative Project: Fusion: Art Meets Tech, Fusion Connect Academy, Fusion Solutions Hub and more.",
-  };
+  return pageMeta({ title: family?.name ?? "", description: "The Fusion Creative Project: Fusion: Art Meets Tech, Fusion Connect Academy, Fusion Solutions Hub and more.", path: "/our-work/fusion" });
 }
 
 export default async function Page() {

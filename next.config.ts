@@ -1,6 +1,32 @@
 import type { NextConfig } from "next";
 
+const isDev = process.env.NODE_ENV === "development";
+
+/**
+ * Content Security Policy without nonces (keeps pages static; see
+ * node_modules/next/dist/docs/01-app/02-guides/content-security-policy.md).
+ * Only the third parties the site actually uses are allowed.
+ */
+const csp = [
+  "default-src 'self'",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com`,
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' blob: data: https://cdn.sanity.io https://i.ytimg.com https://www.google-analytics.com https://www.googletagmanager.com",
+  "media-src 'self' https://res.cloudinary.com https://cdn.sanity.io",
+  "font-src 'self'",
+  "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com",
+  "frame-src https://www.youtube-nocookie.com",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'self'",
+  ...(process.env.VERCEL ? ["upgrade-insecure-requests"] : []),
+].join("; ");
+
 const securityHeaders = [
+  { key: "Content-Security-Policy", value: csp },
+  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
@@ -18,6 +44,7 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [

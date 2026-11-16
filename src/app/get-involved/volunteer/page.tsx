@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { PageHero } from "@/components/ui/PageHero";
 import { InvolveNav } from "@/components/involve/InvolveNav";
 import { FormSection } from "@/components/involve/FormSection";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Volunteer",
   description: "Volunteer with Chris Charis Concept on film sets, community outreaches, events and training.",
-};
+  path: "/get-involved/volunteer",
+});
 
 const reasons = [
   ["Real projects", "Work on films, outreaches and events that reach real communities."],

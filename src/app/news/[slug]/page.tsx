@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
@@ -22,11 +23,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/news/[slug]">): Promise<Metadata> {
   const post = await getPost((await params).slug);
   if (!post) return {};
-  return {
-    title: post.title,
-    description: post.excerpt,
-    openGraph: { type: "article", publishedTime: post.date, title: post.title, description: post.excerpt },
-  };
+  const meta = pageMeta({ title: post.title, description: post.excerpt, path: `/news/${post.slug}`, type: "article" });
+  return { ...meta, openGraph: { ...meta.openGraph, type: "article", publishedTime: post.date } };
 }
 
 /** Instant navigation shell while the article streams in. */

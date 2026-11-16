@@ -3,16 +3,18 @@ import { Inter, Sora } from "next/font/google";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CookieConsent } from "@/components/legal/CookieConsent";
+import { Analytics } from "@/components/analytics/Analytics";
 import { getProjectFamilies } from "@/lib/content";
 import { brand } from "@/config/brand";
 import { site } from "@/config/site";
+import { siteUrl } from "@/lib/seo/meta";
 import "./globals.css";
 
 const sora = Sora({ subsets: ["latin"], variable: "--font-sora", weight: ["500", "600", "700"], display: "swap" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const metadata: Metadata = {
-  metadataBase: site.url ? new URL(site.url) : undefined,
+  metadataBase: new URL(siteUrl()),
   title: {
     default: `${site.name} | ${site.tagline}`,
     template: `%s | ${site.name}`,
@@ -42,6 +44,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <SiteFooter />
         <CookieConsent />
+        <Analytics />
       </body>
     </html>
   );

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import Link from "next/link";
 import { ArrowRight, Clapperboard, Images, Newspaper, Package } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
@@ -8,10 +9,11 @@ import { MediaNav } from "@/components/media/MediaNav";
 import { images } from "@/content/images";
 import { getFilmLibrary, getGalleryItems, getPosts } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Media",
   description: "Films, photographs, news and press materials from Chris Charis Concept.",
-};
+  path: "/media",
+});
 
 export default async function MediaPage() {
   const [films, gallery, posts] = await Promise.all([getFilmLibrary(), getGalleryItems(), getPosts()]);

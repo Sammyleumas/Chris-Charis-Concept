@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import Link from "next/link";
 import { ArrowRight, Clapperboard, GraduationCap, Building2 } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
@@ -12,11 +13,11 @@ import { images } from "@/content/images";
 import { aboutFull, site } from "@/config/site";
 import { getImpactStats } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "About Us",
-  description:
-    "Chris Charis Concept is a not-for-profit social enterprise in Benin City, Nigeria, using filmmaking, creative media, arts and technology for community development.",
-};
+  description: "Chris Charis Concept is a not-for-profit social enterprise in Benin City, Nigeria, using filmmaking, creative media, arts and technology for community development.",
+  path: "/about",
+});
 
 // The three areas of work, quoted from the approved About text (brief §6).
 const pillars = [

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
@@ -8,11 +9,11 @@ import { site } from "@/config/site";
 import { images } from "@/content/images";
 import { getOrganisations } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Our Organisations",
-  description:
-    "The social enterprise, Fusion Connect Academy, Fusion Solutions Hub, the Chris Charis Brand and SOUL: the organisations of the Chris Charis Concept family.",
-};
+  description: "The social enterprise, Fusion Connect Academy, Fusion Solutions Hub, the Chris Charis Brand and SOUL: the organisations of the Chris Charis Concept family.",
+  path: "/organisations",
+});
 
 export default async function OrganisationsPage() {
   const orgs = await getOrganisations();

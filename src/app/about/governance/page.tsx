@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import Link from "next/link";
 import { ArrowRight, FileText } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
@@ -9,10 +10,11 @@ import { site } from "@/config/site";
 import { images } from "@/content/images";
 import { getLegalEntities } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Legal & Governance",
   description: `Registered details of ${site.legalName} (${site.registrationNumber}), trading as Chris Charis Concept, with policies and reports.`,
-};
+  path: "/about/governance",
+});
 
 export default async function GovernancePage() {
   const entities = await getLegalEntities();

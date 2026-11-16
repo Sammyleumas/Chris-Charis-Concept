@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContentNote } from "@/components/ui/ContentNote";
 import { MediaNav } from "@/components/media/MediaNav";
@@ -6,10 +7,11 @@ import { PostCard } from "@/components/media/PostCard";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
 import { getPosts } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "News & Blog",
   description: "News, stories and announcements from Chris Charis Concept and its projects.",
-};
+  path: "/news",
+});
 
 export default async function NewsPage() {
   const posts = await getPosts();

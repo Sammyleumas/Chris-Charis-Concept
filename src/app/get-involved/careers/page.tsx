@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContentNote } from "@/components/ui/ContentNote";
 import { InvolveNav } from "@/components/involve/InvolveNav";
 import { FormSection } from "@/components/involve/FormSection";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Careers & Facilitators",
   description: "Facilitate, teach or work with Chris Charis Concept across film, health, leadership and creative technology programmes.",
-};
+  path: "/get-involved/careers",
+});
 
 /** Open roles. Empty until the organisation advertises one. */
 const openings: { title: string; type: string; summary: string }[] = [];

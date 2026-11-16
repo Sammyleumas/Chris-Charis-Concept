@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { PageHero } from "@/components/ui/PageHero";
 import { MediaNav } from "@/components/media/MediaNav";
 import { GalleryExperience } from "@/components/media/GalleryExperience";
 import { getGalleryItems, getProjectFamilies } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Gallery",
   description: "Photographs from Chris Charis Concept projects, from film sets to community outreaches.",
-};
+  path: "/media/gallery",
+});
 
 export default async function GalleryPage() {
   const [items, families] = await Promise.all([getGalleryItems(), getProjectFamilies()]);

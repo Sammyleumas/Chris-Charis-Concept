@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContentNote } from "@/components/ui/ContentNote";
 import { ButtonLink } from "@/components/ui/Button";
@@ -6,10 +7,11 @@ import { AboutNav } from "@/components/about/AboutNav";
 import { TeamCard } from "@/components/about/TeamCard";
 import { getTeam } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Our Team",
   description: "Meet the leadership and department leads of Chris Charis Concept.",
-};
+  path: "/about/team",
+});
 
 export default async function TeamPage() {
   const team = await getTeam();

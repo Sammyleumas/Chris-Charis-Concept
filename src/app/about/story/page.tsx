@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { PageHero } from "@/components/ui/PageHero";
 import { ButtonLink } from "@/components/ui/Button";
 import { AboutNav } from "@/components/about/AboutNav";
@@ -6,10 +7,11 @@ import { StoryTimeline } from "@/components/about/StoryTimeline";
 import { images } from "@/content/images";
 import { getTimeline } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Our Story",
   description: "The Chris Charis Concept story from August 2020 to November 2026, project by project.",
-};
+  path: "/about/story",
+});
 
 export default async function StoryPage() {
   const entries = await getTimeline();

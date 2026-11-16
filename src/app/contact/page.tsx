@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContentNote } from "@/components/ui/ContentNote";
@@ -7,10 +8,11 @@ import { getSiteSettings } from "@/lib/content";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 import { images } from "@/content/images";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Contact Us",
   description: "Contact Chris Charis Concept in Benin City, Edo State, Nigeria.",
-};
+  path: "/contact",
+});
 
 export default async function ContactPage() {
   const { location, contact, socials } = await getSiteSettings();

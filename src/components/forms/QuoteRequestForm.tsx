@@ -6,6 +6,7 @@ import { CircleCheck, LoaderCircle } from "lucide-react";
 import { requestQuote } from "@/app/actions/quote";
 import { initialFormState, type FormState } from "@/lib/forms/types";
 import { Consent, Honeypot, TextArea, TextField } from "./Field";
+import { events, track } from "@/lib/analytics";
 
 export function QuoteRequestForm() {
   const [state, action, pending] = useActionState<FormState, FormData>(requestQuote, initialFormState);
@@ -16,6 +17,7 @@ export function QuoteRequestForm() {
   // Move focus to the result so screen-reader and keyboard users hear it.
   useEffect(() => {
     if (state.status !== "idle") summaryRef.current?.focus();
+    if (state.status === "success") track(events.quote);
   }, [state]);
 
   if (state.status === "success") {

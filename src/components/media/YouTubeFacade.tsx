@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Play } from "lucide-react";
 import type { ImageAsset } from "@/content/types";
+import { events, track } from "@/lib/analytics";
 
 /** Extracts the video ID from any common YouTube URL form. */
 export function youTubeId(url: string) {
@@ -32,7 +33,10 @@ export function YouTubeFacade({ url, title, poster }: { url: string; title: stri
           className="absolute inset-0 h-full w-full"
         />
       ) : (
-        <button type="button" onClick={() => setActive(true)} className="group absolute inset-0">
+        <button type="button" onClick={() => {
+            setActive(true);
+            track(events.videoPlay, { video_title: title });
+          }} className="group absolute inset-0">
           <Image src={thumb} alt="" fill sizes="(min-width: 1024px) 66vw, 100vw" className="object-cover" />
           <span className="absolute inset-0 bg-night/30 transition-colors group-hover:bg-night/15" />
           <span className="absolute top-1/2 left-1/2 grid h-20 w-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/95 text-brand-ink shadow-xl transition-transform group-hover:scale-105">

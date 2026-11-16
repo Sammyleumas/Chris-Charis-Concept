@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { Download, FileText } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { ButtonLink } from "@/components/ui/Button";
@@ -6,10 +7,11 @@ import { MediaNav } from "@/components/media/MediaNav";
 import { site } from "@/config/site";
 import { getImpactStats, getPressAssets, getProjectFamilies } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Press Kit",
   description: "Fact sheet, logos and approved materials about Chris Charis Concept for journalists and partners.",
-};
+  path: "/media/press",
+});
 
 export default async function PressPage() {
   const [assets, stats, families] = await Promise.all([getPressAssets(), getImpactStats(), getProjectFamilies()]);

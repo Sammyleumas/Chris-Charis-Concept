@@ -8,6 +8,7 @@ import { donationProjects, minimumAmount, presetAmounts } from "@/lib/validation
 import { initialFormState, type FormState } from "@/lib/forms/types";
 import { Consent, Honeypot, SelectField, TextField } from "./Field";
 import { cn } from "@/lib/cn";
+import { events, track } from "@/lib/analytics";
 
 const naira = (n: number) => `₦${n.toLocaleString("en-NG")}`;
 
@@ -32,6 +33,7 @@ export function DonateForm() {
       onSubmit={(ev) => {
         ev.preventDefault();
         const data = new FormData(ev.currentTarget);
+        track(events.donationStart, { frequency, value: numeric, currency: "NGN", project: String(data.get("project") ?? "") });
         startTransition(() => dispatch(data));
       }}
       className="relative space-y-8"

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { FileText } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContentNote } from "@/components/ui/ContentNote";
@@ -6,10 +7,11 @@ import { InvolveNav } from "@/components/involve/InvolveNav";
 import { FormSection } from "@/components/involve/FormSection";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Partner & Sponsor",
   description: "Partner with or sponsor Chris Charis Concept programmes in film, health, leadership and creative technology.",
-};
+  path: "/get-involved/partner",
+});
 
 /** Set when the approved sponsorship tier PDF is supplied (brief §5.6). */
 const sponsorshipTiersPdf: string | null = null;

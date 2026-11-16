@@ -7,6 +7,7 @@ import { Coverflow } from "./Coverflow";
 import { Lightbox } from "./Lightbox";
 import { Photo } from "@/components/ui/Photo";
 import { cn } from "@/lib/cn";
+import { events, track } from "@/lib/analytics";
 
 type View = "carousel" | "grid";
 
@@ -24,7 +25,11 @@ export function GalleryExperience({
 }) {
   const [family, setFamily] = useState<string | null>(null);
   const [view, setView] = useState<View>("carousel");
-  const [open, setOpen] = useState<number | null>(null);
+  const [open, setOpenState] = useState<number | null>(null);
+  const setOpen = (i: number | null) => {
+    if (i !== null && open === null) track(events.galleryOpen, { project: family ?? "all" });
+    setOpenState(i);
+  };
 
   const shown = family ? items.filter((i) => i.family === family) : items;
   const nameOf = (slug: string) => families.find((f) => f.slug === slug);

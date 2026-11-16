@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { notFound } from "next/navigation";
 import { OrgPage } from "@/components/organisations/OrgPage";
 import { QuoteRequestForm } from "@/components/forms/QuoteRequestForm";
@@ -6,7 +7,7 @@ import { getOrganisation } from "@/lib/content";
 
 export async function generateMetadata(): Promise<Metadata> {
   const org = await getOrganisation("fusion-solutions-hub");
-  return { title: org?.name, description: "Fusion Solutions Hub: innovative, sustainable solutions for individuals and businesses. Request a quote." };
+  return pageMeta({ title: org?.name ?? "", description: "Fusion Solutions Hub: innovative, sustainable solutions for individuals and businesses. Request a quote.", path: "/organisations/fusion-solutions-hub" });
 }
 
 export default async function Page() {

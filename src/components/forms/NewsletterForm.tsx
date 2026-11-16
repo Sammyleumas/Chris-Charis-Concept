@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useId } from "react";
+import { useActionState, useEffect, useId } from "react";
+import { events, track } from "@/lib/analytics";
 import { ArrowRight, Check, LoaderCircle } from "lucide-react";
 import { subscribe, type FormState } from "@/app/actions/newsletter";
 import { cn } from "@/lib/cn";
@@ -10,6 +11,10 @@ export function NewsletterForm({ tone = "dark" }: { tone?: "dark" | "light" }) {
   const [state, action, pending] = useActionState<FormState, FormData>(subscribe, { status: "idle" });
   const id = useId();
   const onDark = tone === "dark";
+
+  useEffect(() => {
+    if (state.status === "success") track(events.newsletter, { method: "newsletter_form" });
+  }, [state]);
 
   if (state.status === "success") {
     return (

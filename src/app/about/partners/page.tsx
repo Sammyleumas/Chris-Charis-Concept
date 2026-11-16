@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import Image from "next/image";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContentNote } from "@/components/ui/ContentNote";
@@ -6,10 +7,11 @@ import { ButtonLink } from "@/components/ui/Button";
 import { AboutNav } from "@/components/about/AboutNav";
 import { getPartners } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Our Partners",
   description: "The organisations Chris Charis Concept works alongside, and what we have done together.",
-};
+  path: "/about/partners",
+});
 
 export default async function PartnersPage() {
   const partners = await getPartners();

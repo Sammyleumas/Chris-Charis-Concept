@@ -45,10 +45,9 @@ export function Logo({ tone = "dark", className }: Props) {
         />
       </svg>
       <span className="flex flex-col font-display leading-none">
-        <span className="text-[0.8rem] font-bold tracking-[0.06em]">CHRIS CHARIS</span>
-        <span className="mt-1 text-[0.62rem] font-medium tracking-[0.32em] opacity-80">CONCEPT</span>
+        <span className="text-[0.8rem] font-bold tracking-[0.06em] uppercase">Chris Charis</span>{" "}
+        <span className="mt-1 text-[0.62rem] font-medium tracking-[0.32em] uppercase opacity-80">Concept</span>
       </span>
-      <span className="sr-only">{site.name}, home</span>
     </span>
   );
 }

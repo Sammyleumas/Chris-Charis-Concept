@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import Link from "next/link";
 import { ArrowRight, FileText, Quote } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
@@ -10,11 +11,11 @@ import { ImpactNav } from "@/components/impact/ImpactNav";
 import { images } from "@/content/images";
 import { getImpactStats, getImpactStories, getPathway, getReports } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Our Impact",
-  description:
-    "Chris Charis Concept's impact since 2020: 26 projects, 6 films, 4 HHCP editions, 1,200+ young people reached and a Dakar 2025 delegation.",
-};
+  description: "Chris Charis Concept's impact since 2020: 26 projects, 6 films, 4 HHCP editions, 1,200+ young people reached and a Dakar 2025 delegation.",
+  path: "/impact",
+});
 
 export default async function ImpactPage() {
   const [stats, pathway, stories, reports] = await Promise.all([

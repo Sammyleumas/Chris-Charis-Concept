@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContentNote } from "@/components/ui/ContentNote";
 import { ImpactNav } from "@/components/impact/ImpactNav";
@@ -6,10 +7,11 @@ import { ReportList } from "@/components/impact/ReportList";
 import { site } from "@/config/site";
 import { getReports } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Annual Reports",
   description: "Annual reports and accountability documents from Chris Charis Concept.",
-};
+  path: "/impact/reports",
+});
 
 export default async function ReportsPage() {
   const reports = await getReports();

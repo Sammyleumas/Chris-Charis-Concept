@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { Check } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { InvolveNav } from "@/components/involve/InvolveNav";
 import { DonateForm } from "@/components/forms/DonateForm";
 import { site } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Donate",
   description: "Support Chris Charis Concept with a one-off or monthly gift to fund films, outreaches and training in Nigeria.",
-};
+  path: "/donate",
+});
 
 const funds = [
   "Advocacy films that start conversations in communities",

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import Link from "next/link";
 import { ArrowRight, Briefcase, HandHeart, Handshake, Users } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
@@ -8,10 +9,11 @@ import { Reveal } from "@/components/ui/Reveal";
 import { InvolveNav } from "@/components/involve/InvolveNav";
 import { images } from "@/content/images";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Get Involved",
   description: "Volunteer, partner, sponsor, donate or work with Chris Charis Concept.",
-};
+  path: "/get-involved",
+});
 
 const ways = [
   { icon: Users, title: "Volunteer", text: "Share your time on film sets, outreaches and events.", href: "/get-involved/volunteer", cta: "Apply to volunteer" },

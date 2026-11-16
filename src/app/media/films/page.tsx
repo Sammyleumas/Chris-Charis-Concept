@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import { PageHero } from "@/components/ui/PageHero";
 import { ButtonLink } from "@/components/ui/Button";
 import { ContentNote } from "@/components/ui/ContentNote";
@@ -7,10 +8,11 @@ import { FilmCard } from "@/components/media/FilmCard";
 import { LatestFilm } from "@/components/home/LatestFilm";
 import { getFilmLibrary, getLatestFilm, getSiteSettings } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Films",
   description: "The Chris Charis Concept film library: advocacy films from Film for Social Change.",
-};
+  path: "/media/films",
+});
 
 export default async function FilmsPage() {
   const [films, featured, { links }] = await Promise.all([getFilmLibrary(), getLatestFilm(), getSiteSettings()]);

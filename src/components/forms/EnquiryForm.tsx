@@ -7,6 +7,7 @@ import { submitEnquiry } from "@/app/actions/enquiry";
 import { forms, type FieldDef, type FormKind } from "@/lib/forms/definitions";
 import { initialFormState, type FormState } from "@/lib/forms/types";
 import { Consent, Honeypot, SelectField, TextArea, TextField } from "./Field";
+import { events, track } from "@/lib/analytics";
 
 /**
  * Renders any enquiry form from its definition. `prefill` sets a select
@@ -32,7 +33,8 @@ export function EnquiryForm({
 
   useEffect(() => {
     if (state.status !== "idle") summaryRef.current?.focus();
-  }, [state]);
+    if (state.status === "success") track(events[kind]);
+  }, [state, kind]);
 
   useEffect(() => {
     if (!prefill || !formRef.current) return;

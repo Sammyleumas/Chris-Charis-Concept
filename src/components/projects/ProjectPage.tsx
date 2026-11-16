@@ -55,6 +55,8 @@ export async function ProjectPage({ family, editions }: { family: ProjectFamily;
               href={l.url!}
               target="_blank"
               rel="noopener noreferrer"
+              data-track="project_link_click"
+              data-track-label={`${family.shortName}: ${l.label}`}
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-ink hover:text-brand-deep"
             >
               {l.label} <ArrowUpRight aria-hidden="true" className="h-4 w-4" />

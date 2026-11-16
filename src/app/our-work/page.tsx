@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo/meta";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
@@ -8,11 +9,11 @@ import { Coverflow } from "@/components/media/Coverflow";
 import { images } from "@/content/images";
 import { getPathway, getProjectFamilies } from "@/lib/content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Our Work",
-  description:
-    "Five project families since 2020: Film for Social Change, Healthy Heart, Learn To Lead → SOUL, Fusion Creative Project and the Chris Charis Brand.",
-};
+  description: "Five project families since 2020: Film for Social Change, Healthy Heart, Learn To Lead → SOUL, Fusion Creative Project and the Chris Charis Brand.",
+  path: "/our-work",
+});
 
 export default async function OurWorkPage() {
   const [families, pathway] = await Promise.all([getProjectFamilies(), getPathway()]);
