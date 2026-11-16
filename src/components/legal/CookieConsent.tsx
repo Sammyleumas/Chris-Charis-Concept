@@ -10,20 +10,27 @@ import { getConsent, setConsent, subscribeConsent } from "@/lib/consent";
  * the footer's "Cookie settings" button.
  */
 export function CookieConsent() {
-  const consent = useSyncExternalStore<ReturnType<typeof getConsent> | "unknown">(subscribeConsent, getConsent, () => "unknown");
+  // Server render shows the banner (so it paints immediately on a first
+  // visit); an inline script in <head> hides it for returning visitors
+  // before paint, and the client value takes over after hydration.
+  const consent = useSyncExternalStore<ReturnType<typeof getConsent> | "server">(subscribeConsent, getConsent, () => "server");
   const [reopened, setReopened] = useState(false);
 
   useEffect(() => {
-    const open = () => setReopened(true);
+    const open = () => {
+      delete document.documentElement.dataset.consent;
+      setReopened(true);
+    };
     window.addEventListener("cc:open-cookie-settings", open);
     return () => window.removeEventListener("cc:open-cookie-settings", open);
   }, []);
 
-  const visible = reopened || consent === null;
-  if (!visible || consent === "unknown") return null;
+  const visible = reopened || consent === null || consent === "server";
+  if (!visible) return null;
 
   const choose = (analytics: boolean) => {
     setConsent({ analytics });
+    document.documentElement.dataset.consent = "1";
     setReopened(false);
   };
 
@@ -31,6 +38,7 @@ export function CookieConsent() {
     <div
       role="region"
       aria-label="Cookie choices"
+      data-cookie-banner=""
       className="fixed inset-x-0 bottom-0 z-[55] p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:p-5"
     >
       <div className="mx-auto flex max-w-4xl flex-col gap-4 rounded-2xl bg-ink p-5 text-white shadow-2xl ring-1 ring-white/10 sm:flex-row sm:items-center sm:gap-6 sm:p-6">

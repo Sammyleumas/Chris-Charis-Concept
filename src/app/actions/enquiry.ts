@@ -1,7 +1,8 @@
 "use server";
 
 import { headers } from "next/headers";
-import { forms, schemaFor, type FieldDef, type FormKind } from "@/lib/forms/definitions";
+import { forms, type FieldDef, type FormKind } from "@/lib/forms/definitions";
+import { schemaFor } from "@/lib/forms/schema";
 import { deliverSubmission } from "@/lib/forms/deliver";
 import { formValues, rateLimited, validate } from "@/lib/forms/server";
 import type { FormState } from "@/lib/forms/types";

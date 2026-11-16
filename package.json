@@ -11,7 +11,8 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
-    "cms:seed": "tsx scripts/sanity-seed.ts"
+    "cms:seed": "tsx scripts/sanity-seed.ts",
+    "test:e2e": "playwright test --trace off"
   },
   "dependencies": {
     "@hookform/resolvers": "^7.0.6",

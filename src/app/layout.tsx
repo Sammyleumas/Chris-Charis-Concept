@@ -36,7 +36,15 @@ export const viewport: Viewport = {
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   const families = (await getProjectFamilies()).map(({ slug, name, year, line }) => ({ slug, name, year, line }));
   return (
-    <html lang="en-NG" className={`${sora.variable} ${inter.variable} antialiased`}>
+    <html lang="en-NG" className={`${sora.variable} ${inter.variable} antialiased`} suppressHydrationWarning>
+      <head>
+        {/* Hide the server-rendered cookie banner before paint when a choice already exists. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem("cc-consent"))document.documentElement.dataset.consent="1"}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="flex min-h-dvh flex-col">
         <SiteHeader families={families} />
         <main id="main" className="flex-1">

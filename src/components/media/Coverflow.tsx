@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useId, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
+import { useCallback, useId, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import { useReducedMotion } from "motion/react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import type { ImageAsset } from "@/content/types";
@@ -48,14 +48,9 @@ export function Coverflow({
     [count],
   );
 
-  // Responsive spacing between cards, read from the viewport.
-  const [spread, setSpread] = useState(260);
-  useEffect(() => {
-    const set = () => setSpread(window.innerWidth < 640 ? window.innerWidth * 0.52 : window.innerWidth < 1024 ? 230 : 300);
-    set();
-    window.addEventListener("resize", set);
-    return () => window.removeEventListener("resize", set);
-  }, []);
+  // Card spacing lives in CSS (--cf-spread) so the first paint is already
+  // in place; drag maths reads the rendered card width instead.
+  const [spreadPx, setSpreadPx] = useState(300);
 
   const onKey = (e: KeyboardEvent) => {
     if (e.key === "ArrowLeft") { e.preventDefault(); go(active - 1); }
@@ -65,6 +60,8 @@ export function Coverflow({
   };
 
   const onDown = (e: PointerEvent) => {
+    const card = (e.currentTarget as HTMLElement).querySelector<HTMLElement>("[aria-roledescription=slide]");
+    setSpreadPx((card?.offsetWidth ?? 375) * 0.8);
     start.current = e.clientX;
     moved.current = false;
   };
@@ -76,7 +73,7 @@ export function Coverflow({
   };
   const onUp = () => {
     if (start.current === null) return;
-    const steps = Math.round(-drag / (spread * 0.6));
+    const steps = Math.round(-drag / (spreadPx * 0.6));
     if (steps !== 0) go(active + steps);
     start.current = null;
     setDrag(0);
@@ -100,16 +97,16 @@ export function Coverflow({
         onPointerCancel={onUp}
         onPointerLeave={onUp}
         aria-describedby={`${id}-help`}
-        className="relative mx-auto h-[23rem] touch-pan-y [perspective:1600px] sm:h-[26rem] lg:h-[30rem]"
+        className="relative mx-auto h-[23rem] touch-pan-y [--cf-spread:52vw] [perspective:1600px] sm:h-[26rem] sm:[--cf-spread:230px] lg:h-[30rem] lg:[--cf-spread:300px]"
       >
         <p id={`${id}-help`} className="sr-only">Use the left and right arrow keys to move between items.</p>
         {items.map((item, i) => {
-          const offset = i - active + drag / spread;
+          const offset = i - active + drag / spreadPx;
           const abs = Math.abs(offset);
           const hidden = abs > 2.6;
           const centred = i === active;
           const style = {
-            transform: `translate(-50%, -50%) translateX(${offset * spread}px) translateZ(${-abs * 160}px) rotateY(${reduce ? 0 : Math.max(-1, Math.min(1, -offset)) * 38}deg) scale(${1 - Math.min(abs, 2) * 0.07})`,
+            transform: `translate(-50%, -50%) translateX(calc(var(--cf-spread) * ${offset})) translateZ(${-abs * 160}px) rotateY(${reduce ? 0 : Math.max(-1, Math.min(1, -offset)) * 38}deg) scale(${1 - Math.min(abs, 2) * 0.07})`,
             zIndex: 100 - Math.round(abs * 10),
             opacity: hidden ? 0 : 1 - Math.max(0, abs - 1.6) * 0.8,
             transition: drag || reduce ? "none" : "transform 600ms cubic-bezier(.22,1,.36,1), opacity 400ms",

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { startTransition, useActionState, useEffect, useRef, useState } from "react";
 import { Lock, LoaderCircle } from "lucide-react";
 import { startDonation } from "@/app/actions/donate";
-import { donationProjects, minimumAmount, presetAmounts } from "@/lib/validation/donation";
+import { donationProjects, minimumAmount, presetAmounts } from "@/lib/forms/donation-options";
 import { initialFormState, type FormState } from "@/lib/forms/types";
 import { Consent, Honeypot, SelectField, TextField } from "./Field";
 import { cn } from "@/lib/cn";

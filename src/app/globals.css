@@ -99,6 +99,11 @@
   }
 }
 
+/* Returning visitors: the inline head script marks consent before paint. */
+[data-consent] [data-cookie-banner] {
+  display: none;
+}
+
 @layer components {
   /* Small uppercase label used above headings */
   .eyebrow {
