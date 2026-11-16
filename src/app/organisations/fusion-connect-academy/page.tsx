@@ -1,22 +1,15 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/PageHero";
-import { PlannedSection } from "@/components/ui/PlannedSection";
+import { notFound } from "next/navigation";
+import { OrgPage } from "@/components/organisations/OrgPage";
+import { getOrganisation } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Fusion Connect Academy",
-  description: "Creative and technology education.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const org = await getOrganisation("fusion-connect-academy");
+  return { title: org?.name, description: "Fusion Connect Academy: creative and technology education from the Chris Charis Concept family." };
+}
 
-export default function Page() {
-  return (
-    <>
-      <PageHero
-        eyebrow="Our Organisations"
-        title="Fusion Connect Academy"
-        subtitle="Creative and technology education."
-        crumbs={[{"label": "Our Organisations", "href": "/organisations"}, {"label": "Fusion Connect Academy"}]}
-      />
-      <PlannedSection phase="Phase 7 (Organisations)" />
-    </>
-  );
+export default async function Page() {
+  const org = await getOrganisation("fusion-connect-academy");
+  if (!org) notFound();
+  return <OrgPage org={org} />;
 }

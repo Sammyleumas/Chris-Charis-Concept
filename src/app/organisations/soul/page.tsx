@@ -1,22 +1,15 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/PageHero";
-import { PlannedSection } from "@/components/ui/PlannedSection";
+import { notFound } from "next/navigation";
+import { OrgPage } from "@/components/organisations/OrgPage";
+import { getOrganisation } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "SOUL",
-  description: "The School of Ultimate Leadership.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const org = await getOrganisation("soul");
+  return { title: org?.name, description: "SOUL, the School of Ultimate Leadership: leadership development for young people, grown from Learn To Lead." };
+}
 
-export default function Page() {
-  return (
-    <>
-      <PageHero
-        eyebrow="Our Organisations"
-        title="SOUL"
-        subtitle="The School of Ultimate Leadership."
-        crumbs={[{"label": "Our Organisations", "href": "/organisations"}, {"label": "SOUL"}]}
-      />
-      <PlannedSection phase="Phase 7 (Organisations)" />
-    </>
-  );
+export default async function Page() {
+  const org = await getOrganisation("soul");
+  if (!org) notFound();
+  return <OrgPage org={org} />;
 }

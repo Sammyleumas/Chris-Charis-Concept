@@ -1,22 +1,15 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/PageHero";
-import { PlannedSection } from "@/components/ui/PlannedSection";
+import { notFound } from "next/navigation";
+import { OrgPage } from "@/components/organisations/OrgPage";
+import { getOrganisation } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "The Chris Charis Brand",
-  description: "Founder-led media and community.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const org = await getOrganisation("chris-charis-brand");
+  return { title: org?.name, description: "The Chris Charis Brand: founder-led media and community from the Chris Charis Concept family." };
+}
 
-export default function Page() {
-  return (
-    <>
-      <PageHero
-        eyebrow="Our Organisations"
-        title="The Chris Charis Brand"
-        subtitle="Founder-led media and community."
-        crumbs={[{"label": "Our Organisations", "href": "/organisations"}, {"label": "The Chris Charis Brand"}]}
-      />
-      <PlannedSection phase="Phase 7 (Organisations)" />
-    </>
-  );
+export default async function Page() {
+  const org = await getOrganisation("chris-charis-brand");
+  if (!org) notFound();
+  return <OrgPage org={org} />;
 }

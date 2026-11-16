@@ -1,4 +1,4 @@
-import { linkRegister, site } from "@/config/site";
+import { aboutShort as aboutShortText, linkRegister, site } from "@/config/site";
 import { galleryFor, images } from "./images";
 import type {
   FeaturedInitiative,
@@ -319,9 +319,28 @@ export const organisations: Organisation[] = [
     registeredName: site.legalName,
     registrationNumber: site.registrationNumber,
     line: "The registered not-for-profit at the centre of everything we do.",
-    description: null,
+    description: aboutShortText,
     image: images.orgSocialEnterprise,
     website: null,
+    relationship: "The parent organisation. Every project and arm carries the line “a Chris Charis Concept initiative”.",
+    relatedFamilies: ["film-for-social-change", "healthy-heart", "learn-to-lead", "fusion", "chris-charis-brand"],
+    offerings: {
+      title: "Objects",
+      items: [
+        "Audiovisual and digital content for education, public enlightenment, advocacy and cultural development",
+        "Training, workshops, mentorship and skills acquisition in creative arts, media and digital technology",
+        "Creative and technology hubs, learning platforms and community-based programmes",
+      ],
+      pendingNote: "",
+    },
+    enquiry: {
+      title: "Work with the social enterprise.",
+      text: "We work with governments, NGOs, educational institutions, private organisations, development partners and donor agencies.",
+      actions: [
+        { label: "Partner with us", url: "/get-involved/partner" },
+        { label: "Contact us", url: "/contact" },
+      ],
+    },
   },
   {
     slug: "fusion-connect-academy",
@@ -332,6 +351,21 @@ export const organisations: Organisation[] = [
     description: null,
     image: images.orgFca,
     website: linkRegister.fusionConnectAcademy,
+    relationship: "Born from the Fusion Creative Project. With Fusion Solutions Hub, it forms the “Earn & Lead” stage of our pathway.",
+    relatedFamilies: ["fusion"],
+    offerings: {
+      title: "Programmes and courses",
+      items: [],
+      pendingNote: "Approved programmes, courses, schedules and enrolment details. No courses, fees or certificates are shown until supplied.",
+    },
+    enquiry: {
+      title: "Learn with Fusion Connect Academy.",
+      text: "Ask about upcoming programmes and how to enrol.",
+      actions: [
+        { label: "Visit the Academy website", url: linkRegister.fusionConnectAcademy, external: true },
+        { label: "Ask about enrolment", url: "/contact" },
+      ],
+    },
   },
   {
     slug: "fusion-solutions-hub",
@@ -343,6 +377,19 @@ export const organisations: Organisation[] = [
       "At FUSION Solution Hub, we empower individuals and businesses to thrive in an ever-evolving world by providing innovative, sustainable solutions to complex problems. Our multifaceted enterprise brings together experts from diverse fields to deliver exceptional services that drive growth, efficiency, and success.",
     image: images.orgFsh,
     website: null,
+    relationship: "Born from the Fusion Creative Project. With Fusion Connect Academy, it forms the “Earn & Lead” stage of our pathway.",
+    relatedFamilies: ["fusion"],
+    offerings: {
+      title: "Services",
+      items: [],
+      pendingNote: "The approved Fusion Solutions Hub services list, vision and mission from the company profile.",
+    },
+    enquiry: {
+      title: "Request a quote.",
+      text: "Tell us about your project and the Fusion Solutions Hub team will get back to you.",
+      // The quote form on the page itself is the enquiry route.
+      actions: [],
+    },
   },
   {
     slug: "chris-charis-brand",
@@ -353,6 +400,21 @@ export const organisations: Organisation[] = [
     description: null,
     image: images.brand,
     website: null,
+    relationship: "The founder-led brand of the Chris Charis Concept family, launched in 2025.",
+    relatedFamilies: ["chris-charis-brand"],
+    offerings: {
+      title: "Projects",
+      items: ["MayBe Challenge", "Chris Charis Community", "Book Project"],
+      pendingNote: "Purpose statement for the Chris Charis Brand and descriptions of its projects.",
+    },
+    enquiry: {
+      title: "Collaborate with the brand.",
+      text: "For content collaborations and community enquiries, get in touch.",
+      actions: [
+        { label: "MayBe Challenge on TikTok", url: linkRegister.maybeChallengeTiktok, external: true },
+        { label: "Contact us", url: "/contact" },
+      ],
+    },
   },
   {
     slug: "soul",
@@ -363,6 +425,21 @@ export const organisations: Organisation[] = [
     description: null,
     image: images.orgSoul,
     website: linkRegister.soulWebsite,
+    relationship: "Grew out of Learn To Lead (2021), our leadership development programme for young people.",
+    relatedFamilies: ["learn-to-lead"],
+    offerings: {
+      title: "The seven faculties",
+      items: [],
+      pendingNote: "Names and short descriptions of SOUL’s seven faculties.",
+    },
+    enquiry: {
+      title: "Lead with SOUL.",
+      text: "Join a SOUL programme or facilitate a faculty.",
+      actions: [
+        { label: "SOUL website", url: linkRegister.soulWebsite, external: true },
+        { label: "Become a facilitator", url: "/get-involved/careers" },
+      ],
+    },
   },
 ];
 

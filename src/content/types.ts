@@ -104,6 +104,12 @@ export type Organisation = {
   description: string | null;
   image: ImageAsset;
   website: string | null;
+  /** How this organisation relates to the parent brand. */
+  relationship: string;
+  relatedFamilies: ProjectFamilySlug[];
+  /** Programmes, services or courses: approved items only. */
+  offerings: { title: string; items: string[]; pendingNote: string };
+  enquiry: { title: string; text: string; actions: { label: string; url: string | null; external?: boolean }[] };
 };
 
 export type FeaturedInitiative = {

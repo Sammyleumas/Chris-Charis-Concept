@@ -1,22 +1,15 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/PageHero";
-import { PlannedSection } from "@/components/ui/PlannedSection";
+import { notFound } from "next/navigation";
+import { OrgPage } from "@/components/organisations/OrgPage";
+import { getOrganisation } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "The Social Enterprise",
-  description: "Chris Charis Social Enterprise for Art and Tech LTD/GTE.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const org = await getOrganisation("social-enterprise");
+  return { title: org?.name, description: "Chris Charis Social Enterprise for Art and Tech LTD/GTE (RC 9786077): the registered not-for-profit behind Chris Charis Concept." };
+}
 
-export default function Page() {
-  return (
-    <>
-      <PageHero
-        eyebrow="Our Organisations"
-        title="The Social Enterprise"
-        subtitle="Chris Charis Social Enterprise for Art and Tech LTD/GTE."
-        crumbs={[{"label": "Our Organisations", "href": "/organisations"}, {"label": "The Social Enterprise"}]}
-      />
-      <PlannedSection phase="Phase 7 (Organisations)" />
-    </>
-  );
+export default async function Page() {
+  const org = await getOrganisation("social-enterprise");
+  if (!org) notFound();
+  return <OrgPage org={org} />;
 }
