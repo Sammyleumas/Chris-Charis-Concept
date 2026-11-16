@@ -70,7 +70,7 @@ export function Lightbox({
           {/* Opening grows in once with a settle; stepping between photos is a plain crossfade (frequent action). */}
           <div className="anim-dialog relative h-full max-h-[75vh] w-full max-w-6xl">
             <div key={item.id} className="anim-fade absolute inset-0">
-              <Photo image={item.image} tone="dark" fit="contain" notePosition="top-left" sizes="100vw" />
+              <Photo image={item.image} tone="dark" fit="contain" notePosition="top-left" sizes="100vw" priority />
             </div>
           </div>
           {items.length > 1 && (

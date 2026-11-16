@@ -28,26 +28,38 @@ export const images = {
     "Film crew on set during a Film for Social Change production",
     "Film for Social Change: on set, camera and crew",
   ),
-  hhcp: pending(
-    "Community members at a Healthy Heart Community Project outreach",
-    "HHCP outreach: health screening or community session",
-  ),
+  hhcp: {
+    src: "/images/hhcp/group-with-paintings.jpg",
+    alt: "Participants and facilitators of a Healthy Heart Community Project session smiling and holding up their sunflower paintings",
+    brief: "Participants with their paintings",
+    width: 2400,
+    height: 1800,
+    focus: "50% 45%",
+  },
   learnToLead: pending(
     "Young leaders in a Learn To Lead session",
     "Learn To Lead or SOUL: facilitator with young leaders",
   ),
-  fusion: pending(
-    "Participants at Fusion: Art Meets Tech",
-    "Fusion: Art Meets Tech: creatives and technologists at work",
-  ),
+  fusion: {
+    src: "/images/fusion/group-with-artworks.jpg",
+    alt: "Fusion participants and organisers gathered on stage behind a display of their paintings, drawings and portraits",
+    brief: "Participants with their artworks",
+    width: 2400,
+    height: 1800,
+    focus: "50% 72%",
+  },
   brand: pending(
     "Chris Charis Brand content production",
     "Chris Charis Brand: MayBe Challenge or community moment",
   ),
-  fusionFeature: pending(
-    "Fusion: Art Meets Tech 2026 event visual",
-    "Fusion: Art Meets Tech 2026: official event visual or past edition photo",
-  ),
+  fusionFeature: {
+    src: "/images/fusion/live-portrait-sketch.jpg",
+    alt: "An artist sketches a live pencil portrait of a seated participant while the audience watches, at a past Fusion event",
+    brief: "Live portrait sketching at a past Fusion event",
+    width: 2400,
+    height: 1800,
+    focus: "55% 50%",
+  },
   latestFilm: pending(
     "Still from the latest Film for Social Change release",
     "Still from the latest film (YouTube thumbnail works)",
@@ -101,6 +113,61 @@ export const images = {
     "Governance hero: team or board meeting",
   ),
 } satisfies Record<string, ImageAsset>;
+
+/** Supplied photo with its intrinsic size. */
+const photo = (file: string, w: number, h: number, alt: string, brief: string, focus?: string): ImageAsset => ({
+  src: `/images/${file}`,
+  alt,
+  brief,
+  width: w,
+  height: h,
+  focus,
+});
+
+/**
+ * Healthy Heart Community Project session, August 2025 (supplied by the
+ * organisation). Order matters: the first photo is shown large.
+ */
+export const hhcpGallery: ImageAsset[] = [
+  photo("hhcp/group-with-paintings-close.jpg", 2400, 1800, "Group of young participants and facilitators holding up the sunflower paintings they made", "Showing the finished paintings", "50% 40%"),
+  photo("hhcp/painting-session.jpg", 2400, 1800, "Participants painting at a table covered with paper, paint palettes and cups of water", "The painting session"),
+  photo("hhcp/participant-with-painting.jpg", 1800, 2400, "A smiling participant holding up her painting of three sunflowers signed Victory", "Victory’s painting", "50% 30%"),
+  photo("hhcp/facilitators-with-painting.jpg", 1800, 2400, "Three smiling session leaders holding up a participant’s sunflower painting", "Celebrating the work", "50% 35%"),
+  photo("hhcp/speakers-at-the-table.jpg", 2400, 1800, "Two speakers seated at a table in front of a banner during the conversation", "Opening conversation", "60% 40%"),
+  photo("hhcp/panel-conversation.jpg", 2400, 1800, "A speaker holding a microphone talks while another participant listens beside a podcast microphone", "Panel conversation", "40% 40%"),
+  photo("hhcp/speaker-at-the-microphone.jpg", 1800, 2400, "A speaker in a maroon outfit talking into a studio microphone", "Speaking at the microphone", "50% 35%"),
+  photo("hhcp/group-discussion.jpg", 2400, 1800, "Participants seated around a table taking part in a group discussion", "Group discussion"),
+  photo("hhcp/group-discussion-office.jpg", 1800, 2400, "Participants working together on sheets of paper around a table", "Working in groups", "50% 55%"),
+  photo("hhcp/painting-table-conversation.jpg", 2400, 1800, "Participants at the painting table, one turning to look at the camera", "At the painting table", "35% 45%"),
+  photo("hhcp/participants-smiling.jpg", 1800, 2400, "Two participants smiling during the session", "Moments of joy", "50% 45%"),
+  photo("hhcp/participant-listening.jpg", 1800, 2400, "A participant listening attentively at the table", "Listening in", "50% 40%"),
+  photo("hhcp/participant-portrait.jpg", 1800, 2400, "Portrait of a participant seated at the table during the session", "Taking part", "50% 40%"),
+];
+
+/**
+ * Fusion Creative Project events (supplied by the organisation). The first
+ * photo is shown large. A registration-desk photo was left out because it
+ * shows a person's bank details.
+ */
+export const fusionGallery: ImageAsset[] = [
+  photo("fusion/group-with-artworks.jpg", 2400, 1800, "Fusion participants and organisers gathered on stage behind a display of their paintings, drawings and portraits", "Showcasing the work", "50% 72%"),
+  photo("fusion/artist-with-sitter.jpg", 1500, 2000, "An artist and a participant smile beside the finished pencil portrait of her", "The finished portrait", "50% 45%"),
+  photo("fusion/artist-at-the-easel.jpg", 1500, 2000, "An artist at an easel begins a pencil portrait", "At the easel", "50% 55%"),
+  photo("fusion/live-portrait-sketch.jpg", 2400, 1800, "An artist sketches a live pencil portrait of a seated participant while the audience watches", "Live portrait sketching", "55% 50%"),
+  photo("fusion/presenting-a-portrait.jpg", 1500, 2000, "A host with a microphone presents a framed portrait to the audience", "Presenting the art", "45% 40%"),
+  photo("fusion/performance.jpg", 1398, 1864, "A performer in a red dress sings into a microphone", "Performance", "40% 40%"),
+  photo("fusion/addressing-the-audience.jpg", 1500, 2000, "A speaker in a red dress addresses seated guests, with artworks on the walls", "Addressing the audience", "50% 50%"),
+  photo("fusion/audience.jpg", 1500, 2000, "Guests seated in rows during the programme", "In the audience", "50% 55%"),
+  photo("fusion/conversation.jpg", 1391, 1854, "Two guests in conversation between sessions", "Between sessions", "45% 50%"),
+  photo("fusion/participants-with-painting.jpg", 1500, 2000, "Three participants holding a landscape painting", "A painting to take home", "50% 45%"),
+  photo("fusion/panel-session.jpg", 1800, 1200, "A panellist and a tech facilitator seated in the audience, one working on a laptop", "Panel session", "55% 45%"),
+  photo("fusion/delegates-listening.jpg", 1800, 1200, "Delegates listening closely during a session", "Delegates listening", "50% 35%"),
+  photo("fusion/convener-and-delegate.jpg", 1800, 1200, "The convener and a delegate, wearing event badges, smile for the camera", "Convener and delegate", "50% 35%"),
+  photo("fusion/portrait-black-and-white.jpg", 892, 1200, "Black-and-white portrait of a smiling participant in a Where Art Meets Tech T-shirt", "Portrait", "50% 35%"),
+  photo("fusion/at-the-fusion-banner.jpg", 1800, 2400, "Two organisers stand either side of the FUSION banner, labelled A Chris Charis Concept", "At the Fusion banner", "50% 45%"),
+  photo("fusion/team-at-the-banner.jpg", 1374, 1961, "Four team members in front of the event banner", "The team", "50% 50%"),
+  photo("fusion/team-group.jpg", 2000, 1500, "Six team members smiling in front of the event banner", "The team together", "50% 45%"),
+];
 
 /** Pending photo slots for a project gallery, one per subject. */
 export function galleryFor(project: string, subjects: string[]): ImageAsset[] {

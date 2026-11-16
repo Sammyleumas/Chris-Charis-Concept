@@ -1,5 +1,5 @@
 import { aboutShort as aboutShortText, linkRegister, site } from "@/config/site";
-import { galleryFor, images } from "./images";
+import { galleryFor, hhcpGallery, fusionGallery, images } from "./images";
 import type {
   FeaturedInitiative,
   HeroSlide,
@@ -87,7 +87,7 @@ export const projectFamilies: ProjectFamily[] = [
     externalLinks: [{ label: "HHCP website", url: linkRegister.hhcpWebsite }],
     related: ["film-for-social-change", "learn-to-lead"],
     results: [{ value: "4", label: "HHCP editions completed", source: "Chris Charis Concept M&E records, October 2026" }],
-    gallery: galleryFor("Healthy Heart", ["HHCP outreach", "MHAC session", "NAHCON 2021", "Well-being Socials 2025"]),
+    gallery: hhcpGallery,
     cta: {
       title: "Bring Healthy Heart to your community.",
       text: "Volunteer at an outreach or sponsor the next edition.",
@@ -154,7 +154,7 @@ export const projectFamilies: ProjectFamily[] = [
     ],
     related: ["learn-to-lead", "chris-charis-brand"],
     results: [],
-    gallery: galleryFor("Fusion", ["bootcamp workshop", "FUSION showcase", "School Tour", "Africa Tour"]),
+    gallery: fusionGallery,
     cta: {
       title: "Be part of Fusion 2026.",
       text: "Fusion: Art Meets Tech runs 26–28 November 2026. Apply to take part or sponsor young talent.",

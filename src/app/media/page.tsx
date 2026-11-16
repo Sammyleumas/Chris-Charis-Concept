@@ -19,7 +19,7 @@ export default async function MediaPage() {
   const [films, gallery, posts] = await Promise.all([getFilmLibrary(), getGalleryItems(), getPosts()]);
   const sections = [
     { href: "/media/films", icon: Clapperboard, title: "Films", text: "Advocacy films and productions from Film for Social Change.", count: `${films.length} titles`, image: images.ffsc },
-    { href: "/media/gallery", icon: Images, title: "Gallery", text: "Moments from our projects, explored in 3D.", count: `${gallery.length} photo slots`, image: images.fusion },
+    { href: "/media/gallery", icon: Images, title: "Gallery", text: "Moments from our projects, explored in 3D.", count: `${gallery.filter((g) => g.image.src).length} photos`, image: images.fusion },
     { href: "/news", icon: Newspaper, title: "News & Blog", text: "Updates, stories and announcements from across our work.", count: posts.length ? `${posts.length} articles` : "Coming soon", image: images.hhcp },
     { href: "/media/press", icon: Package, title: "Press Kit", text: "Fact sheet, logos and approved materials for journalists.", count: "Fact sheet available", image: images.brand },
   ];

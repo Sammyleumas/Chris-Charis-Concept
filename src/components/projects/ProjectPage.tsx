@@ -8,6 +8,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { ContentNote } from "@/components/ui/ContentNote";
 import { Photo } from "@/components/ui/Photo";
 import { Reveal } from "@/components/ui/Reveal";
+import { ProjectGallery } from "./ProjectGallery";
 import { MaybeCount } from "@/components/home/CountUp";
 
 /**
@@ -111,22 +112,7 @@ export async function ProjectPage({ family, editions }: { family: ProjectFamily;
               Full gallery <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
-          <ul className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
-            {family.gallery.map((img, i) => (
-              <li
-                key={img.brief}
-                className={
-                  i === 0
-                    ? "relative col-span-2 row-span-2 aspect-square overflow-hidden rounded-sm"
-                    : i === 3
-                      ? "relative col-span-2 aspect-[2/1] overflow-hidden rounded-sm"
-                      : "relative aspect-square overflow-hidden rounded-sm"
-                }
-              >
-                <Photo image={img} sizes={i === 0 ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 768px) 25vw, 50vw"} />
-              </li>
-            ))}
-          </ul>
+          <ProjectGallery images={family.gallery} familyName={family.shortName} />
         </div>
       </section>
 
