@@ -38,7 +38,7 @@ export default async function ContactPage() {
                 <div>
                   <p className="font-semibold text-ink">Our office</p>
                   <p className="mt-1 text-slate-ink">{place}</p>
-                  <a href={mapUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-brand-ink hover:underline">
+                  <a href={mapUrl} target="_blank" rel="noopener noreferrer" className="hit-y mt-2 inline-flex items-center gap-1 text-sm font-semibold text-brand-ink hover:underline">
                     View on map <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" /><span className="sr-only"> (opens OpenStreetMap in a new tab)</span>
                   </a>
                 </div>

@@ -46,7 +46,15 @@
   --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);
   --text-lead--line-height: 1.55;
 
-  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  /*
+   * Motion system (see MOTION.md). Frequent interactions are fast and
+   * plain; storytelling moments are slower and more expressive.
+   *   tap 70ms · fast 150ms · base 220ms · slow 400ms · story 700ms+
+   */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1); /* slow out: arrivals, reveals */
+  --ease-in-quick: cubic-bezier(0.4, 0, 1, 1); /* exits: get out of the way fast */
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1); /* slow in & slow out: moves */
+  --ease-settle: cubic-bezier(0.34, 1.36, 0.64, 1); /* follow-through: small overshoot, settles */
 
   --container-site: 84rem;
 }
@@ -74,6 +82,11 @@
 
   p {
     text-wrap: pretty;
+  }
+
+  /* Smooth in-page anchor scrolling (e.g. "Request a quote" → form). */
+  html {
+    scroll-behavior: smooth;
   }
 
   :focus-visible {
@@ -113,20 +126,50 @@
  * API). Page content fades out quickly and the new page fades up gently;
  * the header stays put. Browsers without support switch pages instantly.
  */
+/* Navigation is frequent, so the transition is short (~300 ms in total). */
 ::view-transition-old(.page) {
-  animation: 160ms cubic-bezier(0.4, 0, 1, 1) both page-out;
+  animation: 110ms var(--ease-in-quick) both page-out;
 }
 ::view-transition-new(.page) {
-  animation: 380ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both page-in;
+  animation: 240ms var(--ease-out-soft) 60ms both page-in;
 }
 ::view-transition-group(site-header) {
   animation: none;
 }
 @keyframes page-out {
-  to { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 0; }
 }
 @keyframes page-in {
-  from { opacity: 0; transform: translateY(14px); }
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+/* Small, reusable entrances (pose to pose: from → to, nothing in between needed). */
+@keyframes menu-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.985); }
+}
+@keyframes dialog-in {
+  from { opacity: 0; transform: scale(0.96); }
+}
+@keyframes backdrop-in {
+  from { opacity: 0; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(6px); }
+}
+@keyframes pop-in {
+  0% { opacity: 0; transform: scale(0.5); }
+  60% { opacity: 1; }
+  100% { transform: scale(1); }
+}
+/* Error summary: one short horizontal nudge to draw the eye, then still. */
+@keyframes nudge {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  60% { transform: translateX(4px); }
+  85% { transform: translateX(-2px); }
 }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*),
@@ -162,6 +205,57 @@
     height: 3px;
     background: var(--color-brand);
   }
+}
+
+/*
+ * Press feedback for buttons and controls (squash & stretch, snappy):
+ * compresses instantly on press, springs back with a little overshoot.
+ */
+@utility tap {
+  transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+  transition-duration: 150ms, 150ms, 150ms, 150ms, 150ms, 260ms;
+  transition-timing-function: var(--ease-out-soft), var(--ease-out-soft), var(--ease-out-soft), var(--ease-out-soft), var(--ease-out-soft), var(--ease-settle);
+  -webkit-tap-highlight-color: transparent;
+  &:active:not(:disabled) {
+    transform: scale(0.96);
+    transition-duration: 70ms;
+  }
+}
+
+/* Gentler press for large surfaces such as cards. */
+@utility tap-soft {
+  transition-property: transform, box-shadow, border-color, background-color;
+  transition-duration: 260ms;
+  transition-timing-function: var(--ease-settle);
+  &:active {
+    transform: scale(0.985);
+    transition-duration: 90ms;
+  }
+}
+
+/* Bigger hit area for standalone text links without changing layout (Fitts). */
+@utility hit-y {
+  padding-block: 0.5rem;
+  margin-block: -0.5rem;
+}
+
+@utility anim-menu {
+  animation: menu-in 160ms var(--ease-out-soft) both;
+}
+@utility anim-dialog {
+  animation: dialog-in 260ms var(--ease-settle) both;
+}
+@utility anim-fade {
+  animation: fade-in 160ms var(--ease-out-soft) both;
+}
+@utility anim-rise {
+  animation: rise-in 220ms var(--ease-out-soft) both;
+}
+@utility anim-pop {
+  animation: pop-in 420ms var(--ease-settle) both;
+}
+@utility anim-nudge {
+  animation: nudge 360ms var(--ease-in-out-soft) both;
 }
 
 @utility container-site {

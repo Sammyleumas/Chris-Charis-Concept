@@ -99,7 +99,7 @@ export default async function OurWorkPage() {
                     </ul>
                     <Link
                       href={`/our-work/${f.slug}`}
-                      className="group mt-8 inline-flex items-center gap-2 font-semibold text-brand-ink"
+                      className="hit-y group mt-8 inline-flex items-center gap-2 font-semibold text-brand-ink"
                     >
                       Explore {f.shortName}
                       <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

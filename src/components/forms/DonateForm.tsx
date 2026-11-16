@@ -7,6 +7,7 @@ import { startDonation } from "@/app/actions/donate";
 import { donationProjects, minimumAmount, presetAmounts } from "@/lib/forms/donation-options";
 import { initialFormState, type FormState } from "@/lib/forms/types";
 import { Consent, Honeypot, SelectField, TextField } from "./Field";
+import { FormAlert, useLiveErrors } from "./FormFeedback";
 import { cn } from "@/lib/cn";
 import { events, track } from "@/lib/analytics";
 
@@ -17,7 +18,8 @@ export function DonateForm() {
   const [frequency, setFrequency] = useState<"once" | "monthly">("once");
   const [amount, setAmount] = useState<string>(String(presetAmounts[1]));
   const alertRef = useRef<HTMLDivElement>(null);
-  const e = state.fieldErrors ?? {};
+  const { errors: e, onInput } = useLiveErrors(state);
+  const labels = { amount: "Amount", project: "Project", name: "Full name", email: "Email" };
   const v = state.values ?? {};
 
   useEffect(() => {
@@ -30,6 +32,7 @@ export function DonateForm() {
   return (
     <form
       noValidate
+      onInput={onInput}
       onSubmit={(ev) => {
         ev.preventDefault();
         const data = new FormData(ev.currentTarget);
@@ -39,9 +42,7 @@ export function DonateForm() {
       className="relative space-y-8"
     >
       {state.status === "error" && (
-        <div ref={alertRef} tabIndex={-1} role="alert" className="rounded-lg border border-[#b42318]/30 bg-[#fef3f2] px-4 py-3 text-sm font-medium text-[#b42318] outline-none">
-          {state.message}
-        </div>
+        <FormAlert ref={alertRef} state={state} labels={labels} visibleErrors={state.fieldErrors ?? {}} />
       )}
 
       <fieldset>
@@ -54,7 +55,7 @@ export function DonateForm() {
               type="button"
               aria-pressed={frequency === f}
               onClick={() => setFrequency(f)}
-              className={cn("h-11 rounded-full text-sm font-semibold transition-colors", frequency === f ? "bg-ink text-white" : "text-charcoal hover:text-ink")}
+              className={cn("h-11 rounded-full text-sm font-semibold tap", frequency === f ? "bg-ink text-white" : "text-charcoal hover:text-ink")}
             >
               {f === "once" ? "One-off" : "Monthly"}
             </button>
@@ -72,7 +73,7 @@ export function DonateForm() {
               aria-pressed={numeric === a}
               onClick={() => setAmount(String(a))}
               className={cn(
-                "h-12 rounded-xl text-sm font-semibold tabular-nums ring-1 transition-colors",
+                "h-12 rounded-xl text-sm font-semibold tabular-nums ring-1 tap",
                 numeric === a ? "bg-brand-ink text-white ring-brand-ink" : "bg-white text-ink ring-line hover:ring-ink/40",
               )}
             >
@@ -89,7 +90,7 @@ export function DonateForm() {
             id="f-amount"
             name="amount"
             inputMode="numeric"
-            value={amount}
+            value={numeric ? numeric.toLocaleString("en-NG") : ""}
             onChange={(ev) => setAmount(ev.target.value.replace(/[^\d]/g, ""))}
             aria-invalid={e.amount ? true : undefined}
             aria-describedby={e.amount ? "f-amount-error" : undefined}
@@ -115,7 +116,7 @@ export function DonateForm() {
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-brand-ink px-8 text-base font-semibold text-white transition-colors hover:bg-brand-deep disabled:opacity-70"
+        className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-brand-ink px-8 text-base font-semibold text-white tap hover:bg-brand-deep disabled:opacity-70"
       >
         {pending ? <LoaderCircle aria-hidden="true" className="h-5 w-5 animate-spin" /> : <Lock aria-hidden="true" className="h-4 w-4" />}
         {numeric >= minimumAmount ? `Give ${naira(numeric)}${frequency === "monthly" ? " monthly" : ""}` : "Continue"}

@@ -49,7 +49,7 @@ export function GalleryExperience({
               aria-pressed={family === f.slug}
               onClick={() => setFamily(f.slug)}
               className={cn(
-                "h-10 rounded-full px-4 text-sm font-semibold transition-colors",
+                "h-11 rounded-full px-4 text-sm font-semibold sm:h-10 tap",
                 family === f.slug ? "bg-ink text-white" : "bg-white text-charcoal ring-1 ring-line hover:ring-ink/40",
               )}
             >
@@ -65,7 +65,7 @@ export function GalleryExperience({
               aria-pressed={view === v}
               onClick={() => setView(v)}
               className={cn(
-                "inline-flex h-9 items-center gap-2 rounded-full px-4 text-sm font-semibold transition-colors",
+                "inline-flex h-11 items-center gap-2 rounded-full px-4 sm:h-9 text-sm font-semibold tap",
                 view === v ? "bg-brand-ink text-white" : "text-charcoal hover:text-ink",
               )}
             >

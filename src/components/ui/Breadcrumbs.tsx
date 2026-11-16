@@ -24,7 +24,7 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
           <li key={c.label} className="flex items-center gap-1.5">
             {i > 0 && <ChevronRight aria-hidden="true" className="h-3 w-3" />}
             {c.href && i < all.length - 1 ? (
-              <Link href={c.href} className="hover:text-white">{c.label}</Link>
+              <Link href={c.href} className="inline-block py-2 hover:text-white">{c.label}</Link>
             ) : (
               <span aria-current="page" className="text-white/90">{c.label}</span>
             )}

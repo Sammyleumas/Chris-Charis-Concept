@@ -58,7 +58,7 @@ export async function ProjectPage({ family, editions }: { family: ProjectFamily;
               rel="noopener noreferrer"
               data-track="project_link_click"
               data-track-label={`${family.shortName}: ${l.label}`}
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-ink hover:text-brand-deep"
+              className="hit-y inline-flex items-center gap-1.5 text-sm font-semibold text-brand-ink hover:text-brand-deep"
             >
               {l.label} <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
               <span className="sr-only">(opens in a new tab)</span>
@@ -107,7 +107,7 @@ export async function ProjectPage({ family, editions }: { family: ProjectFamily;
         <div className="container-site">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <h2 id="gallery-title" className="text-h2 font-semibold">In pictures</h2>
-            <Link href="/media/gallery" className="group inline-flex items-center gap-2 text-sm font-semibold text-brand-ink">
+            <Link href="/media/gallery" className="hit-y group inline-flex items-center gap-2 text-sm font-semibold text-brand-ink">
               Full gallery <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>

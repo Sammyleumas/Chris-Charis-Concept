@@ -9,6 +9,7 @@ import type { ProjectFamily } from "@/content/types";
 import { Logo } from "@/components/ui/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
+import { duration, ease } from "@/lib/motion";
 
 type MenuFamily = Pick<ProjectFamily, "slug" | "name" | "year" | "line">;
 
@@ -70,7 +71,7 @@ export function MobileNav({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: reduce ? 0 : 0.2 }}
+          transition={{ duration: reduce ? 0 : duration.base }}
         >
           <div className="absolute inset-0 bg-night/60" onClick={onClose} aria-hidden="true" />
           <motion.div
@@ -82,8 +83,8 @@ export function MobileNav({
             className="absolute inset-y-0 right-0 flex w-full max-w-md flex-col bg-ink text-white"
             initial={{ x: reduce ? 0 : "100%" }}
             animate={{ x: 0 }}
-            exit={{ x: reduce ? 0 : "100%" }}
-            transition={{ duration: reduce ? 0 : 0.35, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ x: reduce ? 0 : "100%", transition: { duration: reduce ? 0 : duration.base, ease: ease.in } }}
+            transition={{ duration: reduce ? 0 : 0.3, ease: ease.out }}
           >
             <div className="flex h-[4.5rem] items-center justify-between px-5">
               <Link href="/" onClick={onClose} aria-label="Chris Charis Concept, home">
@@ -92,7 +93,7 @@ export function MobileNav({
               <button
                 type="button"
                 onClick={onClose}
-                className="grid h-11 w-11 place-items-center rounded-full hover:bg-white/10"
+                className="tap grid h-11 w-11 place-items-center rounded-full hover:bg-white/10"
               >
                 <X aria-hidden="true" className="h-6 w-6" />
                 <span className="sr-only">Close menu</span>
@@ -130,7 +131,7 @@ export function MobileNav({
                             aria-expanded={isOpen}
                             aria-label={`Show ${item.label} pages`}
                             onClick={() => setExpanded(isOpen ? null : item.label)}
-                            className="grid h-11 w-11 place-items-center rounded-full hover:bg-white/10"
+                            className="tap grid h-11 w-11 place-items-center rounded-full hover:bg-white/10"
                           >
                             <ChevronDown
                               aria-hidden="true"

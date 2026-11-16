@@ -139,7 +139,7 @@ export function HeroSlideshow({ slides, videoSrc }: { slides: HeroSlide[]; video
               <button
                 type="button"
                 onClick={() => setPaused((p) => !p)}
-                className="grid h-10 w-10 place-items-center rounded-full border border-white/35 text-white/85 hover:border-white hover:text-white"
+                className="tap grid h-11 w-11 place-items-center rounded-full border border-white/35 text-white/85 hover:border-white hover:text-white"
               >
                 {paused || reduce ? <Play aria-hidden="true" className="h-4 w-4" /> : <Pause aria-hidden="true" className="h-4 w-4" />}
                 <span className="sr-only">{paused || reduce ? "Play slideshow" : "Pause slideshow"}</span>
@@ -151,7 +151,7 @@ export function HeroSlideshow({ slides, videoSrc }: { slides: HeroSlide[]; video
                       type="button"
                       onClick={() => go(i)}
                       aria-current={i === index ? "true" : undefined}
-                      className="group relative block h-10 w-8 sm:w-10"
+                      className="group relative block h-11 w-8 sm:w-10"
                     >
                       <span className="absolute inset-x-0 top-1/2 h-[3px] -translate-y-1/2 overflow-hidden rounded-full bg-white/25 group-hover:bg-white/45">
                         <span
@@ -176,7 +176,7 @@ export function HeroSlideshow({ slides, videoSrc }: { slides: HeroSlide[]; video
               {current.href ? (
                 <Link
                   href={current.href}
-                  className="group hidden max-w-xs items-center gap-2 truncate text-sm font-medium text-white/80 hover:text-white md:inline-flex"
+                  className="hit-y group hidden max-w-xs items-center gap-2 truncate text-sm font-medium text-white/80 hover:text-white md:inline-flex"
                 >
                   <span className="truncate">{current.label}</span>
                   <ArrowRight aria-hidden="true" className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
@@ -192,7 +192,7 @@ export function HeroSlideshow({ slides, videoSrc }: { slides: HeroSlide[]; video
                 <button
                   type="button"
                   onClick={() => go(index - 1)}
-                  className="grid h-10 w-10 place-items-center rounded-full border border-white/35 text-white hover:border-white hover:bg-white hover:text-ink"
+                  className="tap grid h-11 w-11 place-items-center rounded-full border border-white/35 text-white hover:border-white hover:bg-white hover:text-ink"
                 >
                   <ChevronLeft aria-hidden="true" className="h-5 w-5" />
                   <span className="sr-only">Previous slide</span>
@@ -200,7 +200,7 @@ export function HeroSlideshow({ slides, videoSrc }: { slides: HeroSlide[]; video
                 <button
                   type="button"
                   onClick={() => go(index + 1)}
-                  className="grid h-10 w-10 place-items-center rounded-full border border-white/35 text-white hover:border-white hover:bg-white hover:text-ink"
+                  className="tap grid h-11 w-11 place-items-center rounded-full border border-white/35 text-white hover:border-white hover:bg-white hover:text-ink"
                 >
                   <ChevronRight aria-hidden="true" className="h-5 w-5" />
                   <span className="sr-only">Next slide</span>

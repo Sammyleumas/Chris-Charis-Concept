@@ -29,7 +29,7 @@ export function StoriesBrowser({
               aria-pressed={filter === f.slug}
               onClick={() => setFilter(f.slug)}
               className={cn(
-                "h-10 rounded-full px-4 text-sm font-semibold transition-colors",
+                "h-11 rounded-full px-4 text-sm font-semibold sm:h-10 tap",
                 filter === f.slug ? "bg-ink text-white" : "bg-white text-charcoal ring-1 ring-line hover:ring-ink/40",
               )}
             >

@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CookieConsent } from "@/components/legal/CookieConsent";
 import { Analytics } from "@/components/analytics/Analytics";
+import { MotionProvider } from "@/components/analytics/MotionProvider";
 import { getProjectFamilies } from "@/lib/content";
 import { brand } from "@/config/brand";
 import { site } from "@/config/site";
@@ -47,6 +48,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="flex min-h-dvh flex-col">
+        <MotionProvider>
         <SiteHeader families={families} />
         <main id="main" className="flex-1">
           {/* Crossfades page content on every navigation (see globals.css). */}
@@ -57,6 +59,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         <SiteFooter />
         <CookieConsent />
         <Analytics />
+        </MotionProvider>
       </body>
     </html>
   );

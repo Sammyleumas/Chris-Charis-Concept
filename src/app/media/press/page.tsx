@@ -70,7 +70,7 @@ export default async function PressPage() {
                   <h3 className="font-semibold text-ink">{a.label}</h3>
                   <p className="mt-1 text-sm text-slate-ink">{a.description}</p>
                   {a.fileUrl ? (
-                    <a href={a.fileUrl} download className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-ink hover:text-brand-deep">
+                    <a href={a.fileUrl} download className="hit-y mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-ink hover:text-brand-deep">
                       <Download aria-hidden="true" className="h-4 w-4" /> Download{a.format && ` ${a.format}`}
                     </a>
                   ) : (

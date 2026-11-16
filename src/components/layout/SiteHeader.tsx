@@ -120,7 +120,7 @@ export function SiteHeader({ families }: { families: MenuFamily[] }) {
                         aria-controls={`menu-${item.label}`}
                         aria-label={`${item.label} menu`}
                         onClick={() => setOpen(expanded ? null : item.label)}
-                        className="-ml-1.5 rounded-sm p-1 text-white/60 hover:text-white"
+                        className="tap -ml-1 grid h-8 w-7 place-items-center rounded-md text-white/60 hover:bg-white/10 hover:text-white"
                       >
                         <ChevronDown
                           aria-hidden="true"
@@ -134,7 +134,7 @@ export function SiteHeader({ families }: { families: MenuFamily[] }) {
                     <MegaMenu id={`menu-${item.label}`} families={families} />
                   )}
                   {item.children && expanded && (
-                    <div id={`menu-${item.label}`} className="absolute top-full left-0 pt-3">
+                    <div id={`menu-${item.label}`} className="anim-menu absolute top-full left-0 origin-top pt-3">
                       <ul className="min-w-60 rounded-xl bg-white p-2 shadow-2xl ring-1 ring-ink/5">
                         {item.children.map((child) => (
                           <li key={child.href}>
@@ -168,7 +168,7 @@ export function SiteHeader({ families }: { families: MenuFamily[] }) {
             onClick={() => setMobileOpen(true)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
-            className="grid h-11 w-11 place-items-center rounded-full text-white hover:bg-white/10 xl:hidden"
+            className="tap grid h-11 w-11 place-items-center rounded-full text-white hover:bg-white/10 xl:hidden"
           >
             <Menu aria-hidden="true" className="h-6 w-6" />
             <span className="sr-only">Open menu</span>

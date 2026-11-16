@@ -22,7 +22,7 @@ const sizes: Record<Size, string> = {
 export const buttonClasses = (variant: Variant = "primary", size: Size = "md") =>
   cn(
     "group inline-flex items-center justify-center gap-2 rounded-full font-semibold whitespace-nowrap",
-    "transition-colors duration-200 ease-out-soft focus-visible:outline-offset-4",
+    "tap focus-visible:outline-offset-4",
     variants[variant],
     sizes[size],
   );

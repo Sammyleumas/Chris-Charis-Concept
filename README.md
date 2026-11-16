@@ -10,6 +10,7 @@ The official website of **Chris Charis Concept**, trading name of Chris Charis S
 | [EDITING-GUIDE.md](EDITING-GUIDE.md) | Staff using the CMS |
 | [CONTENT-CHECKLIST.md](CONTENT-CHECKLIST.md) | Content still needed from the organisation |
 | [QA-REPORT.md](QA-REPORT.md) | Test results |
+| [MOTION.md](MOTION.md) | Motion and interaction standard (the 20 UX and animation principles) |
 
 ## Running locally
 

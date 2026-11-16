@@ -38,7 +38,7 @@ export function ImpactPathway({ stages }: { stages: PathwayStage[] }) {
                 <p className="mt-3 max-w-xs text-[0.95rem] leading-relaxed text-white/70">{s.text}</p>
                 <Link
                   href={s.href}
-                  className="group mt-5 inline-flex items-center gap-2 text-sm font-semibold text-mist hover:text-white"
+                  className="hit-y group mt-5 inline-flex items-center gap-2 text-sm font-semibold text-mist hover:text-white"
                 >
                   {s.linkLabel}
                   <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

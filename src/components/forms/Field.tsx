@@ -24,7 +24,7 @@ function Wrapper({ name, label, error, hint, required, className, children }: Ba
       {children}
       {hint && !error && <p id={`f-${name}-hint`} className="mt-1.5 text-xs text-slate-ink">{hint}</p>}
       {error && (
-        <p id={`f-${name}-error`} className="mt-1.5 text-sm font-medium text-[#b42318]">{error}</p>
+        <p id={`f-${name}-error`} className="anim-rise mt-1.5 text-sm font-medium text-[#b42318]">{error}</p>
       )}
     </div>
   );
@@ -104,12 +104,13 @@ export function Consent({ name = "consent", error, children }: { name?: string; 
     <div>
       <label className="flex items-start gap-3 text-sm leading-relaxed text-charcoal">
         <input
+          id={`f-${name}`}
           type="checkbox"
           name={name}
           required
           aria-invalid={error ? true : undefined}
           aria-describedby={error ? `f-${name}-error` : undefined}
-          className="mt-1 h-4 w-4 shrink-0 accent-brand"
+          className="mt-1 h-5 w-5 shrink-0 accent-brand"
         />
         <span>{children}</span>
       </label>

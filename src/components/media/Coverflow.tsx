@@ -67,8 +67,10 @@ export function Coverflow({
   };
   const onMove = (e: PointerEvent) => {
     if (start.current === null) return;
-    const dx = e.clientX - start.current;
+    let dx = e.clientX - start.current;
     if (Math.abs(dx) > 6) moved.current = true;
+    // Rubber-band resistance past the first or last card.
+    if ((active === 0 && dx > 0) || (active === count - 1 && dx < 0)) dx *= 0.3;
     setDrag(dx);
   };
   const onUp = () => {
@@ -109,12 +111,18 @@ export function Coverflow({
             transform: `translate(-50%, -50%) translateX(calc(var(--cf-spread) * ${offset})) translateZ(${-abs * 160}px) rotateY(${reduce ? 0 : Math.max(-1, Math.min(1, -offset)) * 38}deg) scale(${1 - Math.min(abs, 2) * 0.07})`,
             zIndex: 100 - Math.round(abs * 10),
             opacity: hidden ? 0 : 1 - Math.max(0, abs - 1.6) * 0.8,
-            transition: drag || reduce ? "none" : "transform 600ms cubic-bezier(.22,1,.36,1), opacity 400ms",
+            // Depth-consistent shadow: nearer cards cast larger, darker shadows.
+            boxShadow: `0 ${Math.max(10, 40 - abs * 12)}px ${Math.max(30, 80 - abs * 20)}px -30px rgba(0,0,0,${Math.max(0.2, 0.55 - abs * 0.15).toFixed(2)})`,
+            // Slow in & out with a small overshoot so cards settle rather than stop dead.
+            transition: drag || reduce
+              ? "none"
+              : "transform 520ms cubic-bezier(.25,1.12,.4,1), opacity 300ms var(--ease-out-soft), box-shadow 520ms var(--ease-out-soft)",
           };
 
           const card = (
             <>
-              <div className="absolute inset-0">
+              {/* Anticipation: the centred card dips slightly while pressed, before it opens. */}
+              <div className="absolute inset-0 transition-transform duration-150 ease-out group-active:scale-[0.97]">
                 <Photo image={item.image} tone="dark" notePosition="top-left" sizes="(min-width: 1024px) 480px, 80vw" />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-night/90 via-night/20 to-transparent" />
@@ -136,7 +144,7 @@ export function Coverflow({
           );
 
           const shared = cn(
-            "absolute top-1/2 left-1/2 block aspect-[4/5] w-[min(78vw,20rem)] overflow-hidden rounded-xl bg-night shadow-[0_40px_80px_-30px_rgba(0,0,0,0.55)] [backface-visibility:hidden] sm:w-[22rem] lg:w-[24rem]",
+            "group absolute top-1/2 left-1/2 block aspect-[4/5] w-[min(78vw,20rem)] overflow-hidden rounded-xl bg-night [backface-visibility:hidden] sm:w-[22rem] lg:w-[24rem]",
             hidden && "pointer-events-none",
           );
 
@@ -187,7 +195,7 @@ export function Coverflow({
           type="button"
           onClick={() => go(active - 1)}
           disabled={active === 0}
-          className="grid h-11 w-11 place-items-center rounded-full border border-ink/20 text-ink transition-colors hover:border-ink hover:bg-ink hover:text-white disabled:pointer-events-none disabled:opacity-30"
+          className="grid h-11 w-11 place-items-center rounded-full border border-ink/20 text-ink tap hover:border-ink hover:bg-ink hover:text-white disabled:pointer-events-none disabled:opacity-30"
         >
           <ChevronLeft aria-hidden="true" className="h-5 w-5" />
           <span className="sr-only">Previous</span>
@@ -200,7 +208,7 @@ export function Coverflow({
           type="button"
           onClick={() => go(active + 1)}
           disabled={active === count - 1}
-          className="grid h-11 w-11 place-items-center rounded-full border border-ink/20 text-ink transition-colors hover:border-ink hover:bg-ink hover:text-white disabled:pointer-events-none disabled:opacity-30"
+          className="grid h-11 w-11 place-items-center rounded-full border border-ink/20 text-ink tap hover:border-ink hover:bg-ink hover:text-white disabled:pointer-events-none disabled:opacity-30"
         >
           <ChevronRight aria-hidden="true" className="h-5 w-5" />
           <span className="sr-only">Next</span>

@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { startTransition, useActionState, useEffect, useRef } from "react";
-import { CircleCheck, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
+import { FormAlert, FormSuccess, useLiveErrors } from "./FormFeedback";
 import { requestQuote } from "@/app/actions/quote";
 import { initialFormState, type FormState } from "@/lib/forms/types";
 import { Consent, Honeypot, TextArea, TextField } from "./Field";
@@ -11,7 +12,8 @@ import { events, track } from "@/lib/analytics";
 export function QuoteRequestForm() {
   const [state, action, pending] = useActionState<FormState, FormData>(requestQuote, initialFormState);
   const summaryRef = useRef<HTMLDivElement>(null);
-  const e = state.fieldErrors ?? {};
+  const { errors: e, onInput } = useLiveErrors(state);
+  const labels = { name: "Full name", email: "Email", phone: "Phone", organisation: "Organisation", service: "Service", details: "Project details", timeline: "Timeline" };
   const v = state.values ?? {};
 
   // Move focus to the result so screen-reader and keyboard users hear it.
@@ -22,17 +24,14 @@ export function QuoteRequestForm() {
 
   if (state.status === "success") {
     return (
-      <div ref={summaryRef} tabIndex={-1} role="status" className="rounded-2xl bg-mist p-8 outline-none">
-        <CircleCheck aria-hidden="true" className="h-8 w-8 text-brand-ink" />
-        <p className="mt-4 font-display text-xl font-semibold text-ink">Request sent</p>
-        <p className="mt-2 text-slate-ink">{state.message}</p>
-      </div>
+      <FormSuccess ref={summaryRef} title="Request sent" message={state.message} />
     );
   }
 
   return (
     <form
       noValidate
+      onInput={onInput}
       // Submitted manually so React does not clear the fields after an error.
       onSubmit={(ev) => {
         ev.preventDefault();
@@ -42,9 +41,7 @@ export function QuoteRequestForm() {
       className="relative grid gap-6 sm:grid-cols-2"
     >
       {state.status === "error" && (
-        <div ref={summaryRef} tabIndex={-1} role="alert" className="rounded-lg border border-[#b42318]/30 bg-[#fef3f2] px-4 py-3 text-sm font-medium text-[#b42318] outline-none sm:col-span-2">
-          {state.message}
-        </div>
+        <FormAlert ref={summaryRef} state={state} labels={labels} visibleErrors={state.fieldErrors ?? {}} className="sm:col-span-2" />
       )}
       <TextField name="name" label="Full name" required autoComplete="name" error={e.name} defaultValue={v.name} />
       <TextField name="email" type="email" label="Email" required autoComplete="email" error={e.email} defaultValue={v.email} />
@@ -64,7 +61,7 @@ export function QuoteRequestForm() {
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex h-12 items-center gap-2 rounded-full bg-brand-ink px-7 font-semibold text-white transition-colors hover:bg-brand-deep disabled:opacity-70"
+          className="inline-flex h-12 items-center gap-2 rounded-full bg-brand-ink px-7 font-semibold text-white tap hover:bg-brand-deep disabled:opacity-70"
         >
           {pending && <LoaderCircle aria-hidden="true" className="h-4 w-4 animate-spin" />}
           {pending ? "Sending…" : "Request a quote"}

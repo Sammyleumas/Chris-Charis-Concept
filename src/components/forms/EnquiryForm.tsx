@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { startTransition, useActionState, useEffect, useRef } from "react";
-import { CircleCheck, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
+import { FormAlert, FormSuccess, useLiveErrors } from "./FormFeedback";
 import { submitEnquiry } from "@/app/actions/enquiry";
 import { forms, type FieldDef, type FormKind } from "@/lib/forms/definitions";
 import { initialFormState, type FormState } from "@/lib/forms/types";
@@ -28,7 +29,8 @@ export function EnquiryForm({
   const formRef = useRef<HTMLFormElement>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
   const def = forms[kind];
-  const e = state.fieldErrors ?? {};
+  const { errors: e, onInput } = useLiveErrors(state);
+  const labels = Object.fromEntries((def.fields as readonly FieldDef[]).map((f) => [f.name, f.label]));
   const v = state.values ?? {};
 
   useEffect(() => {
@@ -45,11 +47,7 @@ export function EnquiryForm({
 
   if (state.status === "success") {
     return (
-      <div ref={summaryRef} tabIndex={-1} role="status" className="rounded-2xl bg-mist p-8 outline-none">
-        <CircleCheck aria-hidden="true" className="h-8 w-8 text-brand-ink" />
-        <p className="mt-4 font-display text-xl font-semibold text-ink">Sent</p>
-        <p className="mt-2 text-slate-ink">{state.message}</p>
-      </div>
+      <FormSuccess ref={summaryRef} title="Sent" message={state.message} />
     );
   }
 
@@ -57,6 +55,7 @@ export function EnquiryForm({
     <form
       ref={formRef}
       noValidate
+      onInput={onInput}
       onSubmit={(ev) => {
         ev.preventDefault();
         const data = new FormData(ev.currentTarget);
@@ -65,9 +64,7 @@ export function EnquiryForm({
       className="relative grid gap-6 sm:grid-cols-2"
     >
       {state.status === "error" && (
-        <div ref={summaryRef} tabIndex={-1} role="alert" className="rounded-lg border border-[#b42318]/30 bg-[#fef3f2] px-4 py-3 text-sm font-medium text-[#b42318] outline-none sm:col-span-2">
-          {state.message}
-        </div>
+        <FormAlert ref={summaryRef} state={state} labels={labels} visibleErrors={state.fieldErrors ?? {}} className="sm:col-span-2" />
       )}
       {(def.fields as readonly FieldDef[]).map((f) => {
         const common = { name: f.name, label: f.label, required: f.required, error: e[f.name], defaultValue: v[f.name], hint: f.hint };
@@ -94,7 +91,7 @@ export function EnquiryForm({
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex h-12 items-center gap-2 rounded-full bg-brand-ink px-7 font-semibold text-white transition-colors hover:bg-brand-deep disabled:opacity-70"
+          className="inline-flex h-12 items-center gap-2 rounded-full bg-brand-ink px-7 font-semibold text-white tap hover:bg-brand-deep disabled:opacity-70"
         >
           {pending && <LoaderCircle aria-hidden="true" className="h-4 w-4 animate-spin" />}
           {pending ? "Sending…" : submitLabel}

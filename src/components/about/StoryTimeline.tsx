@@ -32,7 +32,7 @@ export function StoryTimeline({ entries }: { entries: TimelineEntry[] }) {
               aria-pressed={active}
               onClick={() => setYear(y)}
               className={cn(
-                "h-10 rounded-full px-4 text-sm font-semibold tabular-nums transition-colors",
+                "h-11 rounded-full px-4 text-sm font-semibold sm:h-10 tabular-nums tap",
                 active ? "bg-ink text-white" : "bg-white text-charcoal ring-1 ring-line hover:ring-ink/40",
               )}
             >
@@ -78,7 +78,7 @@ export function StoryTimeline({ entries }: { entries: TimelineEntry[] }) {
                     {e.href && (
                       <Link
                         href={e.href}
-                        className="group mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-ink hover:text-brand-deep"
+                        className="hit-y group mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-ink hover:text-brand-deep"
                       >
                         View project
                         <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

@@ -29,10 +29,10 @@ function Column({ title, links }: { title: string; links: { label: string; href:
   return (
     <div>
       <h2 className="eyebrow text-white/60">{title}</h2>
-      <ul className="mt-5 space-y-3">
+      <ul className="mt-4 space-y-0.5">
         {links.map((l) => (
           <li key={l.href}>
-            <Link href={l.href} className="text-sm text-white/80 transition-colors hover:text-white">
+            <Link href={l.href} className="inline-block py-1.5 text-sm text-white/80 transition-colors hover:text-white">
               {l.label}
             </Link>
           </li>
@@ -109,14 +109,14 @@ export async function SiteFooter() {
           <p>
             © <CopyrightYear /> {site.name}. Trading name of {site.legalName} ({site.registrationNumber}).
           </p>
-          <ul className="flex flex-wrap gap-x-5 gap-y-2">
+          <ul className="flex flex-wrap gap-x-5">
             {legalNav.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="hover:text-white">{l.label}</Link>
+                <Link href={l.href} className="inline-block py-2.5 hover:text-white">{l.label}</Link>
               </li>
             ))}
             <li>
-              <CookieSettingsButton className="hover:text-white" />
+              <CookieSettingsButton className="inline-block py-2.5 hover:text-white" />
             </li>
           </ul>
         </div>

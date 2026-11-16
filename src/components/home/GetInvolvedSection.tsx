@@ -42,7 +42,7 @@ export function GetInvolvedSection() {
             <Reveal as="li" key={a.title} delay={i * 0.08}>
               <Link
                 href={a.href}
-                className="group flex h-full flex-col rounded-2xl border border-line bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-brand/40 hover:shadow-[0_24px_60px_-30px_rgba(35,108,158,0.45)] lg:p-10"
+                className="group flex h-full flex-col rounded-2xl border border-line bg-white p-8 tap-soft transition-[translate,transform,box-shadow,border-color] duration-300 ease-out-soft hover:-translate-y-1 hover:border-brand/40 hover:shadow-[0_24px_60px_-30px_rgba(35,108,158,0.45)] lg:p-10"
               >
                 <span className="grid h-12 w-12 place-items-center rounded-full bg-mist text-brand-ink transition-colors group-hover:bg-brand-ink group-hover:text-white">
                   <a.icon aria-hidden="true" className="h-5 w-5" />

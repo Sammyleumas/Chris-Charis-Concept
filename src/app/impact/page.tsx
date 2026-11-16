@@ -64,7 +64,7 @@ export default async function ImpactPage() {
                       <p className="mt-2 text-xs text-slate-ink">Source: {s.source} · as of {s.asOf}</p>
                     </div>
                     {evidence ? (
-                      <Link href={s.href} className="group inline-flex items-center gap-2 text-sm font-semibold text-brand-ink">
+                      <Link href={s.href} className="hit-y group inline-flex items-center gap-2 text-sm font-semibold text-brand-ink">
                         See the evidence <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                         <span className="sr-only">for {s.label}</span>
                       </Link>
@@ -95,7 +95,7 @@ export default async function ImpactPage() {
                 <p className="text-xs font-semibold tracking-[0.2em] text-white/50">0{i + 1}</p>
                 <h3 className="mt-2 font-display text-2xl font-semibold text-white!">{p.title}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-white/70">{p.text}</p>
-                <Link href={p.href} className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-mist hover:text-white">
+                <Link href={p.href} className="hit-y group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-mist hover:text-white">
                   {p.linkLabel} <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </Link>
               </li>
@@ -115,7 +115,7 @@ export default async function ImpactPage() {
                 ? `${stories.length} ${stories.length === 1 ? "story" : "stories"} of change from our projects, shared with consent.`
                 : "Stories of change from the people our projects reach, shared only with their consent."}
             </p>
-            <Link href="/impact/stories" className="group mt-6 inline-flex items-center gap-2 font-semibold text-brand-ink">
+            <Link href="/impact/stories" className="hit-y group mt-6 inline-flex items-center gap-2 font-semibold text-brand-ink">
               Read the stories <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </article>
@@ -127,7 +127,7 @@ export default async function ImpactPage() {
                 ? `Latest: ${reports[0].title} (${reports[0].period}).`
                 : "Our reports library. The FY2026/27 annual report will be published here once it is available."}
             </p>
-            <Link href="/impact/reports" className="group mt-6 inline-flex items-center gap-2 font-semibold text-brand-ink">
+            <Link href="/impact/reports" className="hit-y group mt-6 inline-flex items-center gap-2 font-semibold text-brand-ink">
               Reports library <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </article>

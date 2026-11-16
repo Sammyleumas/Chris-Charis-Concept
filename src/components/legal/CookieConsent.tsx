@@ -47,10 +47,10 @@ export function CookieConsent() {
           <Link href="/cookies" className="font-semibold text-white underline underline-offset-2">Cookie notice</Link>
         </p>
         <div className="flex shrink-0 gap-2">
-          <button type="button" onClick={() => choose(false)} className="h-11 rounded-full border border-white/40 px-5 text-sm font-semibold hover:bg-white/10">
+          <button type="button" onClick={() => choose(false)} className="tap h-11 rounded-full border border-white/40 px-5 text-sm font-semibold hover:bg-white/10">
             Necessary only
           </button>
-          <button type="button" onClick={() => choose(true)} className="h-11 rounded-full bg-white px-5 text-sm font-semibold text-ink hover:bg-mist">
+          <button type="button" onClick={() => choose(true)} className="tap h-11 rounded-full bg-white px-5 text-sm font-semibold text-ink hover:bg-mist">
             Accept analytics
           </button>
         </div>

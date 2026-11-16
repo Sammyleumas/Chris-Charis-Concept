@@ -44,7 +44,7 @@ export function NewsletterForm({ tone = "dark" }: { tone?: "dark" | "light" }) {
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-full bg-brand-ink px-4 text-sm font-semibold text-white transition-colors hover:bg-brand-deep disabled:opacity-70"
+          className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-full bg-brand-ink px-4 text-sm font-semibold text-white tap hover:bg-brand-deep disabled:opacity-70"
         >
           {pending ? <LoaderCircle aria-hidden="true" className="h-4 w-4 animate-spin" /> : null}
           Subscribe
@@ -56,7 +56,7 @@ export function NewsletterForm({ tone = "dark" }: { tone?: "dark" | "light" }) {
         <label>Company<input name="company" tabIndex={-1} autoComplete="off" /></label>
       </div>
       <label className={cn("mt-3 flex items-start gap-2.5 text-xs leading-relaxed", onDark ? "text-white/65" : "text-slate-ink")}>
-        <input type="checkbox" name="consent" required className="mt-0.5 h-4 w-4 shrink-0 accent-brand" />
+        <input type="checkbox" name="consent" required className="mt-0.5 h-5 w-5 shrink-0 accent-brand" />
         <span>
           I agree to receive email updates and accept the{" "}
           <Link href="/privacy" className="underline underline-offset-2 hover:text-current">privacy policy</Link>. Unsubscribe any time.

@@ -101,7 +101,7 @@ export default async function GovernancePage() {
             <ul className="mt-4 space-y-3">
               {legalNav.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="group inline-flex items-center gap-2 font-medium text-brand-ink hover:text-brand-deep">
+                  <Link href={l.href} className="hit-y group inline-flex items-center gap-2 font-medium text-brand-ink hover:text-brand-deep">
                     <FileText aria-hidden="true" className="h-4 w-4" /> {l.label}
                   </Link>
                 </li>
@@ -111,7 +111,7 @@ export default async function GovernancePage() {
           <div>
             <h2 className="text-h3 font-semibold">Annual reports</h2>
             <p className="mt-3 leading-relaxed text-slate-ink">The FY2026/27 annual report will be published here once it is available.</p>
-            <Link href="/impact/reports" className="group mt-4 inline-flex items-center gap-2 font-semibold text-brand-ink">
+            <Link href="/impact/reports" className="hit-y group mt-4 inline-flex items-center gap-2 font-semibold text-brand-ink">
               Reports library <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>

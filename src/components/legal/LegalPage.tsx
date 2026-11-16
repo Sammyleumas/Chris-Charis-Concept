@@ -20,10 +20,10 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
           <nav aria-label="On this page" className="lg:col-span-3">
             <div className="lg:sticky lg:top-28">
               <p className="eyebrow text-slate-ink">On this page</p>
-              <ol className="mt-4 space-y-2 text-sm">
+              <ol className="mt-3 space-y-0.5 text-sm">
                 {doc.sections.map((s, i) => (
                   <li key={s.id}>
-                    <a href={`#${s.id}`} className="text-charcoal hover:text-brand-ink">{i + 1}. {s.heading}</a>
+                    <a href={`#${s.id}`} className="inline-block py-1.5 text-charcoal hover:text-brand-ink">{i + 1}. {s.heading}</a>
                   </li>
                 ))}
               </ol>

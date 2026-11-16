@@ -87,7 +87,7 @@ async function Article({ params }: { params: PageProps<"/news/[slug]">["params"]
         <div className="space-y-6 text-[1.075rem] leading-[1.75] text-charcoal">
           {post.body.map((para, i) => <p key={i}>{para}</p>)}
         </div>
-        <Link href="/news" className="group mt-14 inline-flex items-center gap-2 font-semibold text-brand-ink">
+        <Link href="/news" className="hit-y group mt-14 inline-flex items-center gap-2 font-semibold text-brand-ink">
           <ArrowLeft aria-hidden="true" className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" /> All news
         </Link>
       </div>

@@ -48,7 +48,7 @@ export function Lightbox({
       }}
       onClick={(e) => e.target === ref.current && ref.current?.close()}
       aria-label={`Image viewer: ${item.caption}`}
-      className="m-0 h-dvh max-h-none w-screen max-w-none bg-night/95 p-0 text-white backdrop:bg-night/80"
+      className="anim-fade m-0 h-dvh max-h-none w-screen max-w-none bg-night/95 p-0 text-white backdrop:bg-night/80"
     >
       <div className="flex h-full flex-col">
         <div className="flex items-center justify-between gap-4 px-4 py-3 sm:px-6">
@@ -59,7 +59,7 @@ export function Lightbox({
             type="button"
             onClick={() => ref.current?.close()}
             autoFocus
-            className="grid h-11 w-11 place-items-center rounded-full hover:bg-white/10"
+            className="tap grid h-11 w-11 place-items-center rounded-full hover:bg-white/10"
           >
             <X aria-hidden="true" className="h-6 w-6" />
             <span className="sr-only">Close viewer</span>
@@ -67,16 +67,19 @@ export function Lightbox({
         </div>
 
         <div className="relative flex flex-1 items-center justify-center px-2 sm:px-20">
-          <div className="relative h-full max-h-[75vh] w-full max-w-6xl">
-            <Photo image={item.image} tone="dark" fit="contain" notePosition="top-left" sizes="100vw" />
+          {/* Opening grows in once with a settle; stepping between photos is a plain crossfade (frequent action). */}
+          <div className="anim-dialog relative h-full max-h-[75vh] w-full max-w-6xl">
+            <div key={item.id} className="anim-fade absolute inset-0">
+              <Photo image={item.image} tone="dark" fit="contain" notePosition="top-left" sizes="100vw" />
+            </div>
           </div>
           {items.length > 1 && (
             <>
-              <button type="button" onClick={prev} className="absolute top-1/2 left-2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 hover:bg-white/20 sm:left-6">
+              <button type="button" onClick={prev} className="absolute top-1/2 left-2 tap grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 hover:bg-white/20 sm:left-6">
                 <ChevronLeft aria-hidden="true" className="h-6 w-6" />
                 <span className="sr-only">Previous image</span>
               </button>
-              <button type="button" onClick={next} className="absolute top-1/2 right-2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 hover:bg-white/20 sm:right-6">
+              <button type="button" onClick={next} className="absolute top-1/2 right-2 tap grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 hover:bg-white/20 sm:right-6">
                 <ChevronRight aria-hidden="true" className="h-6 w-6" />
                 <span className="sr-only">Next image</span>
               </button>
@@ -85,7 +88,7 @@ export function Lightbox({
         </div>
 
         <div className="mx-auto w-full max-w-3xl px-6 py-5 text-center">
-          <p className="font-display text-lg font-semibold">{item.caption}</p>
+          <p key={item.id} className="anim-rise font-display text-lg font-semibold">{item.caption}</p>
           {item.meta && <p className="mt-1 text-sm text-white/60">{item.meta}</p>}
         </div>
       </div>
