@@ -9,6 +9,10 @@
 import {
   featuredInitiative,
   films,
+  filmLibrary,
+  galleryItems,
+  posts,
+  pressAssets,
   heroMedia,
   impactStats,
   impactStories,
@@ -89,4 +93,24 @@ export async function getImpactStories() {
 
 export async function getReports() {
   return [...reports].sort((a, b) => b.publishedOn.localeCompare(a.publishedOn));
+}
+
+export async function getFilmLibrary() {
+  return filmLibrary;
+}
+
+export async function getGalleryItems() {
+  return galleryItems;
+}
+
+export async function getPosts() {
+  return [...posts].sort((a, b) => b.date.localeCompare(a.date));
+}
+
+export async function getPost(slug: string) {
+  return posts.find((p) => p.slug === slug) ?? null;
+}
+
+export async function getPressAssets() {
+  return pressAssets;
 }

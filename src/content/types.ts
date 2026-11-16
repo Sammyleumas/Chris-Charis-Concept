@@ -197,3 +197,32 @@ export type Report = {
   publishedOn: string;
   fileSizeLabel?: string;
 };
+
+export type GalleryItem = {
+  id: string;
+  family: ProjectFamilySlug;
+  image: ImageAsset;
+  caption: string;
+  year?: number;
+};
+
+export type Post = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  /** ISO date */
+  date: string;
+  category: "News" | "Blog" | "Event" | "Press";
+  author?: string;
+  image: ImageAsset;
+  /** Article body as paragraphs (rich text arrives with the CMS). */
+  body: string[];
+};
+
+export type PressAsset = {
+  label: string;
+  description: string;
+  /** Downloadable file; `null` = not yet supplied, shown as pending. */
+  fileUrl: string | null;
+  format?: string;
+};

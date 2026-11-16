@@ -2,6 +2,9 @@ import { aboutShort as aboutShortText, linkRegister, site } from "@/config/site"
 import { galleryFor, images } from "./images";
 import type {
   FeaturedInitiative,
+  GalleryItem,
+  Post,
+  PressAsset,
   Film,
   LegalEntity,
   Statements,
@@ -532,3 +535,41 @@ export const impactStories: ImpactStory[] = [];
 
 /** Annual reports. The FY2026/27 report is added once published. */
 export const reports: Report[] = [];
+
+/** Film library, one entry per Film for Social Change output (brief §5.4). */
+export const filmLibrary: Film[] =
+  projectFamilies
+    .find((f) => f.slug === "film-for-social-change")!
+    .items.map((item) => ({
+      title: item.name,
+      family: "film-for-social-change" as const,
+      description: item.summary,
+      youtubeUrl: item.youtubeUrl ?? null,
+      poster: {
+        src: null,
+        alt: `Poster for ${item.name}`,
+        brief: `${item.name}: poster or YouTube thumbnail`,
+      },
+    }));
+
+/** Gallery: every project's photo slots, tagged by project. */
+export const galleryItems: GalleryItem[] = projectFamilies.flatMap((f) =>
+  f.gallery.map((image, i) => ({
+    id: `${f.slug}-${i}`,
+    family: f.slug,
+    image,
+    // Alt text reads "Project: subject"; the project is shown separately.
+    caption: image.alt.split(": ").slice(1).join(": ") || image.alt,
+  })),
+);
+
+/** News and blog posts. CMS-managed from Phase 11. */
+export const posts: Post[] = [];
+
+/** Press kit downloads (brief §5.6). Files are added as they are approved. */
+export const pressAssets: PressAsset[] = [
+  { label: "Logo pack", description: "Crown-and-C logo for light and dark backgrounds, SVG and PNG.", fileUrl: null, format: "ZIP" },
+  { label: "Founder biography", description: "Approved biography and portrait of the founder.", fileUrl: null, format: "PDF" },
+  { label: "Approved photographs", description: "High-resolution project photos cleared for press use, with credits.", fileUrl: null, format: "ZIP" },
+  { label: "Organisation fact sheet", description: "One-page summary of who we are, our projects and our impact.", fileUrl: null, format: "PDF" },
+];

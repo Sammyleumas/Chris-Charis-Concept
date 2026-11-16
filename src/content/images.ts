@@ -84,6 +84,10 @@ export const images = {
     "Archive moment from an early Chris Charis Concept project",
     "Our Story hero: an early project photo (2020–2021)",
   ),
+  mediaHero: pending(
+    "Filmmaker behind a camera at golden hour",
+    "Media hero: cinematographer silhouette or film set",
+  ),
   impactHero: pending(
     "Young person smiling at a Chris Charis Concept programme",
     "Impact hero: a participant at a programme (with consent)",

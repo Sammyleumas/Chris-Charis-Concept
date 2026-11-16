@@ -14,6 +14,8 @@ type Props = {
   tone?: "light" | "dark";
   /** Where the "photo to be supplied" label sits on the placeholder. */
   notePosition?: "bottom-left" | "bottom-right" | "top-right" | "top-left";
+  /** "contain" shows the whole photo (lightbox); default crops to fill. */
+  fit?: "cover" | "contain";
 };
 
 /**
@@ -21,7 +23,7 @@ type Props = {
  * supplied it (`src: null`), shows a labelled frame describing the photo
  * needed, so missing assets are visible during review, never faked.
  */
-export function Photo({ image, fill = true, sizes = "100vw", priority, className, tone = "light", notePosition = "bottom-left" }: Props) {
+export function Photo({ image, fill = true, sizes = "100vw", priority, className, tone = "light", notePosition = "bottom-left", fit = "cover" }: Props) {
   if (image.src) {
     return fill ? (
       <Image
@@ -30,7 +32,7 @@ export function Photo({ image, fill = true, sizes = "100vw", priority, className
         fill
         sizes={sizes}
         priority={priority}
-        className={cn("object-cover", className)}
+        className={cn(fit === "contain" ? "object-contain" : "object-cover", className)}
         style={image.focus ? { objectPosition: image.focus } : undefined}
       />
     ) : (
