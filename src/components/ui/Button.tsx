@@ -60,7 +60,7 @@ export function ButtonLink({
       {arrow && <ButtonEyes size={size} />}
     </>
   );
-  const classes = cn(buttonClasses(variant, size), className);
+  const classes = cn(buttonClasses(variant, size), !arrow && (size === "lg" ? "px-7" : "px-5"), className);
 
   if (external) {
     return (

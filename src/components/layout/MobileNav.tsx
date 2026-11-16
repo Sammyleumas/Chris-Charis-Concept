@@ -8,6 +8,7 @@ import { mainNav } from "@/config/navigation";
 import type { ProjectFamily } from "@/content/types";
 import { Logo } from "@/components/ui/Logo";
 import { ButtonLink } from "@/components/ui/Button";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { cn } from "@/lib/cn";
 import { duration, ease } from "@/lib/motion";
 
@@ -150,8 +151,9 @@ export function MobileNav({
               />
             </nav>
 
-            <div className="border-t border-line p-5">
-              <ButtonLink href="/donate" size="lg" className="w-full" onClick={onClose}>
+            <div className="flex items-center gap-3 border-t border-line p-5">
+              <ThemeToggle className="h-13 shrink-0" />
+              <ButtonLink href="/donate" size="lg" arrow={false} className="flex-1 px-7" onClick={onClose}>
                 Donate
               </ButtonLink>
             </div>
@@ -236,17 +238,17 @@ function RailList({
   return (
     <div className="relative mt-5">
       {height > 0 && (
-        <svg aria-hidden="true" className="pointer-events-none absolute top-0 left-0 overflow-visible" width={INNER + 8} height={height}>
+        <svg aria-hidden="true" className="pointer-events-none absolute top-0 left-0 overflow-visible text-ink" width={INNER + 8} height={height}>
           <defs>
             <clipPath id="rail-progress">
               <rect x="-4" y="0" width={INNER + 16} height={height} style={{ transform: `scaleY(${dotY !== null ? dotY / height : 0})`, transformOrigin: "0 0", transition: move }} />
             </clipPath>
           </defs>
           <path d={path} fill="none" stroke="var(--color-line)" strokeWidth="1.5" strokeLinecap="round" />
-          <path d={path} fill="none" stroke="var(--color-ink)" strokeWidth="1.5" strokeLinecap="round" clipPath="url(#rail-progress)" />
+          <path d={path} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" clipPath="url(#rail-progress)" />
           {dotY !== null && (
             <g style={{ transform: `translate(${dotX}px, ${dotY}px)`, transition: move }}>
-              <circle r="3.5" fill="var(--color-ink)" />
+              <circle r="3.5" fill="currentColor" />
             </g>
           )}
         </svg>

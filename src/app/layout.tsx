@@ -47,6 +47,12 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             __html: `try{if(localStorage.getItem("cc-consent"))document.documentElement.dataset.consent="1"}catch(e){}`,
           }}
         />
+        {/* Theme before paint: the saved choice, else the device setting. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(d){var t;try{t=localStorage.getItem("cc-theme")}catch(e){}if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";d.dataset.theme=t})(document.documentElement)`,
+          }}
+        />
         {/* The loader plays once per visit, and never for reduced motion. */}
         <script
           dangerouslySetInnerHTML={{

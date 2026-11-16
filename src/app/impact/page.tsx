@@ -141,7 +141,7 @@ export default async function ImpactPage() {
             <p className="mt-4 max-w-xl text-lead text-slate-ink">Every gift and partnership funds more films, outreaches and training.</p>
           </div>
           <div className="flex flex-wrap gap-3 lg:justify-end">
-            <ButtonLink href="/donate">Donate</ButtonLink>
+            <ButtonLink href="/donate" arrow={false}>Donate</ButtonLink>
             <ButtonLink href="/get-involved/partner" variant="outline">Partner with us</ButtonLink>
           </div>
         </div>

@@ -76,7 +76,7 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    color: var(--color-ink);
+    color: var(--heading, var(--color-ink));
     text-wrap: balance;
   }
 
@@ -507,3 +507,159 @@ html:not([data-preloaded]) .hero-copy:first-child:not(.is-active) > :first-child
 }
 .btn-eye { transition: background-color 200ms; }
 .btn-pupil { transition: transform 120ms var(--ease-out-soft), background-color 200ms; }
+
+/* ------------------------------------------------------------------ */
+/* Dark mode                                                           */
+/*                                                                     */
+/* `data-theme="dark"` on <html> (set before paint, see layout.tsx).   */
+/* Light surfaces and their text turn dark; sections that are already  */
+/* dark (charcoal, night, brand backgrounds) keep their exact colours: */
+/* they restore the tokens for everything inside them.                 */
+/* ------------------------------------------------------------------ */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-paper: #1b1c21;
+  --color-mist: #1d2933;
+  --color-line: #33363d;
+  --color-slate: #8e9b9b;
+  --color-slate-ink: #a9b3b3;
+  --dk-surface: #1f2026;
+  --dk-text: #eceef0;
+  --dk-text-soft: #d3d7db;
+  --dk-brand-text: #7fbde8;
+  --heading: #f2f3f5;
+}
+:root[data-theme="dark"] body {
+  background-color: #141519;
+  color: var(--dk-text);
+}
+/* Dark sections keep their original palette. */
+:root[data-theme="dark"] :is(.bg-ink, .bg-night, .bg-charcoal, .bg-brand-ink, .bg-brand, .bg-brand-deep, .preloader, .dark-scope) {
+  --color-paper: #f6f5f1;
+  --color-mist: #e6f0f8;
+  --color-line: #dfe3e6;
+  --color-slate: #7a8a8a;
+  --color-slate-ink: #5e6b6b;
+  --heading: var(--color-ink);
+}
+/* Light-surface utilities, outside dark sections only. */
+:root[data-theme="dark"] .bg-white:not(:is(.bg-ink, .bg-night, .bg-charcoal, .bg-brand-ink, .dark-scope) *) {
+  background-color: var(--dk-surface);
+}
+:root[data-theme="dark"] :is(.text-ink, .text-night):not(:is(.bg-ink, .bg-night, .bg-charcoal, .bg-brand-ink, .btn-light, .dark-scope) *):not(.btn-light) {
+  color: var(--dk-text);
+}
+:root[data-theme="dark"] .text-charcoal:not(:is(.bg-ink, .bg-night, .bg-charcoal, .dark-scope) *) {
+  color: var(--dk-text-soft);
+}
+:root[data-theme="dark"] .hover\:text-ink:hover:not(:is(.bg-ink, .bg-night, .dark-scope) *) {
+  color: #fff;
+}
+:root[data-theme="dark"] .text-brand-ink:not(:is(.bg-ink, .bg-night, .bg-charcoal, .dark-scope) .bg-white *):not(.btn-light *) {
+  color: var(--dk-brand-text);
+}
+:root[data-theme="dark"] .border-ink\/25:not(:is(.bg-ink, .bg-night, .dark-scope) *) {
+  border-color: rgb(255 255 255 / 0.3);
+}
+:root[data-theme="dark"] :is(.ring-ink\/5, .ring-ink\/10) {
+  --tw-ring-color: rgb(255 255 255 / 0.08);
+}
+/* White buttons stay white wherever they sit; their text stays dark. */
+:root[data-theme="dark"] .btn-light {
+  background-color: #fff;
+  color: var(--color-ink);
+}
+/* Logo: the dark-lettered version swaps for the light one. */
+.logo-for-dark { display: none; }
+:root[data-theme="dark"] .logo-has-alt .logo-for-light { display: none; }
+:root[data-theme="dark"] .logo-has-alt .logo-for-dark { display: block; }
+/* Theme change: the page crossfades; the switch keeps animating live on top. */
+::view-transition-group(theme-switch),
+::view-transition-new(theme-switch) {
+  animation: none;
+}
+::view-transition-old(theme-switch) {
+  display: none;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 320ms;
+  animation-timing-function: var(--ease-in-out-soft);
+}
+
+/* ------------------------------------------------------------------ */
+/* Theme switch: a pill whose word rolls between Light and Dark.       */
+/* ------------------------------------------------------------------ */
+.theme-switch {
+  --ts-bg: #ececee;
+  --ts-fg: var(--color-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2.5rem;
+  padding: 0 1rem 0 0.75rem;
+  border-radius: 999px;
+  background: var(--ts-bg);
+  color: var(--ts-fg);
+  font-size: 0.84rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 450ms var(--ease-in-out-soft), color 450ms var(--ease-in-out-soft), transform 70ms;
+}
+.theme-switch:active { transform: scale(0.97); }
+:root[data-theme="dark"] .theme-switch {
+  --ts-bg: #000;
+  --ts-fg: #fff;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.14);
+}
+.theme-switch-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  transition: transform 600ms var(--ease-in-out-soft);
+}
+:root[data-theme="dark"] .theme-switch-icon { transform: rotate(180deg); }
+.theme-switch-word {
+  position: relative;
+  display: inline-grid;
+  height: 1.25em;
+  overflow: hidden;
+  line-height: 1.25;
+}
+.theme-switch-word > span {
+  grid-area: 1 / 1;
+  transition: transform 450ms var(--ease-out-soft), opacity 300ms, filter 300ms;
+}
+.theme-switch-word > span:last-child {
+  transform: translateY(110%);
+  opacity: 0;
+  filter: blur(2px);
+}
+:root[data-theme="dark"] .theme-switch-word > span:first-child {
+  transform: translateY(-110%);
+  opacity: 0;
+  filter: blur(2px);
+}
+:root[data-theme="dark"] .theme-switch-word > span:last-child {
+  transform: none;
+  opacity: 1;
+  filter: none;
+}
+/* Reserve the width of the longer word so the pill never jumps. */
+.theme-switch-word::before {
+  content: "Light";
+  grid-area: 1 / 1;
+  visibility: hidden;
+}
+/* Placeholders and review notes in dark mode. */
+:root[data-theme="dark"] .photo-placeholder-light {
+  background-image: linear-gradient(135deg, #1d2a35 0%, #20252c 55%, #1b1f25 100%);
+}
+:root[data-theme="dark"] .photo-placeholder-light > [aria-hidden] { color: rgb(255 255 255 / 0.04); }
+:root[data-theme="dark"] .photo-placeholder-note { background: rgb(255 255 255 / 0.08); color: #b9c2c2; }
+:root[data-theme="dark"] .legal-note {
+  background: #2a2216;
+  color: #f5d9a8;
+  border-color: rgb(245 180 90 / 0.35);
+}
+:root[data-theme="dark"] .text-\[\#b42318\] { color: #ff9b8f; }
+:root[data-theme="dark"] .bg-\[\#fef3f2\] { background: #2c1a19; color: #ffc9c2; border-color: rgb(255 155 143 / 0.35); }

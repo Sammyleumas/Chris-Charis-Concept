@@ -10,6 +10,7 @@ import { Logo } from "@/components/ui/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import { MegaMenu } from "./MegaMenu";
 import { MobileNav } from "./MobileNav";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { cn } from "@/lib/cn";
 
 type MenuFamily = Pick<ProjectFamily, "slug" | "name" | "year" | "line">;
@@ -160,7 +161,8 @@ export function SiteHeader({ families }: { families: MenuFamily[] }) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ButtonLink href="/donate" size="md" className="hidden h-10 pr-2 pl-5 sm:inline-flex">
+          <ThemeToggle className="hidden xl:inline-flex" />
+          <ButtonLink href="/donate" size="md" arrow={false} className="hidden h-10 px-5 sm:inline-flex">
             Donate
           </ButtonLink>
           <button

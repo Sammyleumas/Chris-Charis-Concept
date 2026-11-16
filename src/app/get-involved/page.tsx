@@ -62,7 +62,7 @@ export default function GetInvolvedPage() {
           <div className="max-w-xl p-10 sm:p-14">
             <h2 id="together-title" className="text-h2 font-semibold text-white!">Together, we can create more impact.</h2>
             <p className="mt-4 text-white/80">Every volunteer hour, partnership and gift moves a young person further along the pathway.</p>
-            <ButtonLink href="/donate" variant="light" className="mt-8">Donate now</ButtonLink>
+            <ButtonLink href="/donate" variant="light" arrow={false} className="mt-8 px-7">Donate now</ButtonLink>
           </div>
         </div>
       </section>

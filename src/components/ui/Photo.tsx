@@ -74,7 +74,7 @@ export function Photo({ image, fill = true, sizes = "100vw", priority, className
         notePosition === "top-left" && "items-start!",
         dark
           ? ""
-          : "bg-[linear-gradient(135deg,#dbe7f1_0%,#eef3f7_55%,#e3e8ec_100%)]",
+          : "photo-placeholder-light bg-[linear-gradient(135deg,#dbe7f1_0%,#eef3f7_55%,#e3e8ec_100%)]",
         className,
       )}
       style={dark ? { backgroundImage: darkGradients[variant % darkGradients.length] } : undefined}
@@ -91,7 +91,7 @@ export function Photo({ image, fill = true, sizes = "100vw", priority, className
         aria-hidden="true"
         className={cn(
           "relative m-4 inline-flex max-w-[90%] items-start gap-2 rounded-md px-3 py-2 text-[0.7rem] leading-snug font-medium",
-          dark ? "bg-white/10 text-white/70 backdrop-blur-sm" : "bg-white/80 text-slate-ink",
+          dark ? "bg-white/10 text-white/70 backdrop-blur-sm" : "photo-placeholder-note bg-white/80 text-slate-ink",
         )}
       >
         <Camera className="mt-px h-3.5 w-3.5 shrink-0" />

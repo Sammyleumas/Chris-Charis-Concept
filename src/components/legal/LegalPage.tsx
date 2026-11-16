@@ -9,7 +9,7 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
       <PageHero eyebrow="Legal" title={doc.title} subtitle={doc.summary} crumbs={[{ label: doc.title }]} />
       <div className="container-site py-16 lg:py-24">
         {!doc.approved && (
-          <div role="note" className="mb-12 flex max-w-3xl gap-4 rounded-xl border border-[#b54708]/30 bg-[#fffaeb] p-5 text-sm text-[#7a2e0e]">
+          <div role="note" className="mb-12 flex max-w-3xl gap-4 rounded-xl legal-note border border-[#b54708]/30 bg-[#fffaeb] p-5 text-sm text-[#7a2e0e]">
             <TriangleAlert aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0" />
             <p>
               <strong>Draft for review.</strong> This text describes how this website works and is written with the Nigeria Data Protection Act 2023 in mind. It has not yet been reviewed or approved by a lawyer and must be approved before launch.
@@ -45,7 +45,7 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
                     ),
                   )}
                   {s.review && (
-                    <p className="rounded-lg border border-dashed border-[#b54708]/40 bg-[#fffaeb] px-4 py-3 text-sm text-[#7a2e0e]">
+                    <p className="rounded-lg legal-note border border-dashed border-[#b54708]/40 bg-[#fffaeb] px-4 py-3 text-sm text-[#7a2e0e]">
                       <strong>To confirm:</strong> {s.review}
                     </p>
                   )}
