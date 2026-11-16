@@ -11,13 +11,32 @@ import { cn } from "@/lib/cn";
 
 const INTERVAL = 6500; // ms each slide stays on screen
 
+/** Copy used where a slide (or the first slide) leaves a part empty. */
+const FALLBACK = {
+  eyebrow: "Chris Charis Concept · Benin City, Nigeria",
+  title: ["Transforming Communities", "Through Creative Expressions"] as [string, string],
+  text: "Creativity, technology and community development working together to create lasting impact.",
+  cta: { label: "Explore Our Work", href: "/our-work" },
+};
+
+/** The copy fields a slide actually sets. */
+function pickCopy(s: HeroSlide | undefined) {
+  const out: Partial<typeof FALLBACK> = {};
+  if (s?.eyebrow) out.eyebrow = s.eyebrow;
+  if (s?.title?.[0]) out.title = s.title;
+  if (s?.text) out.text = s.text;
+  if (s?.cta?.label && s.cta.href) out.cta = s.cta;
+  return out;
+}
+
 /**
  * Homepage hero with a cinematic crossfading slideshow (approved mock-up).
  *
  * - Slides crossfade over 1.4 s with a slow "Ken Burns" zoom.
  * - Autoplay pauses on hover, keyboard focus, a hidden tab, or the pause
  *   button (WCAG 2.2.2), and never starts for reduced-motion users.
- * - The headline stays still; only the photography changes.
+ * - The hero copy (label, headline, text and main button) changes with
+ *   each slide, rising in as its photo fades up.
  * - If a hero video is configured, it plays as the first slide.
  */
 export function HeroSlideshow({ slides, videoSrc }: { slides: HeroSlide[]; videoSrc: string | null }) {
@@ -30,7 +49,15 @@ export function HeroSlideshow({ slides, videoSrc }: { slides: HeroSlide[]; video
   const regionRef = useRef<HTMLElement>(null);
   const count = slides.length;
 
-  const go = useCallback((i: number) => setIndex(((i % count) + count) % count), [count]);
+  // The copy animates only after the first change, so the headline paints at once on load.
+  const [moved, setMoved] = useState(false);
+  const go = useCallback(
+    (i: number) => {
+      setMoved(true);
+      setIndex(((i % count) + count) % count);
+    },
+    [count],
+  );
   const playing = !paused && !held && !hidden && !reduce && count > 1;
 
   useEffect(() => {
@@ -55,6 +82,7 @@ export function HeroSlideshow({ slides, videoSrc }: { slides: HeroSlide[]; video
   }, [videoSrc, reduce]);
 
   const pad = (n: number) => String(n).padStart(2, "0");
+  const copy0 = { ...FALLBACK, ...pickCopy(slides[0]) };
   const current = slides[index];
 
   return (
@@ -118,18 +146,35 @@ export function HeroSlideshow({ slides, videoSrc }: { slides: HeroSlide[]; video
       </div>
 
       <div className="container-site pt-36 pb-[calc(5vw+5rem)] lg:pb-[calc(5vw+6.5rem)]">
-        <p className="eyebrow text-mist">Chris Charis Concept · Benin City, Nigeria</p>
-        <h1 className="mt-5 max-w-5xl text-display text-white!">
-          <span className="block font-bold">Transforming Communities</span>
-          <span className="block font-medium text-white/85">Through Creative Expressions</span>
-        </h1>
-        <p className="mt-6 max-w-xl text-lead text-white/80">
-          Creativity, technology and community development working together to create lasting impact.
-        </p>
-        <span className="rule-accent mt-8" />
-        <div className="mt-8 flex flex-wrap gap-3">
-          <ButtonLink href="/our-work" size="lg">Explore Our Work</ButtonLink>
-          <ButtonLink href="/get-involved/partner" size="lg" variant="outline-light">Partner With Us</ButtonLink>
+        {/* Hero copy follows the slide. Every slide's copy shares one grid
+            cell, so the block keeps the height of the longest and the
+            controls below never jump. Only the active copy is visible,
+            focusable and read by assistive technology. */}
+        <div className="grid grid-cols-[minmax(0,1fr)]">
+          {slides.map((s, i) => {
+            const active = i === index;
+            const c = { ...copy0, ...pickCopy(s) };
+            const Title = i === 0 ? "h1" : "p";
+            return (
+              <div
+                key={`copy-${i}`}
+                aria-hidden={!active}
+                className={cn("hero-copy [grid-area:1/1]", active ? moved && "is-active" : "invisible")}
+              >
+                <p className="eyebrow text-mist">{c.eyebrow}</p>
+                <Title className="mt-5 max-w-5xl text-display text-white!">
+                  <span className="block font-bold">{c.title[0]}</span>
+                  {c.title[1] && <span className="block font-medium text-white/85">{c.title[1]}</span>}
+                </Title>
+                <p className="mt-6 max-w-xl text-lead text-white/80">{c.text}</p>
+                <span className="rule-accent mt-8" />
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <ButtonLink href={c.cta.href} size="lg">{c.cta.label}</ButtonLink>
+                  <ButtonLink href="/get-involved/partner" size="lg" variant="outline-light">Partner With Us</ButtonLink>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         {/* Slideshow controls */}

@@ -21,7 +21,7 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
   youtubeChannel, hhcpWebsite, soulWebsite, fusionBootcamp, fusionVote, fusionConnectAcademy, maybeChallengeTiktok,
   vision, mission, tagline, motto, values[]{ name, text },
   heroVideoUrl, "heroPoster": heroPoster${img},
-  "heroSlides": heroSlides[]{ "image": image${img}, label, href }
+  "heroSlides": heroSlides[]{ "image": image${img}, label, href, eyebrow, "title": select(defined(titleBold) => [titleBold, coalesce(titleLight, "")]), text, "cta": select(defined(ctaLabel) && defined(ctaHref) => { "label": ctaLabel, "href": ctaHref }) }
 }`;
 
 export const homepageQuery = `*[_type == "homepage"][0]{

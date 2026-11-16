@@ -1,6 +1,7 @@
 import { aboutShort as aboutShortText, linkRegister, site } from "@/config/site";
 import { galleryFor, hhcpGallery, fusionGallery, images } from "./images";
 import type {
+  ProjectFamilySlug,
   FeaturedInitiative,
   HeroSlide,
   Post,
@@ -552,7 +553,37 @@ export const pressAssets: PressAsset[] = [
  * plus one image per project family. Replaced by Site settings → Hero
  * slides in the CMS when set.
  */
+/** Headline lines for each project's hero slide, taken from its name. */
+const heroTitles: Record<ProjectFamilySlug, [string, string]> = {
+  "film-for-social-change": ["Film for", "Social Change"],
+  "healthy-heart": ["Healthy Heart", "Community Project"],
+  "learn-to-lead": ["Learn To Lead", "School of Ultimate Leadership"],
+  fusion: ["Fusion", "Creative Project"],
+  "chris-charis-brand": ["The Chris Charis", "Brand"],
+};
+
+/**
+ * Homepage hero slides. The first carries the organisation's headline;
+ * each project slide swaps the hero copy for that project's name, one-line
+ * summary and link while its photo is showing.
+ */
 export const heroSlides: HeroSlide[] = [
-  { image: images.heroPoster, label: "Chris Charis Concept", href: "/about" },
-  ...projectFamilies.map((f) => ({ image: f.image, label: `${f.name} · ${f.year}`, href: `/our-work/${f.slug}` })),
+  {
+    image: images.heroPoster,
+    label: "Chris Charis Concept",
+    href: "/about",
+    eyebrow: "Chris Charis Concept · Benin City, Nigeria",
+    title: ["Transforming Communities", "Through Creative Expressions"],
+    text: "Creativity, technology and community development working together to create lasting impact.",
+    cta: { label: "Explore Our Work", href: "/our-work" },
+  },
+  ...projectFamilies.map((f) => ({
+    image: f.image,
+    label: `${f.name} · ${f.year}`,
+    href: `/our-work/${f.slug}`,
+    eyebrow: `Our Work · Since ${f.year}`,
+    title: heroTitles[f.slug],
+    text: f.line,
+    cta: { label: `Explore ${f.shortName}`, href: `/our-work/${f.slug}` },
+  })),
 ];

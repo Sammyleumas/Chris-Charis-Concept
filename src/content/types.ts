@@ -70,8 +70,15 @@ export type ProjectFamily = {
 /** One hero slideshow slide; `href` links the caption to its page. */
 export type HeroSlide = {
   image: ImageAsset;
+  /** Caption beside the slide controls. */
   label: string;
   href?: string;
+  /** Hero copy shown while this slide is on screen. Missing parts fall back to the first slide's. */
+  eyebrow?: string;
+  /** Headline: a bold first line and a lighter second line. */
+  title?: [string, string];
+  text?: string;
+  cta?: { label: string; href: string };
 };
 
 export type ImpactStat = {
