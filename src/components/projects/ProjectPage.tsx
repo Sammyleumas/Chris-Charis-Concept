@@ -112,8 +112,8 @@ export async function ProjectPage({ family, editions }: { family: ProjectFamily;
               Full gallery <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
-          <ProjectGallery images={family.gallery} familyName={family.shortName} />
         </div>
+        <ProjectGallery images={family.gallery} familyName={family.shortName} />
       </section>
 
       {/* Partners */}

@@ -36,3 +36,20 @@ test("gallery shows the full-screen control", async ({ page }) => {
   await page.goto("/media/gallery");
   await expect(page.getByRole("button", { name: "View full screen" })).toBeVisible();
 });
+
+test("project photos: rows move, pause stops them, photos open", async ({ page }) => {
+  await page.goto("/our-work/healthy-heart");
+  const track = page.locator(".marquee-track").first();
+  await page.locator("#gallery-title").scrollIntoViewIfNeeded();
+  const x = () => track.evaluate((t) => new DOMMatrix(getComputedStyle(t).transform).m41);
+  const a = await x();
+  await page.waitForTimeout(600);
+  expect(await x()).not.toBe(a);
+  await page.getByRole("button", { name: "Pause motion" }).click();
+  await page.mouse.move(0, 0);
+  const b = await x();
+  await page.waitForTimeout(600);
+  expect(await x()).toBe(b);
+  await page.locator(".marquee-card:not(.marquee-dup) button").first().click();
+  await expect(page.locator("dialog[open]")).toBeVisible();
+});

@@ -272,3 +272,68 @@
     padding-inline: 3rem;
   }
 }
+
+/* Project photo rows: each track holds two identical copies and moves by
+   half its width, so the loop has no seam. */
+.marquee-row {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 0.75rem;
+  padding-right: 0.75rem;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+.marquee-row:nth-child(2) .marquee-track {
+  margin-left: -7rem;
+}
+.marquee-card {
+  position: relative;
+  flex: none;
+  width: 14.5rem;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: var(--color-mist);
+}
+@media (min-width: 640px) {
+  .marquee-card { width: 18rem; }
+}
+@media (min-width: 1024px) {
+  .marquee-track { gap: 1rem; padding-right: 1rem; }
+  .marquee-card { width: 21.25rem; }
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track,
+.marquee[data-paused] .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee-left {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes marquee-right {
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+/* Reduced motion: still rows, swiped by hand, without the repeat copies. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-row {
+    overflow-x: auto;
+    mask-image: none;
+    scrollbar-width: none;
+  }
+  .marquee-track {
+    animation: none !important;
+    margin-left: 0 !important;
+    padding-inline: 1.25rem;
+  }
+  .marquee-dup,
+  .marquee-toggle {
+    display: none;
+  }
+}
