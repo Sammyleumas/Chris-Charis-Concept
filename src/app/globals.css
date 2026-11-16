@@ -349,3 +349,98 @@
 @keyframes hero-copy-in {
   from { opacity: 0; transform: translateY(14px); }
 }
+
+/* ------------------------------------------------------------------ */
+/* First-visit loader: count to 100%, then the tiles vanish.           */
+/* ------------------------------------------------------------------ */
+@property --pre-n {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+.preloader {
+  --pre-count: 1100ms;
+  --pre-reveal: 1350ms;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  animation: preloader-done 0s linear 2000ms forwards;
+}
+[data-preloaded] .preloader {
+  display: none;
+}
+.preloader-tiles {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+.preloader-tiles > span {
+  background: var(--color-ink);
+  /* Hairline seams appear as the tiles start to go. */
+  box-shadow: inset 0 0 0 0.5px color-mix(in oklab, var(--color-night) 60%, transparent);
+  animation: preloader-tile 240ms var(--ease-in-quick) both;
+}
+.preloader-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: max(1.5rem, env(safe-area-inset-top)) 1.5rem max(1.75rem, env(safe-area-inset-bottom));
+  animation: preloader-content-out 220ms var(--ease-in-quick) calc(var(--pre-reveal) - 120ms) both;
+}
+@media (min-width: 1024px) {
+  .preloader-content { padding: 2.5rem 3.5rem 3rem; }
+}
+.preloader-count {
+  margin: 0;
+  color: #fff;
+  font-weight: 300;
+  font-size: clamp(4.5rem, 3rem + 9vw, 11rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  counter-reset: pre var(--pre-n);
+  animation: preloader-count var(--pre-count) cubic-bezier(0.3, 0.1, 0.25, 1) 120ms both;
+}
+.preloader-count::before {
+  content: counter(pre) "%";
+}
+@keyframes preloader-count {
+  to { --pre-n: 100; }
+}
+@keyframes preloader-tile {
+  to { opacity: 0; transform: scale(0.985); }
+}
+@keyframes preloader-content-out {
+  to { opacity: 0; transform: translateY(-8px); }
+}
+@keyframes preloader-done {
+  to { visibility: hidden; }
+}
+
+/* After the reveal, the homepage headline rises in line by line. */
+.hero-line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+html:not([data-preloaded]) .hero-copy:first-child:not(.is-active) .hero-line {
+  display: block;
+  animation: hero-line-in 900ms var(--ease-out-soft) both;
+  animation-delay: calc(1.55s + var(--i, 0) * 110ms);
+}
+html:not([data-preloaded]) .hero-copy:first-child:not(.is-active) > :not(h1) {
+  animation: hero-copy-in 700ms var(--ease-out-soft) 1.85s both;
+}
+html:not([data-preloaded]) .hero-copy:first-child:not(.is-active) > :first-child {
+  animation-delay: 1.45s;
+}
+@keyframes hero-line-in {
+  from { transform: translateY(105%); }
+}

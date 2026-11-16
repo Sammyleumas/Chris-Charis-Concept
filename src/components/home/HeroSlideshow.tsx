@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { useReducedMotion } from "motion/react";
 import type { HeroSlide } from "@/content/types";
@@ -163,8 +163,14 @@ export function HeroSlideshow({ slides, videoSrc }: { slides: HeroSlide[]; video
               >
                 <p className="eyebrow text-mist">{c.eyebrow}</p>
                 <Title className="mt-5 max-w-5xl text-display text-white!">
-                  <span className="block font-bold">{c.title[0]}</span>
-                  {c.title[1] && <span className="block font-medium text-white/85">{c.title[1]}</span>}
+                  <span className="hero-line-mask">
+                    <span className="hero-line block font-bold">{c.title[0]}</span>
+                  </span>
+                  {c.title[1] && (
+                    <span className="hero-line-mask">
+                      <span className="hero-line block font-medium text-white/85" style={{ "--i": 1 } as CSSProperties}>{c.title[1]}</span>
+                    </span>
+                  )}
                 </Title>
                 <p className="mt-6 max-w-xl text-lead text-white/80">{c.text}</p>
                 <span className="rule-accent mt-8" />

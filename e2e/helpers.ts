@@ -12,7 +12,10 @@ export const routes = [
   "/donate", "/contact", "/privacy", "/terms", "/safeguarding", "/cookies",
 ];
 
-/** Pre-answers the cookie banner so it does not cover content. */
+/** Pre-answers the cookie banner and skips the first-visit loader so neither covers content. */
 export async function dismissCookies(page: Page, analytics = false) {
-  await page.addInitScript((a) => localStorage.setItem("cc-consent", JSON.stringify({ analytics: a, at: "test" })), analytics);
+  await page.addInitScript((a) => {
+    localStorage.setItem("cc-consent", JSON.stringify({ analytics: a, at: "test" }));
+    sessionStorage.setItem("cc-pre", "1");
+  }, analytics);
 }

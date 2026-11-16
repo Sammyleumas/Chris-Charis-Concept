@@ -4,6 +4,7 @@ import { Inter, Sora } from "next/font/google";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CookieConsent } from "@/components/legal/CookieConsent";
+import { Preloader } from "@/components/layout/Preloader";
 import { Analytics } from "@/components/analytics/Analytics";
 import { MotionProvider } from "@/components/analytics/MotionProvider";
 import { getProjectFamilies } from "@/lib/content";
@@ -46,8 +47,15 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             __html: `try{if(localStorage.getItem("cc-consent"))document.documentElement.dataset.consent="1"}catch(e){}`,
           }}
         />
+        {/* The loader plays once per visit, and never for reduced motion. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(d){try{if(sessionStorage.getItem("cc-pre")||matchMedia("(prefers-reduced-motion: reduce)").matches)d.dataset.preloaded="";else sessionStorage.setItem("cc-pre","1")}catch(e){d.dataset.preloaded=""}})(document.documentElement)`,
+          }}
+        />
       </head>
       <body className="flex min-h-dvh flex-col">
+        <Preloader />
         <MotionProvider>
         <SiteHeader families={families} />
         <main id="main" className="flex-1">
