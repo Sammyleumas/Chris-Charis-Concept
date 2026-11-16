@@ -17,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...staticRoutes.map((p) => entry(p, p === "/" ? 1 : 0.6)),
     ...families.map((f) => entry(`/our-work/${f.slug}`, 0.8)),
+    entry("/our-work/fusion/2026", 0.9),
     ...orgs.map((o) => entry(`/organisations/${o.slug}`, 0.7)),
     ...posts.map((p) => ({ ...entry(`/news/${p.slug}`, 0.5), lastModified: p.date })),
   ];

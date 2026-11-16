@@ -1,5 +1,6 @@
 import { link, photo } from "./objects";
 import {
+  event,
   homepage,
   impactStat,
   impactStory,
@@ -21,6 +22,7 @@ export const schemaTypes = [
   link,
   siteSettings,
   homepage,
+  event,
   projectFamily,
   organisation,
   impactStat,

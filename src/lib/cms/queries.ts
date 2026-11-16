@@ -78,3 +78,12 @@ export const teamQuery = `*[_type == "teamMember"] | order(order asc){
 export const partnersQuery = `*[_type == "partner" && permission == true] | order(order asc){
   name, "logo": logo{ "src": asset->url, "alt": "", "brief": "" }, collaboration, url
 }`;
+
+export const fusionEventQuery = `*[_type == "event" && edition == $edition][0]{
+  title, edition, startsAt, endsAt, dateLabel, venue, city, summary, applyUrl, voteUrl,
+  "hero": hero${img},
+  days[]{ date, label, sessions[]{ time, title, detail, speaker } },
+  speakers[]{ name, role, bio, "photo": photo${img} },
+  sponsors[]{ name, url, "logo": logo{ "src": asset->url, "alt": "", "brief": "" } },
+  faqs[]{ q, a }
+}`;

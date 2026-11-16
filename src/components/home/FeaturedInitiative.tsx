@@ -1,5 +1,7 @@
 import { CalendarDays } from "lucide-react";
 import type { FeaturedInitiative as Featured } from "@/content/types";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { site } from "@/config/site";
 import { Photo } from "@/components/ui/Photo";
 import { ButtonLink } from "@/components/ui/Button";
@@ -18,11 +20,7 @@ export function FeaturedInitiative({ item }: { item: Featured }) {
     endDate: item.endDate,
     eventStatus: "https://schema.org/EventScheduled",
     description: item.description,
-    location: {
-      "@type": "Place",
-      name: `${site.location.city}, ${site.location.state}`,
-      address: { "@type": "PostalAddress", addressLocality: site.location.city, addressRegion: site.location.state, addressCountry: "NG" },
-    },
+    // Venue not yet confirmed, so no location is published (never guessed).
     organizer: { "@type": "Organization", name: site.name },
   };
 
@@ -56,6 +54,10 @@ export function FeaturedInitiative({ item }: { item: Featured }) {
                 </ButtonLink>
               ))}
             </div>
+            <Link href="/our-work/fusion/2026" className="hit-y group mt-6 inline-flex items-center gap-2 self-start text-sm font-semibold text-mist hover:text-white">
+              Programme, FAQs and countdown
+              <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
             {missing.length > 0 && (
               <ContentNote className="mt-6 border-white/25 bg-white/5 text-white/80 [&_span]:text-mist">
                 Link for {missing.map((m) => `“${m.label}”`).join(", ")} not yet supplied; the button appears once it is set.

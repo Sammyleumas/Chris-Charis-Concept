@@ -10,6 +10,7 @@ export const structure: StructureResolver = (S) =>
     .items([
       singleton(S, "siteSettings", "Site settings"),
       singleton(S, "homepage", "Homepage (featured & film)"),
+      S.documentTypeListItem("event").title("Events"),
       S.divider(),
       S.documentTypeListItem("projectFamily").title("Project families"),
       S.documentTypeListItem("organisation").title("Organisations"),

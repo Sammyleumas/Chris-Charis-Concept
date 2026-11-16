@@ -56,6 +56,9 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       // Brief §4 lists FSH under Fusion; one canonical page lives under Organisations.
+      // Short, shareable event address for WhatsApp and social posts.
+      { source: "/fusion-2026", destination: "/our-work/fusion/2026", permanent: false },
+      { source: "/fusion", destination: "/our-work/fusion/2026", permanent: false },
       {
         source: "/our-work/fusion/solutions-hub",
         destination: "/organisations/fusion-solutions-hub",

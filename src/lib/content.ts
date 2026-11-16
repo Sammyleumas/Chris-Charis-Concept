@@ -46,6 +46,7 @@ import type {
   TimelineEntry,
 } from "@/content/types";
 import { linkRegister, site, type SocialLink } from "@/config/site";
+import { fusion2026, type FusionEvent } from "@/content/events";
 import { cmsFetch } from "@/lib/cms/client";
 import { listOr, overlay } from "@/lib/cms/merge";
 import * as q from "@/lib/cms/queries";
@@ -249,4 +250,19 @@ export async function getPost(slug: string) {
 
 export async function getPressAssets(): Promise<PressAsset[]> {
   return listOr(await cmsFetch<PressAsset[]>(q.pressAssetsQuery), pressAssets);
+}
+
+/* ------------------------------------------------------------------ */
+/* Events                                                              */
+/* ------------------------------------------------------------------ */
+
+type CmsEvent = Partial<FusionEvent>;
+
+/** Fusion: Art Meets Tech 2026, with any CMS edits overlaid. */
+export async function getFusionEvent(): Promise<FusionEvent> {
+  const doc = await cmsFetch<CmsEvent>(q.fusionEventQuery, { edition: "2026" });
+  const merged = overlay(fusion2026, doc);
+  // Keep a day's local label when the CMS has sessions only.
+  merged.days = fusion2026.days.map((d) => overlay(d, doc?.days?.find((x) => x.date === d.date)));
+  return merged;
 }

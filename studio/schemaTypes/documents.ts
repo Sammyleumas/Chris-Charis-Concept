@@ -318,3 +318,97 @@ export const partner = defineType({
     order,
   ],
 });
+
+export const event = defineType({
+  name: "event",
+  title: "Event",
+  type: "document",
+  description: "Event pages such as Fusion: Art Meets Tech. Empty fields show “to be announced” on the site.",
+  groups: [{ name: "basics", default: true }, { name: "programme" }, { name: "people" }, { name: "faq" }],
+  fields: [
+    defineField({ name: "title", type: "string", group: "basics", validation: (r) => r.required() }),
+    defineField({ name: "edition", type: "string", group: "basics", description: "e.g. 2026", validation: (r) => r.required() }),
+    defineField({ name: "startsAt", title: "Starts", type: "datetime", group: "basics", validation: (r) => r.required() }),
+    defineField({ name: "endsAt", title: "Ends", type: "datetime", group: "basics", validation: (r) => r.required() }),
+    defineField({ name: "dateLabel", title: "Dates as shown", type: "string", group: "basics" }),
+    defineField({ name: "venue", type: "string", group: "basics", description: "Leave empty until confirmed." }),
+    defineField({ name: "city", type: "string", group: "basics" }),
+    defineField({ name: "summary", type: "text", rows: 3, group: "basics" }),
+    defineField({ name: "hero", type: "photo", group: "basics" }),
+    defineField({ name: "applyUrl", title: "Apply link", type: "url", group: "basics" }),
+    defineField({ name: "voteUrl", title: "Vote link", type: "url", group: "basics" }),
+    defineField({
+      name: "days",
+      type: "array",
+      group: "programme",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({ name: "date", type: "date", validation: (r) => r.required() }),
+            defineField({ name: "label", type: "string" }),
+            defineField({
+              name: "sessions",
+              type: "array",
+              of: [
+                defineArrayMember({
+                  type: "object",
+                  fields: [
+                    defineField({ name: "time", type: "string", description: "e.g. 10:00" }),
+                    defineField({ name: "title", type: "string", validation: (r) => r.required() }),
+                    defineField({ name: "detail", type: "string" }),
+                    defineField({ name: "speaker", type: "string" }),
+                  ],
+                  preview: { select: { title: "title", subtitle: "time" } },
+                }),
+              ],
+            }),
+          ],
+          preview: { select: { title: "label", subtitle: "date" } },
+        }),
+      ],
+    }),
+    defineField({
+      name: "speakers",
+      title: "Speakers and facilitators",
+      type: "array",
+      group: "people",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({ name: "name", type: "string", validation: (r) => r.required() }),
+            defineField({ name: "role", type: "string", validation: (r) => r.required() }),
+            defineField({ name: "bio", type: "text", rows: 2 }),
+            defineField({ name: "photo", type: "photo" }),
+          ],
+          preview: { select: { title: "name", subtitle: "role", media: "photo" } },
+        }),
+      ],
+    }),
+    defineField({
+      name: "sponsors",
+      type: "array",
+      group: "people",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({ name: "name", type: "string", validation: (r) => r.required() }),
+            defineField({ name: "logo", type: "image", validation: (r) => r.required() }),
+            defineField({ name: "url", type: "url" }),
+          ],
+          preview: { select: { title: "name", media: "logo" } },
+        }),
+      ],
+    }),
+    defineField({
+      name: "faqs",
+      title: "FAQs",
+      type: "array",
+      group: "faq",
+      of: [defineArrayMember({ type: "object", fields: [defineField({ name: "q", title: "Question", type: "string" }), defineField({ name: "a", title: "Answer", type: "text", rows: 2 })] })],
+    }),
+  ],
+  preview: { select: { title: "title", subtitle: "edition" } },
+});

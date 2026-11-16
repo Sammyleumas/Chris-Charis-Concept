@@ -138,7 +138,7 @@ export const projectFamilies: ProjectFamily[] = [
     accent: null,
     image: images.fusion,
     items: [
-      { name: "Fusion: Art Meets Tech", date: "26–28 Nov 2026", group: "Programmes", summary: "The bootcamp bringing creatives and technologists together.", href: linkRegister.fusionBootcamp ?? undefined },
+      { name: "Fusion: Art Meets Tech", date: "26–28 Nov 2026", group: "Programmes", summary: "The bootcamp bringing creatives and technologists together.", href: "/our-work/fusion/2026" },
       { name: "FUSION 1.0", group: "Editions" },
       { name: "FUSION 2.0", group: "Editions" },
       { name: "FUSION 3.0", group: "Editions" },
@@ -323,7 +323,7 @@ export const timeline: TimelineEntry[] = [
     year: 2026,
     title: "Fusion: Art Meets Tech",
     text: "Three days bringing young creatives and technologists together.",
-    href: "/our-work/fusion",
+    href: "/our-work/fusion/2026",
   },
 ];
 
