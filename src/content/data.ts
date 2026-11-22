@@ -43,6 +43,7 @@ export const projectFamilies: ProjectFamily[] = [
         summary:
           "A peace advocacy film. Written and produced by Chris Charis; directed by Solomon Ability; cinematography and editing by Anthony Jay.",
         youtubeUrl: "https://youtu.be/9SChNCoaDv4",
+        poster: images.shunElectoralViolencePoster,
       },
       { name: "D’impact Campaign" },
       {

@@ -37,7 +37,14 @@ export function YouTubeFacade({ url, title, poster }: { url: string; title: stri
             setActive(true);
             track(events.videoPlay, { video_title: title });
           }} className="group absolute inset-0">
-          <Image src={thumb} alt="" fill sizes="(min-width: 1024px) 66vw, 100vw" className="object-cover" />
+          <Image
+            src={thumb}
+            alt=""
+            fill
+            sizes="(min-width: 1024px) 66vw, 100vw"
+            className="object-cover"
+            style={poster?.src && poster.focus ? { objectPosition: poster.focus } : undefined}
+          />
           <span className="absolute inset-0 bg-night/30 transition-colors group-hover:bg-night/15" />
           <span className="absolute top-1/2 left-1/2 grid h-20 w-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/95 text-brand-ink shadow-xl transition-transform group-hover:scale-105">
             <Play aria-hidden="true" className="ml-1 h-8 w-8 fill-current" />

@@ -68,6 +68,14 @@ export const images = {
     height: 1800,
     focus: "55% 50%",
   },
+  shunElectoralViolencePoster: {
+    src: "/images/films/shun-electoral-violence-poster.jpg",
+    alt: "Shun Electoral Violence film poster: three cast members seated in conversation, with the title in green and red. A Chris Charis Concept",
+    brief: "Shun Electoral Violence: film poster",
+    width: 616,
+    height: 768,
+    focus: "50% 8%",
+  },
   hopeAlivePoster: {
     src: "/images/films/hope-alive-poster.jpg",
     alt: "Hope Alive film cover: a woman lies in a hospital bed with a bandaged head and an oxygen tube. A short film on gender-based violence. A Chris Charis Concept",
