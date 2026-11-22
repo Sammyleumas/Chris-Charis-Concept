@@ -33,7 +33,7 @@ What the website still needs from Chris Charis Concept. Owners follow the CTO br
 - [ ] Partner logos and permission to display them (Partnerships); confirm Arts in Medicine Projects (NAHCON 2021)
 
 ## Impact and reports
-- [ ] Evidence behind each headline figure (26 projects, 6 films, 4 HHCP editions, 1,200+ young people, Dakar 2025)
+- [ ] Evidence behind each headline figure (26 projects, 6 films, 2 HHCP editions, 1,200+ young people, Dakar 2025)
 - [ ] Beneficiary stories with consent
 - [ ] Annual report PDF (after FY2026/27)
 

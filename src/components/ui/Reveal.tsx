@@ -1,12 +1,14 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import type { ReactNode } from "react";
 import { ease } from "@/lib/motion";
 
 /**
- * Subtle fade-and-rise on first scroll into view. Content is fully visible
- * for reduced-motion users.
+ * Subtle fade-and-rise on first scroll into view. For reduced-motion users,
+ * MotionConfig (reducedMotion="user") drops the movement and keeps only the
+ * fade. Always the same element on server and client: swapping to a static
+ * element after hydration left the server's hidden inline style in place.
  */
 export function Reveal({
   children,
@@ -19,12 +21,7 @@ export function Reveal({
   className?: string;
   as?: "div" | "li";
 }) {
-  const reduce = useReducedMotion();
   const Comp = as === "li" ? motion.li : motion.div;
-  if (reduce) {
-    const Static = as;
-    return <Static className={className}>{children}</Static>;
-  }
   return (
     <Comp
       className={className}

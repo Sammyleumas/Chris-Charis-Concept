@@ -13,7 +13,7 @@ import { getImpactStats, getImpactStories, getPathway, getReports } from "@/lib/
 
 export const metadata: Metadata = pageMeta({
   title: "Our Impact",
-  description: "Chris Charis Concept's impact since 2020: 26 projects, 6 films, 4 HHCP editions, 1,200+ young people reached and a Dakar 2025 delegation.",
+  description: "Chris Charis Concept's impact since 2020: 26 projects, 6 films, 2 HHCP editions, 1,200+ young people reached and a Dakar 2025 delegation.",
   path: "/impact",
 });
 
