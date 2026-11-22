@@ -43,6 +43,8 @@ export function YouTubeFacade({ url, title, poster }: { url: string; title: stri
             fill
             sizes="(min-width: 1024px) 66vw, 100vw"
             className="object-cover"
+            // YouTube thumbnails are already compressed; load them directly.
+            unoptimized={!poster?.src}
             style={poster?.src && poster.focus ? { objectPosition: poster.focus } : undefined}
           />
           <span className="absolute inset-0 bg-night/30 transition-colors group-hover:bg-night/15" />

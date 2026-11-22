@@ -55,7 +55,7 @@ export const projectFamilies: ProjectFamily[] = [
       },
       { name: "Blur", summary: "A New Nigeria initiative: a short film project produced by Chris Charis." },
       { name: "Treepz Stage Drama" },
-      { name: "FreeDumb" },
+      { name: "FreeDumb", youtubeUrl: "https://youtu.be/HJjQeFW4V8s" },
       { name: "Stop Human Trafficking" },
     ],
     externalLinks: [{ label: "Watch on YouTube", url: linkRegister.youtubeChannel }],

@@ -14,6 +14,10 @@ export const routes = [
 
 /** Pre-answers the cookie banner and skips the first-visit loader so neither covers content. */
 export async function dismissCookies(page: Page, analytics = false) {
+  // YouTube thumbnails are external and unreachable in CI: serve a 1px stand-in.
+  await page.route("https://i.ytimg.com/**", (r) =>
+    r.fulfill({ contentType: "image/gif", body: Buffer.from("R0lGODlhAQABAAAAACw=", "base64") }),
+  );
   await page.addInitScript((a) => {
     localStorage.setItem("cc-consent", JSON.stringify({ analytics: a, at: "test" }));
     sessionStorage.setItem("cc-pre", "1");
