@@ -53,3 +53,7 @@ What the website still needs from Chris Charis Concept. Owners follow the CTO br
 - [ ] Confirm volunteer areas, partnership types and careers role options in the forms
 - [ ] Open roles or facilitator calls for the Careers page
 - [ ] Legal review of the four draft legal pages, resolving each "To confirm" box: data protection contact, retention periods, refund policy, safeguarding lead, consent rules for under-18s
+
+## Photo consent
+
+- [x] Consent confirmed by Chris Charis Concept (November 2026) for every photograph supplied for the site so far: Healthy Heart (HHCP 1.0, HHCP 2.0, August 2025 session), Fusion, Shun Electoral Violence, YALI Learns, the Hope Alive cover and the founder portrait. Photos added later need the same confirmation.

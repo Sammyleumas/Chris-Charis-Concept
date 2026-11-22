@@ -38,10 +38,19 @@ export const projectFamilies: ProjectFamily[] = [
     accent: null,
     image: images.ffsc,
     items: [
-      { name: "Shun Electoral Violence" },
+      {
+        name: "Shun Electoral Violence",
+        summary:
+          "A peace advocacy film. Written and produced by Chris Charis; directed by Solomon Ability; cinematography and editing by Anthony Jay.",
+      },
       { name: "D’impact Campaign" },
-      { name: "Hope Alive", summary: "A short film on gender-based violence.", poster: images.hopeAlivePoster },
-      { name: "Blur" },
+      {
+        name: "Hope Alive",
+        summary:
+          "A short film on gender-based violence. Written and produced by Chris Charis; directed by Solomon Ability; photography and editing by Theophilus Ogbede. Showing on the Chris Charis Concept YouTube channel.",
+        poster: images.hopeAlivePoster,
+      },
+      { name: "Blur", summary: "A New Nigeria initiative: a short film project produced by Chris Charis." },
       { name: "Treepz Stage Drama" },
       { name: "FreeDumb" },
       { name: "Stop Human Trafficking" },
@@ -78,8 +87,18 @@ export const projectFamilies: ProjectFamily[] = [
         summary:
           "For World Hypertension Day, with the Dynamic Youth of The Household of Peace, Omosigho, Benin City. Theme: “Measure your blood pressure, control it, live longer.” A health seminar, counselling, free blood pressure checks, creative art and prayer.",
       },
-      { name: "MHAC 1.0", summary: "Mental Health Awareness Campaign" },
-      { name: "MHAC 2.0", summary: "Mental Health Awareness Campaign" },
+      {
+        name: "MHAC 1.0",
+        date: "2–8 November 2021",
+        summary:
+          "Mental Health Awareness Campaign: “My Mental Health Stability: Creative Art”. A one-week online campaign using music, dance, drama and film, poetry and creative writing, with an awareness walk at the University of Benin (UNIBEN) on 5 November 2021. Powered by 100 Level students of the UNIBEN Social Work Department.",
+      },
+      {
+        name: "MHAC 2.0",
+        date: "9 November 2024",
+        summary:
+          "Mental Health Awareness Campaign at the University of Benin, themed “Where Art Meets Tech”, with the Office of the National Vice President, Nigerian Association of Social Work Students (NASOWS): trainings, workshops, art and tech exhibitions, sip, paint and watch sessions and networking.",
+      },
       {
         name: "NAHCON 2021",
         date: "May 2021",
@@ -90,7 +109,10 @@ export const projectFamilies: ProjectFamily[] = [
     ],
     externalLinks: [{ label: "HHCP website", url: linkRegister.hhcpWebsite }],
     related: ["film-for-social-change", "learn-to-lead"],
-    results: [{ value: "2", label: "HHCP editions completed", source: "Confirmed by Chris Charis Concept, November 2026" }],
+    results: [
+      { value: "2", label: "HHCP editions completed", source: "Confirmed by Chris Charis Concept, November 2026" },
+      { value: "500+", label: "Community members reached by the medical outreach", source: "Chris Charis Concept blog (chrischaris.art.blog)" },
+    ],
     gallery: [...hhcp1Gallery, ...hhcp2Gallery, ...hhcpGallery],
     cta: {
       title: "Bring Healthy Heart to your community.",
@@ -115,6 +137,12 @@ export const projectFamilies: ProjectFamily[] = [
     items: [
       { name: "Learn To Lead 1.0" },
       { name: "Learn To Lead 2.0" },
+      {
+        name: "YALI Learns: Community Organizing for Action",
+        date: "2 July 2021",
+        summary:
+          "A YALI Learns session at Edo Innovation Hub (ICE), hosted by Chris Omowa with keynote speaker Victor O. Nelson and panellists Faith Idiahosa (State Coordinator, YALI Network Edo) and Amaka Chukwudi. Participants received certificates of participation.",
+      },
       { name: "SOUL", summary: "School of Ultimate Leadership, with seven faculties", href: "/organisations/soul" },
     ],
     externalLinks: [{ label: "SOUL website", url: linkRegister.soulWebsite }],
@@ -307,6 +335,34 @@ export const timeline: TimelineEntry[] = [
     title: "Learn To Lead",
     text: "Leadership development for young people begins, later growing into SOUL.",
     href: "/our-work/learn-to-lead",
+  },
+  {
+    date: "2 July 2021",
+    year: 2021,
+    title: "YALI Learns: Community Organizing for Action",
+    text: "A session at Edo Innovation Hub on organising communities for action, with certificates for participants.",
+    href: "/our-work/learn-to-lead",
+  },
+  {
+    date: "November 2021",
+    year: 2021,
+    title: "Mental Health Awareness Campaign 1.0",
+    text: "A week-long online campaign and an awareness walk at the University of Benin.",
+    href: "/our-work/healthy-heart",
+  },
+  {
+    date: "17 May 2022",
+    year: 2022,
+    title: "Healthy Heart Community Project 2.0",
+    text: "A health and prayer summit for World Hypertension Day, with free blood pressure checks, in Omosigho, Benin City.",
+    href: "/our-work/healthy-heart",
+  },
+  {
+    date: "9 November 2024",
+    year: 2024,
+    title: "Mental Health Awareness Campaign 2.0",
+    text: "“Where Art Meets Tech” at the University of Benin, with the Nigerian Association of Social Work Students.",
+    href: "/our-work/healthy-heart",
   },
   {
     date: "2024",
@@ -515,8 +571,23 @@ export const statements: Statements = {
   values: [],
 };
 
-/** Team: published only with photos, bios and consent (COO to collect). */
-export const team: TeamMember[] = [];
+/** Team: published only with photos, bios and consent. Founder profile from the organisation's blog. */
+export const team: TeamMember[] = [
+  {
+    name: "Christopher Orobosa Omowa",
+    role: "Creative Director",
+    group: "leadership",
+    bio: "A filmmaker and creative director who uses art to drive social change. He has produced six short films and a stage play, and leads the Healthy Heart Community Project, a medical outreach that has reached over 500 community members. With over eight years of experience in project and programme management, he is Dynamic Youth President of The Household of Peace (The Purpose Driven Church Int’l Inc.) and served as National Vice President of the Nigerian Association of Social Work Students. He holds a BSc in Social Work from the University of Benin.",
+    photo: {
+      src: "/images/team/christopher-omowa.jpg",
+      alt: "Portrait of Christopher Orobosa Omowa in a waistcoat and tie, arms folded",
+      brief: "Founder portrait",
+      width: 408,
+      height: 509,
+      focus: "50% 30%",
+    },
+  },
+];
 
 /** Legal & Governance (brief §5.2). Numbers must match CAC records exactly. */
 export const legalEntities: LegalEntity[] = [
