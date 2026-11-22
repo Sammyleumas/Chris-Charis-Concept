@@ -60,6 +60,14 @@ export const images = {
     height: 1800,
     focus: "55% 50%",
   },
+  hopeAlivePoster: {
+    src: "/images/films/hope-alive-poster.jpg",
+    alt: "Hope Alive film cover: a woman lies in a hospital bed with a bandaged head and an oxygen tube. A short film on gender-based violence. A Chris Charis Concept",
+    brief: "Hope Alive: film cover",
+    width: 1080,
+    height: 1080,
+    focus: "30% 0%",
+  },
   latestFilm: pending(
     "Still from the latest Film for Social Change release",
     "Still from the latest film (YouTube thumbnail works)",
@@ -167,6 +175,24 @@ export const fusionGallery: ImageAsset[] = [
   photo("fusion/at-the-fusion-banner.jpg", 1800, 2400, "Two organisers stand either side of the FUSION banner, labelled A Chris Charis Concept", "At the Fusion banner", "50% 45%"),
   photo("fusion/team-at-the-banner.jpg", 1374, 1961, "Four team members in front of the event banner", "The team", "50% 50%"),
   photo("fusion/team-group.jpg", 2000, 1500, "Six team members smiling in front of the event banner", "The team together", "50% 45%"),
+];
+
+/** Healthy Heart Community Project 1.0 (supplied by the organisation, labelled HHCP 1.0). */
+const hh1 = (file: string, w: number, h: number, alt: string, brief: string, focus?: string): ImageAsset => ({
+  ...photo(`hhcp/1.0/${file}.jpg`, w, h, alt, brief, focus),
+  group: "HHCP 1.0",
+});
+export const hhcp1Gallery: ImageAsset[] = [
+  hh1("team-line-up", 2400, 1271, "Healthy Heart volunteers, paramedics and health workers standing in a line outside a community building", "The HHCP 1.0 team", "50% 45%"),
+  hh1("blood-pressure-check", 2400, 1800, "A volunteer checks an elderly man's blood pressure under a canopy while team members look on", "Free blood pressure checks", "40% 50%"),
+  hh1("interview-at-the-phc", 2400, 1800, "A volunteer in a Healthy Heart T-shirt is interviewed outside a primary health centre", "Talking heart health", "50% 35%"),
+  hh1("volunteers-celebrating", 2400, 1089, "A large group of HHCP 1.0 volunteers smiling and posing together under a cloudy sky", "Volunteers together", "50% 45%"),
+  hh1("paramedic-volunteers", 2400, 1800, "Two paramedics and a volunteer standing together at the outreach", "Paramedics on the team", "50% 35%"),
+  hh1("blood-pressure-check-close", 2400, 1800, "Close view of a volunteer taking a blood pressure reading with a stethoscope and cuff", "Taking a reading", "55% 50%"),
+  hh1("speaking-to-camera", 2400, 1800, "A volunteer in a Healthy Heart T-shirt speaks into a microphone outside a health centre", "Spreading the message", "45% 35%"),
+  hh1("dancing-in-traditional-dress", 2400, 1800, "Two young women in wrapper outfits and coral beads laughing and dancing on the road", "Celebrating together", "55% 40%"),
+  hh1("team-cheering", 2400, 1089, "Volunteers in lab coats and team T-shirts cheering in front of a community building", "The team cheering", "50% 40%"),
+  hh1("volunteers-with-instruments", 2400, 1800, "Volunteers standing together, some holding beaded shekere instruments", "Music on the day", "50% 40%"),
 ];
 
 /** Pending photo slots for a project gallery, one per subject. */

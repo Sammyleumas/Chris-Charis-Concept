@@ -1,5 +1,5 @@
 import { aboutShort as aboutShortText, linkRegister, site } from "@/config/site";
-import { galleryFor, hhcpGallery, fusionGallery, images } from "./images";
+import { galleryFor, hhcp1Gallery, hhcpGallery, fusionGallery, images } from "./images";
 import type {
   ProjectFamilySlug,
   FeaturedInitiative,
@@ -40,7 +40,7 @@ export const projectFamilies: ProjectFamily[] = [
     items: [
       { name: "Shun Electoral Violence" },
       { name: "D’impact Campaign" },
-      { name: "Hope Alive" },
+      { name: "Hope Alive", summary: "A short film on gender-based violence.", poster: images.hopeAlivePoster },
       { name: "Blur" },
       { name: "Treepz Stage Drama" },
       { name: "FreeDumb" },
@@ -88,7 +88,7 @@ export const projectFamilies: ProjectFamily[] = [
     externalLinks: [{ label: "HHCP website", url: linkRegister.hhcpWebsite }],
     related: ["film-for-social-change", "learn-to-lead"],
     results: [{ value: "4", label: "HHCP editions completed", source: "Chris Charis Concept M&E records, October 2026" }],
-    gallery: hhcpGallery,
+    gallery: [...hhcp1Gallery, ...hhcpGallery],
     cta: {
       title: "Bring Healthy Heart to your community.",
       text: "Volunteer at an outreach or sponsor the next edition.",

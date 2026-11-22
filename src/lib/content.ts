@@ -223,7 +223,7 @@ export async function getFilmLibrary(): Promise<Film[]> {
     family: "film-for-social-change",
     description: item.summary,
     youtubeUrl: item.youtubeUrl ?? null,
-    poster: { src: null, alt: `Poster for ${item.name}`, brief: `${item.name}: poster or YouTube thumbnail` },
+    poster: item.poster ?? { src: null, alt: `Poster for ${item.name}`, brief: `${item.name}: poster or YouTube thumbnail` },
   }));
 }
 
@@ -234,7 +234,7 @@ export async function getGalleryItems(): Promise<GalleryItem[]> {
       id: `${f.slug}-${i}`,
       family: f.slug,
       image,
-      caption: image.src ? image.brief || image.alt : image.alt.split(": ").slice(1).join(": ") || image.alt,
+      caption: image.src ? [image.group, image.brief || image.alt].filter(Boolean).join(" · ") : image.alt.split(": ").slice(1).join(": ") || image.alt,
     })),
   );
 }

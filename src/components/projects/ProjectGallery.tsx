@@ -129,7 +129,7 @@ function Card({ img, label, onOpen, tabbable = true }: { img: ImageAsset; label:
       </span>
       <span className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-night/80 via-night/30 to-transparent" />
       <span className="absolute right-3.5 bottom-3 left-3.5 block">
-        <span className="block text-[0.6875rem] font-medium tracking-wide text-white/75">{label}</span>
+        <span className="block text-[0.6875rem] font-medium tracking-wide text-white/75">{img.group ?? label}</span>
         <span className="mt-0.5 block truncate text-sm font-semibold text-white">{img.brief}</span>
       </span>
       <span className="sr-only">. View full screen: {img.alt}</span>

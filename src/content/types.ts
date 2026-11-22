@@ -15,6 +15,8 @@ export type ImageAsset = {
   /** CSS object-position, e.g. "50% 30%" to keep faces in frame. */
   focus?: string;
   credit?: string;
+  /** Edition or event the photo is from, shown as the card label (e.g. "HHCP 1.0"). */
+  group?: string;
 };
 
 export type ExternalLink = {
@@ -40,6 +42,8 @@ export type ProjectItem = {
   date?: string;
   summary?: string;
   youtubeUrl?: string | null;
+  /** Film poster or cover, when supplied. */
+  poster?: ImageAsset;
 };
 
 export type ProjectFamily = {
