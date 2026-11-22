@@ -1,5 +1,5 @@
 import { aboutShort as aboutShortText, linkRegister, site } from "@/config/site";
-import { galleryFor, hhcp1Gallery, hhcp2Gallery, hhcpGallery, fusionGallery, images } from "./images";
+import { galleryFor, hhcp1Gallery, shunElectoralViolenceGallery, yaliLearnsGallery, hhcp2Gallery, hhcpGallery, fusionGallery, images } from "./images";
 import type {
   ProjectFamilySlug,
   FeaturedInitiative,
@@ -49,7 +49,7 @@ export const projectFamilies: ProjectFamily[] = [
     externalLinks: [{ label: "Watch on YouTube", url: linkRegister.youtubeChannel }],
     related: ["healthy-heart", "fusion"],
     results: [{ value: "6", label: "Films produced", source: "Chris Charis Concept M&E records, October 2026" }],
-    gallery: galleryFor("Film for Social Change", ["on set", "behind the camera", "screening audience", "cast and crew"]),
+    gallery: shunElectoralViolenceGallery,
     cta: {
       title: "Tell a story with us.",
       text: "Partner on our next film, or help the films we have made reach more people.",
@@ -120,7 +120,7 @@ export const projectFamilies: ProjectFamily[] = [
     externalLinks: [{ label: "SOUL website", url: linkRegister.soulWebsite }],
     related: ["healthy-heart", "fusion"],
     results: [],
-    gallery: galleryFor("Learn To Lead and SOUL", ["Learn To Lead 1.0", "Learn To Lead 2.0", "SOUL session", "graduates"]),
+    gallery: yaliLearnsGallery,
     cta: {
       title: "Grow the next generation of leaders.",
       text: "Facilitate a SOUL faculty or partner on a leadership programme.",

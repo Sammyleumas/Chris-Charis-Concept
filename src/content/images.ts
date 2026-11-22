@@ -24,10 +24,14 @@ export const images = {
     "Chris Charis Concept team members with participants at a community programme",
     "Team with participants at a programme, natural light",
   ),
-  ffsc: pending(
-    "Film crew on set during a Film for Social Change production",
-    "Film for Social Change: on set, camera and crew",
-  ),
+  ffsc: {
+    src: "/images/ffsc/shun-electoral-violence/filming-the-crowd-scene.jpg",
+    alt: "A camera operator films a crowd scene outside a building during the Shun Electoral Violence shoot",
+    brief: "On set: Shun Electoral Violence",
+    width: 2400,
+    height: 1796,
+    focus: "45% 50%",
+  },
   hhcp: {
     src: "/images/hhcp/1.0/team-line-up.jpg",
     alt: "Healthy Heart volunteers, paramedics and health workers at HHCP 1.0, standing in a line outside a community building",
@@ -36,10 +40,14 @@ export const images = {
     height: 1271,
     focus: "50% 45%",
   },
-  learnToLead: pending(
-    "Young leaders in a Learn To Lead session",
-    "Learn To Lead or SOUL: facilitator with young leaders",
-  ),
+  learnToLead: {
+    src: "/images/learn-to-lead/yali-learns/team-in-learn-to-lead-shirts.jpg",
+    alt: "Seven team members in black Learn To Lead T-shirts smiling together at the YALI Learns session",
+    brief: "The Learn To Lead team",
+    width: 2400,
+    height: 1800,
+    focus: "50% 35%",
+  },
   fusion: {
     src: "/images/fusion/group-with-artworks.jpg",
     alt: "Fusion participants and organisers gathered on stage behind a display of their paintings, drawings and portraits",
@@ -213,6 +221,40 @@ export const hhcp2Gallery: ImageAsset[] = [
   hh2("audience-smiling", "Women in the audience smiling and laughing during the programme", "Moments of joy", "40% 45%"),
   hh2("team-at-the-banner", "The team standing in front of the HHCP 2.0 banner outside the church", "At the HHCP 2.0 banner", "50% 40%"),
   hh2("speaking-at-the-lectern", "A young speaker at the lectern during the prayer session", "Prayer session", "45% 30%"),
+];
+
+/** Shun Electoral Violence film shoot (Film for Social Change, supplied by the organisation). */
+const sev = (file: string, alt: string, brief: string, focus?: string): ImageAsset => ({
+  ...photo(`ffsc/shun-electoral-violence/${file}.jpg`, 2400, 1796, alt, brief, focus),
+  group: "Shun Electoral Violence",
+});
+export const shunElectoralViolenceGallery: ImageAsset[] = [
+  sev("filming-the-crowd-scene", "A camera operator films a crowd scene outside a green building", "Filming the crowd scene", "45% 50%"),
+  sev("cast-and-crew", "Cast and crew smiling together outdoors, one crouching in front with a camera", "Cast and crew", "50% 40%"),
+  sev("read-through", "Cast members seated on chairs in a hall going over the script", "Script read-through", "50% 45%"),
+  sev("rehearsing-the-scene", "Cast members rehearse a scene outside the building", "Rehearsing the scene", "50% 45%"),
+  sev("blocking-the-scene", "Cast and crew gathered on set working out the scene", "Blocking the scene", "50% 45%"),
+  sev("on-location", "Cast members on location, seen from behind, waiting for the next take", "On location", "50% 45%"),
+  sev("after-the-shoot", "Three members of the team smiling outside after the shoot", "After the shoot", "40% 35%"),
+];
+
+/** YALI Learns session run by Learn To Lead (supplied by the organisation). */
+const yali = (file: string, alt: string, brief: string, focus?: string): ImageAsset => ({
+  ...photo(`learn-to-lead/yali-learns/${file}.jpg`, 2400, 1800, alt, brief, focus),
+  group: "YALI Learns",
+});
+export const yaliLearnsGallery: ImageAsset[] = [
+  yali("team-in-learn-to-lead-shirts", "Seven team members in black Learn To Lead T-shirts smiling together", "The Learn To Lead team", "50% 35%"),
+  yali("panel-with-yali-learns-guest", "Three panellists seated in front of a mural, with a guest joining on screen", "Panel conversation", "50% 40%"),
+  yali("yali-network-edo-welcome", "A speaker with a microphone beside a screen showing the YALI Network Edo logo", "Welcome", "60% 40%"),
+  yali("session-on-social-change", "A facilitator presents a slide on planning for social change", "Planning for social change", "55% 45%"),
+  yali("participants-taking-notes", "Young participants seated on colourful chairs, one holding a pen and notes", "Taking notes", "55% 45%"),
+  yali("presenting-amara", "A participant presents his project, with its logo on the screen", "Presenting a project", "60% 40%"),
+  yali("audience-listening", "Participants listening, one writing in a notebook, while the session is filmed behind them", "Listening in", "60% 40%"),
+  yali("presenting-stead-feet-consult", "A participant presents his business to the room in front of a painted mural", "Pitching an idea", "50% 50%"),
+  yali("learners-in-the-room", "A row of young men listening attentively", "Paying attention", "50% 35%"),
+  yali("filming-the-session", "A camera on a tripod records a speaker during the session", "Recording the session", "40% 50%"),
+  yali("two-team-members", "Two team members in Learn To Lead T-shirts in the corridor", "Team members", "55% 35%"),
 ];
 
 /** Pending photo slots for a project gallery, one per subject. */
