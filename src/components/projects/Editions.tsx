@@ -67,15 +67,17 @@ export function HeartEditions({ family }: { family: ProjectFamily }) {
     <section aria-label="Editions and campaigns" className="py-20 lg:py-28">
       <div className="container-site">
         <Heading eyebrow="Editions" title="Four completed editions." intro="Each Healthy Heart edition takes the conversation about health and well-being further into the community." />
-        <ol className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-line md:grid-cols-4">
+        <ol className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-2xl bg-line sm:grid-cols-2 lg:grid-cols-4">
           {editions.map((e, i) => (
             <Reveal as="li" key={e.name} delay={i * 0.06} className="bg-white p-8">
               <p className="font-display text-5xl font-bold text-brand-ink">{e.name.replace("HHCP ", "")}</p>
               <p className="mt-3 text-sm font-semibold text-ink">{e.name}</p>
+              {e.date && <p className="mt-1 text-sm text-slate-ink">{e.date}</p>}
+              {e.summary && <p className="mt-3 text-sm leading-relaxed text-slate-ink">{e.summary}</p>}
             </Reveal>
           ))}
         </ol>
-        <ContentNote className="mt-6 max-w-2xl">Dates, venues and outcomes for each HHCP edition; confirm whether HHCP 5.0 has taken place.</ContentNote>
+        <ContentNote className="mt-6 max-w-2xl">Dates, venues and outcomes for HHCP 1.0, 3.0 and 4.0; confirm whether HHCP 5.0 has taken place.</ContentNote>
 
         <h3 className="mt-20 text-h3 font-semibold">Campaigns and events</h3>
         <ul className="mt-6 grid gap-6 md:grid-cols-2">

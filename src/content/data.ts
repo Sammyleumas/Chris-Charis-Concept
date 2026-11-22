@@ -1,5 +1,5 @@
 import { aboutShort as aboutShortText, linkRegister, site } from "@/config/site";
-import { galleryFor, hhcp1Gallery, hhcpGallery, fusionGallery, images } from "./images";
+import { galleryFor, hhcp1Gallery, hhcp2Gallery, hhcpGallery, fusionGallery, images } from "./images";
 import type {
   ProjectFamilySlug,
   FeaturedInitiative,
@@ -72,7 +72,12 @@ export const projectFamilies: ProjectFamily[] = [
     image: images.hhcp,
     items: [
       { name: "HHCP 1.0" },
-      { name: "HHCP 2.0" },
+      {
+        name: "HHCP 2.0",
+        date: "17 May 2022",
+        summary:
+          "For World Hypertension Day, with the Dynamic Youth of The Household of Peace, Omosigho, Benin City. Theme: “Measure your blood pressure, control it, live longer.” A health seminar, counselling, free blood pressure checks, creative art and prayer.",
+      },
       { name: "HHCP 3.0" },
       { name: "HHCP 4.0" },
       { name: "MHAC 1.0", summary: "Mental Health Awareness Campaign" },
@@ -88,7 +93,7 @@ export const projectFamilies: ProjectFamily[] = [
     externalLinks: [{ label: "HHCP website", url: linkRegister.hhcpWebsite }],
     related: ["film-for-social-change", "learn-to-lead"],
     results: [{ value: "4", label: "HHCP editions completed", source: "Chris Charis Concept M&E records, October 2026" }],
-    gallery: [...hhcp1Gallery, ...hhcpGallery],
+    gallery: [...hhcp1Gallery, ...hhcp2Gallery, ...hhcpGallery],
     cta: {
       title: "Bring Healthy Heart to your community.",
       text: "Volunteer at an outreach or sponsor the next edition.",

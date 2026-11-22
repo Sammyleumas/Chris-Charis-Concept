@@ -196,6 +196,25 @@ export const hhcp1Gallery: ImageAsset[] = [
   hh1("volunteers-with-instruments", 2400, 1800, "Volunteers standing together, some holding beaded shekere instruments", "Music on the day", "50% 40%"),
 ];
 
+/** Healthy Heart Community Project 2.0, 17 May 2022, The Household of Peace, Omosigho, Benin City (supplied by the organisation). */
+const hh2 = (file: string, alt: string, brief: string, focus?: string): ImageAsset => ({
+  ...photo(`hhcp/2.0/${file}.jpg`, 2400, 1800, alt, brief, focus),
+  group: "HHCP 2.0",
+});
+export const hhcp2Gallery: ImageAsset[] = [
+  hh2("team-on-stage", "The HHCP 2.0 team and hosts standing together on the stage under purple lights", "The HHCP 2.0 team", "50% 40%"),
+  hh2("blood-pressure-checks", "A volunteer in a white coat checks a woman's blood pressure while others wait their turn", "Free blood pressure checks", "50% 50%"),
+  hh2("audience-listening", "Community members seated in rows listening during the health seminar", "The health seminar", "50% 45%"),
+  hh2("speaker-at-the-lectern", "A speaker addresses the gathering from a glass lectern", "Opening address", "45% 30%"),
+  hh2("blood-pressure-reading", "A volunteer in a white coat takes a man's blood pressure with a stethoscope and cuff", "Taking a reading", "50% 40%"),
+  hh2("organisers", "Four members of the organising team smiling outside the venue", "The organisers", "50% 30%"),
+  hh2("health-seminar", "A young speaker in a waistcoat talks to the audience with a microphone", "Speaking to the community", "40% 35%"),
+  hh2("blood-pressure-monitor", "A volunteer uses a digital monitor and cuff to check a woman's blood pressure", "Measure your blood pressure", "55% 45%"),
+  hh2("audience-smiling", "Women in the audience smiling and laughing during the programme", "Moments of joy", "40% 45%"),
+  hh2("team-at-the-banner", "The team standing in front of the HHCP 2.0 banner outside the church", "At the HHCP 2.0 banner", "50% 40%"),
+  hh2("speaking-at-the-lectern", "A young speaker at the lectern during the prayer session", "Prayer session", "45% 30%"),
+];
+
 /** Pending photo slots for a project gallery, one per subject. */
 export function galleryFor(project: string, subjects: string[]): ImageAsset[] {
   return subjects.map((subject) =>
