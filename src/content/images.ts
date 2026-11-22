@@ -29,11 +29,11 @@ export const images = {
     "Film for Social Change: on set, camera and crew",
   ),
   hhcp: {
-    src: "/images/hhcp/group-with-paintings.jpg",
-    alt: "Participants and facilitators of a Healthy Heart Community Project session smiling and holding up their sunflower paintings",
-    brief: "Participants with their paintings",
+    src: "/images/hhcp/1.0/team-line-up.jpg",
+    alt: "Healthy Heart volunteers, paramedics and health workers at HHCP 1.0, standing in a line outside a community building",
+    brief: "The HHCP 1.0 team",
     width: 2400,
-    height: 1800,
+    height: 1271,
     focus: "50% 45%",
   },
   learnToLead: pending(
@@ -137,6 +137,7 @@ const photo = (file: string, w: number, h: number, alt: string, brief: string, f
  * organisation). Order matters: the first photo is shown large.
  */
 export const hhcpGallery: ImageAsset[] = [
+  photo("hhcp/group-with-paintings.jpg", 2400, 1800, "Participants and facilitators of a Healthy Heart Community Project session smiling and holding up their sunflower paintings", "Participants with their paintings", "50% 45%"),
   photo("hhcp/group-with-paintings-close.jpg", 2400, 1800, "Group of young participants and facilitators holding up the sunflower paintings they made", "Showing the finished paintings", "50% 40%"),
   photo("hhcp/painting-session.jpg", 2400, 1800, "Participants painting at a table covered with paper, paint palettes and cups of water", "The painting session"),
   photo("hhcp/participant-with-painting.jpg", 1800, 2400, "A smiling participant holding up her painting of three sunflowers signed Victory", "Victory’s painting", "50% 30%"),

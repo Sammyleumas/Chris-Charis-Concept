@@ -593,7 +593,6 @@ html:not([data-preloaded]) .hero-copy:first-child:not(.is-active) > :first-child
 .theme-switch {
   --ts-bg: #ececee;
   --ts-fg: var(--color-ink);
-  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   height: 2.5rem;
@@ -730,4 +729,8 @@ html:not([data-preloaded]) .hero-copy:first-child:not(.is-active) > :first-child
 }
 @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
   .cursor-follower { display: none; }
+}
+/* Default display in the components layer, so utilities such as `hidden` can override it. */
+@layer components {
+  .theme-switch { display: inline-flex; }
 }
