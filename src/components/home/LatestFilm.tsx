@@ -10,7 +10,7 @@ export function LatestFilm({ film, channelUrl }: { film: Film; channelUrl?: stri
     <section aria-labelledby="film-title" className="border-t border-line py-24 lg:py-32">
       <div className="container-site grid items-center gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <p className="eyebrow text-brand-ink">Latest film</p>
+          <p className="eyebrow text-brand-ink">Featured film</p>
           <h2 id="film-title" className="mt-4 text-h2 font-semibold">{film.title}</h2>
           {film.description && <p className="mt-5 leading-relaxed text-slate-ink">{film.description}</p>}
           <div className="mt-8 flex flex-wrap gap-3">

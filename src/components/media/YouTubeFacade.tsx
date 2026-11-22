@@ -20,7 +20,7 @@ export function YouTubeFacade({ url, title, poster }: { url: string; title: stri
   const [active, setActive] = useState(false);
   const id = youTubeId(url);
   if (!id) return null;
-  const thumb = poster?.src ?? `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+  const thumb = poster?.src ?? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 
   return (
     <div className="relative aspect-video overflow-hidden rounded-xl bg-night">

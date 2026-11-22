@@ -42,6 +42,7 @@ export const projectFamilies: ProjectFamily[] = [
         name: "Shun Electoral Violence",
         summary:
           "A peace advocacy film. Written and produced by Chris Charis; directed by Solomon Ability; cinematography and editing by Anthony Jay.",
+        youtubeUrl: "https://youtu.be/9SChNCoaDv4",
       },
       { name: "D’impact Campaign" },
       {
@@ -49,6 +50,7 @@ export const projectFamilies: ProjectFamily[] = [
         summary:
           "A short film on gender-based violence. Written and produced by Chris Charis; directed by Solomon Ability; photography and editing by Theophilus Ogbede. Showing on the Chris Charis Concept YouTube channel.",
         poster: images.hopeAlivePoster,
+        youtubeUrl: "https://youtu.be/XiaJTmc9Mlo",
       },
       { name: "Blur", summary: "A New Nigeria initiative: a short film project produced by Chris Charis." },
       { name: "Treepz Stage Drama" },
@@ -540,12 +542,12 @@ export const partners: Partner[] = [];
 
 export const films: Film[] = [
   {
-    title: "Latest from Film for Social Change",
+    title: "Hope Alive",
     family: "film-for-social-change",
     description:
-      "Our films start conversations about the issues that shape communities, from electoral violence to human trafficking.",
-    youtubeUrl: null,
-    poster: images.latestFilm,
+      "A short film on gender-based violence, written and produced by Chris Charis. Our films start conversations about the issues that shape communities.",
+    youtubeUrl: "https://youtu.be/XiaJTmc9Mlo",
+    poster: images.hopeAlivePoster,
   },
 ];
 
