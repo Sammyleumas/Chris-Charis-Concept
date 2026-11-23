@@ -67,7 +67,7 @@ export const linkRegister = {
   soulWebsite: null as string | null,
   // Brief: "Currently https://bit.ly/fusion-artxtech — replace with final URL"
   fusionBootcamp: "https://bit.ly/fusion-artxtech" as string | null,
-  fusionConnectAcademy: null as string | null,
+  fusionConnectAcademy: "https://fc-academy-mu.vercel.app/" as string | null,
   maybeChallengeTiktok: null as string | null,
   donationPage: null as string | null,
   fusionVote: null as string | null,
